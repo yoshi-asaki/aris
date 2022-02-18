@@ -1,0 +1,19 @@
+set terminal x11
+#set terminal postscript eps enhanced
+set xrange[-30.005: 30.005] 
+set yrange[-30.005: 30.005] 
+
+set xlabel "Pointing error (pitch) [deg]" font "Times-Roman"
+set ylabel "Pointing error (roll) [deg]" font "Times-Roman"
+set zlabel "Delay [ps]" font "Times-Roman"
+
+#set view 125, 65
+#set view 0, 0
+#set contour
+#set pm3d
+#set hidden3d
+set palette color
+set style data lines
+#set output 'per.eps'
+splot "bhs_a00_i20.dat"
+pause -1

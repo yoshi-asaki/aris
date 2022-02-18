@@ -1,0 +1,17 @@
+#!/bin/sh
+aris < acatest-az2
+\mv epl01.dat ../aca/swt-demo/RA2-1.dat
+\mv epl02.dat ../aca/swt-demo/RA2-2.dat
+\mv epl03.dat ../aca/swt-demo/RA2-3.dat
+aris < acatest-az4
+\mv epl01.dat ../aca/swt-demo/RA4-1.dat
+\mv epl02.dat ../aca/swt-demo/RA4-2.dat
+\mv epl03.dat ../aca/swt-demo/RA4-3.dat
+aris < acatest-el2
+\mv epl01.dat ../aca/swt-demo/DC2-1.dat
+\mv epl02.dat ../aca/swt-demo/DC2-2.dat
+\mv epl03.dat ../aca/swt-demo/DC2-3.dat
+aris < acatest-el4
+\mv epl01.dat ../aca/swt-demo/DC4-1.dat
+\mv epl02.dat ../aca/swt-demo/DC4-2.dat
+\mv epl03.dat ../aca/swt-demo/DC4-3.dat

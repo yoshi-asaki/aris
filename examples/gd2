@@ -1,0 +1,11 @@
+set palette color positive
+set terminal x11
+set xrange[0:8192]
+set yrange[0:81]
+set contour
+set pm3d
+set hidden3d
+set palette color
+set style data lines
+splot "aaa.001"
+pause -1 "Hit RETURN KEY"

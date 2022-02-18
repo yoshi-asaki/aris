@@ -1,0 +1,35 @@
+LOCAL_LIBRARIES = -lm
+
+CCOPTIONS = -O3
+
+CXXDEBUGFLAGS =
+
+CDEBUGFLAGS =
+
+F77 = g77
+
+CC = gcc
+
+CCLINK = $(CC)
+
+TOP_INCLUDES =  -I. \
+		-I$(LOCAL_INCDIR)
+
+EXTRA_LDOPTIONS = -I. \
+		-I$(LOCAL_INCDIR)
+
+SRCS =  phase_screen_check.c \
+	turbulent_phase_screen.c \
+	seed_random.c \
+	char_copy.c \
+	gauss_dev.c \
+	random_val1.c
+
+OBJS =  phase_screen_check.o \
+	turbulent_phase_screen.o \
+	seed_random.o \
+	char_copy.o \
+	gauss_dev.o \
+	random_val1.o
+
+ComplexProgramTarget(phase_screen_check)

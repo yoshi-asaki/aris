@@ -1,0 +1,178 @@
+PGPLOT_LIBDIR = /usr/local/pgplot
+
+PGPLOT_INCDIR = /usr/local/pgplot
+
+CFITSIO_LIBDIR = /usr/local/lib
+
+CFITSIO_INCDIR = /usr/local/include
+
+GSL_LIBDIR = /usr/local/lib
+
+GSL_INCDIR = /usr/local/include
+
+LOCAL_LIBDIR = ./lib
+
+LOCAL_INCDIR = ./include
+
+LOCAL_LIBRARIES = XawClientLibs -L/usr/X11R6/lib \
+	-L$(PGPLOT_LIBDIR) -lcpgplot -lpgplot \
+	-L$(CFITSIO_LIBDIR) -lcfitsio \
+	-L$(GSL_LIBDIR) -lgsl -lgslcblas \
+	-L$(HOME)/local/lib \
+	-L$(LOCAL_LIBDIR) -lastrotools -lpgtools -lmathtools -lm -lz -lpng
+
+CCOPTIONS = -O3 -ansi -Wuninitialized -g 
+
+CXXDEBUGFLAGS =
+
+CDEBUGFLAGS =
+
+F77 = gfortran
+
+CC = gcc
+
+CCLINK = $(F77)
+
+TOP_INCLUDES =  -I./include \
+		-I$(LOCAL_INCDIR) -I$(PGPLOT_INCDIR) -I$(CFITSIO_INCDIR) \
+                -I$(HOME)/local/include \
+		-I$(GSL_INCDIR)
+
+EXTRA_LDOPTIONS = -I./include \
+		-I$(LOCAL_INCDIR) -I$(PGPLOT_INCDIR) -I$(CFITSIO_INCDIR) \
+                -I$(HOME)/local/include \
+		-I$(GSL_INCDIR)
+
+SRCS =  aris.c \
+	free_memory_block.c \
+	free_memory_block_char.c \
+	free_memory_block_float.c \
+	free_memory_block_double.c \
+	obs_param_file_io.c \
+	obs_param_set.c \
+	obs_param_input.c \
+	in__src_proc.c \
+	out_src_proc.c \
+	ch_time_set.c \
+	antenna_selection.c \
+	baseline_check.c \
+	number_char_cut.c \
+	srt_info_disp.c \
+	err_parameter_set.c \
+	trk_priority_check.c \
+	tracking_init.c \
+	tracking_button_disp.c \
+	srtatt_button_disp.c \
+	sun_angle_check.c \
+	source_info_disp.c \
+	menu_config.c \
+	on_source_disp.c \
+	TV_menu_hatch.c \
+	fits_data_select.c \
+	text_bottom.c \
+	tv_button_disp.c \
+	comment_init.c \
+	comment_disp.c \
+	tv_get_param.c \
+	off_button.c \
+	on_button.c \
+	toggle_button.c \
+	button_chk.c \
+	char_copy.c \
+	char_ncopy.c \
+	source_position.c \
+	transformation_matrices.c \
+	atmospheric_fluctuation.c \
+	Gaussian_Noise1D.c \
+	Gaussian_noise_check.c \
+	gauss_dev.c \
+	turbulent_phase_screen.c \
+	phase_screen_check.c \
+	antenna_visibility.c \
+	GRT_TEC_TID.c \
+	TEC_fluctuation_amp.c \
+	ref_pos_shift.c \
+	array_config.c \
+	position_on_screen.c \
+	azel_disp.c \
+	SSF_disp.c \
+	airmass.c \
+	nmf20.c \
+	nmf20_coeffi.c \
+	fitsidi_save.c \
+	brightness_disp.c \
+	source_model.c \
+	source_model3.c \
+	ADAF_disk.c \
+	VSOP2_logo.c \
+	jet_cjet.c \
+	PA_rotate.c \
+	ordinate_axis.c \
+	earth_eclipse.c \
+	fft2d.c \
+	fringe_disp.c \
+	fringe_fitting.c \
+	wfft2d.c \
+	get_vis.c \
+	visibility_calc.c \
+	bhs_model.c \
+	ccm_read.c \
+	mcm_read.c \
+	vis_smoothing.c \
+	input_star_position.c \
+	output_star_position.c \
+	str_init.c \
+	orbit_disp.c \
+	draw_earth.c \
+	data_link_schedule.c \
+	link_TRK_sim.c \
+	link_SLR_sim.c \
+	orbit_info_print.c \
+	peak_normalize.c \
+	spherical_geometry.c \
+	pg_color_bar.c \
+	pg_color_map.c \
+	palett.c \
+	pgcont_map.c \
+	position2uvw.c \
+	EPL_disp.c \
+	spectl_disp.c \
+	allanv_disp.c \
+	coherence_disp.c \
+	station_select.c \
+	wave_select.c \
+	random_val0.c \
+	random_val1.c \
+	diff.c \
+	imager.c \
+	pixel_calc.c \
+	phase_reference.c \
+	qlook_imager.c \
+	seed_random.c \
+	set_color.c \
+	spacecraft_position.c \
+	tracking_status.c \
+	tracking_station_name_read.c \
+	slr_config.c \
+	get_srt_link.c \
+	snrcal.c \
+	thermal_noise_cal.c \
+	parabo.c \
+	uvw_calc.c \
+	az_rotation.c \
+	az_adjustment.c \
+	weight_flag_add.c \
+	weight_flag_chk.c \
+	attitude_Q.c \
+	slew_time.c \
+	SEFD.c \
+	tracking_condition.c \
+	freq_std_instability.c \
+	asd_model.c \
+	modified_asd_model.c \
+	coherence_factor_calc.c \
+	uv_display.c
+
+OBJS =  $(SRCS:.c=.o)
+
+ComplexProgramTarget(aris)

@@ -1,0 +1,791 @@
+------------------------------------------------------
+------------------------------------------------------
+            ****  A R I S  ****
+
+Astronomical Radio Interferometer Simulator
+
+      Last Update : 2022-01-06 16:00 UT  (Ver 1.4.9)
+
+------------------------------------------------------
+------------------------------------------------------
+
+-----------------------
+HOW TO INSTALL
+-----------------------
+
+1. Install CFITSIO (v 3.48 or later) library as follows. 
+   NOTE : The CFITSIO library is not included in this distribution. 
+          Get it by yourself via internet.
+          (e.g. https://heasarc.gsfc.nasa.gov/fitsio/)
+
+    a: % ./configure
+    b: % make
+    c: % make install
+
+2. Install GNU Science Library (GSL). There is no problem with GSL-2.5.
+   NOTE : The source files are not included in this distribution. 
+          Get them by yourself via internet. 
+
+3. Install PGPLOT library. 
+
+4. Uncompress tar-ball with tar command: 
+
+    % tar xvfz aris-1.4.9.tar.gz
+
+   You can see a new directory (aris-1.4.9). This directory is here 
+   called $(ARIS). 
+
+5. Now you can compile the simulation program, aris.
+
+    a: % cd aris-1.4.9
+    b. % ./configure
+
+6. Edit Makefile if needed. 
+
+7. Run "make".
+
+    a: % make aris
+
+
+-----------------------
+BEFORE USING
+-----------------------
+
+You have to copy directories of $(ARIS)/aris_input/ and 
+$(ARIS)/aris_log/ to your working directory unless you 
+use aris in $ARIS where the executable file exits.
+
+
+-----------------------
+HOW TO USE (MAIN)
+-----------------------
+
+    If you succeed the compilation, you can run the simulator as follows: 
+
+% aris
+
+    Or, if you want to run aris with the GUI mode in X-Window system, 
+    run aris with -g option.
+
+% aris -g
+
+    In the following, how to use aris in the text user interface mode 
+    is described.
+
+    At first, you can see the following message: 
+
+
+---- ERROR PROC MODE ----
+  1  Antenna Position Error
+  2  Source-1 Position Error
+  3  Source-2 Position Error
+  4  EOP Error
+  5  Trospospheric Error
+  6  Ionospheric Error
+  7  Water Vapor Turbulence
+  8  Dry Air Turbulence
+  9  TEC Turbulence
+ 10  Thermal Noise Error
+ 11  Frequency Standard Error
+ 12  L-O Phase Offset
+ 13  Antenna Gain Bias Error
+---- Current ERROR FLAG Status : 0000000000000
+Input ERROR FLAG: 
+
+
+     Select interferometer error sources which you would like to 
+     simulate. For instance, if you want to turn off all the error 
+     sources, input 0000000000000. If you want to simulate with the 
+     Current ERROR FLAG Status, just type RETURN key. If you want to 
+     turn on all the error sources, input 1111111111111. If you want 
+     to turn on the antenna position error and thermal noise error, 
+     input 1000000010000. 
+
+
+Input ERROR FLAG: 1111111111111
+---- New ERROR FLAG Status : 1111111111111
+Which input type for the source positions?
+1. R.A.       -   DEC.
+2. Delta_R.A. -   Delta_DEC.
+3. Sep_ang    -   P.A.
+(CR->1)
+Input number: 
+
+
+    Select one number to input the positions of a pair of 
+    sources. Since ARIS simulates phase-referencing observations, 
+    you need to input two source positions. If you don't intend to 
+    perform a phase-referencing observation, input the same position 
+    of the first source as the second. 
+
+    For example, if you select "1", you input R.A and Decl for each 
+    of the sources. We here give you an example when you select "2".
+
+
+Which position for the input?
+1. Source-1 Position
+2. MID Point
+(CR->1)
+Input number: 
+
+
+    Select the number. If you select "1", input the position of one 
+    of the sources. If you select "2", input the center position 
+    between the two sources. We assume that you take the number 1.
+
+
+**** Source-1 (J2000) ****
+Input RA (CR->18 03 00.0) : 
+
+    Input the right ascension of source-1 in the format of 
+    "hh mm ss.ss". 
+
+Input DEC(CR->59 00 00.0) : 
+
+    Input the declination of source-1 in the format of 
+    "dd mm ss.ss". If the declination is below zero, 
+    you input the position using the format as "-dd mm ss.s". 
+
+
+Input RA (CR->02 00 00.0) : 02 00 00                  -> hh mm ss
+Input DEC(CR->60 00 00.0) : 60 00 00                  -> dd mm ss
+Separation Angle (RA) [deg] (CR->2.0) : 
+
+    Input the separation angle between the sources. If you don't 
+    need the phase-referencing, input 0 for R.A. and DEC. 
+
+Separation Angle (RA) [deg] (CR->2.000000) : 2
+Separation Angle (DC) [deg] (CR->1.000000) : 1
+Separation Angle [deg]: 2.236045
+Input Observation Date [YYYYMMDD] (CR->20101121) : 20101121
+
+    Input the observation date when the simulatioted observation 
+    will start. 
+
+Input Start UTC (hhmmss) (CR->060000) : 060000
+
+    Input the start UTC time. 
+
+
+Observing Duration [hour] (CR->8.000000) : 8
+
+    Input the observation duration. 
+
+GRT MINIMUM elevation (CR->20 [deg]) : 20
+
+    Input the minimum elevation angle of the telescopes which 
+    attend the simulated observation. If you set too low elevation 
+    angle, the simulation may not work with the error option of 
+    ``Water Vapor Turbulence" and/or ``TEC Turbulence". We recommend 
+    to use an elevation angle higher than 10-15 degrees. 
+
+    Then, you can see the following messages: 
+
+SELECTED Antennas:
+ 1.             2.             3. VLBANL      4. VLBAFD      5. VLBALA     
+ 6. VLBAPT      7. VLBAKP      8.             9.            10.            
+11.            12.            13.            14.            15.            
+16.            17.            18.            19.            20.            
+21.            22.            23.            24.            25.            
+26.            27.            28.            29.            30.            
+31.            32.            33.            34.            35.            
+36.            37.            38.            39.            40.            
+41.            42.            43.            44.            45.            
+46.            47.            48.            49.            50.            
+51.            52.            53.            54.            55.            
+56.            57.            
+Array List:
+ a. RESET       b. VLBA        c. EVN         d. HSA         e. VERA       
+ f. JVN         g. KVN         h. LBA         i. KERA        j. ALMA       
+ k. ACA         l. EALMA      
+Antenna List:
+ 1. VLBASC      2. VLBAHN      3.             4.             5.            
+ 6.             7.             8. VLBAOV      9. VLBABR     10. VLBAMK     
+11. GBT        12. VLA_Y27    13. ARECIBO    14. EVNJb-1    15. EVNJb-2    
+16. EVNCm      17. EVNWb      18. EVNEb/Ef   19. EVNMc      20. EVNNt      
+21. EVNOn-85   22. EVNOn-60   23. EVNSh      24. EVNUr      25. EVNTr      
+26. EVNMh      27. EVNYb      28. EVNHh      29. EVNWz      30. VERAMZ     
+31. VERAIR     32. VERAOG     33. VERAIS     34. KASHIM34   35. NRO45      
+36. USUDA64    37. KVNYS      38. KVNUS      39. KVNTN      40. TAEDUK     
+41. ATCA       42. LBAMOP     43. PARKES     44. TID        45. HOBART     
+46. CEDUNA     47. HARTRO     48. SEST       49. LMT        50. ALMA       
+51. G_LAND     52. SMT        53. IRAM       54. SMA        55. ACA01      
+56. ACA02      57. ACA03      
+Input array character or antenna number (0 or CR->Exit) : 
+
+
+
+    Select antenna or array. The selected antenna 
+    Then, you can see the antenna list which has been selected: 
+
+SELECTED Antennas:
+ 1. VLBASC      2. VLBAHN      3. VLBANL      4. VLBAFD      5. VLBALA     
+ 6. VLBAPT      7. VLBAKP      8. VLBAOV      9. VLBABR     10. VLBAMK     
+11.            12.            13.            14.            15.            
+16.            17.            18.            19.            20.            
+21.            22.            23.            24.            25.            
+26.            27.            28.            29.            30.            
+31.            32.            33.            34.            35.            
+36.            37.            38.            39.            40.            
+41.            42.            43.            44.            45.            
+46.            47.            48.            49.            50.            
+
+
+Antenna List:
+ 1.             2.             3.             4.             5.            
+ 6.             7.             8.             9.            10.            
+11. GBT        12. VLA_Y27    13. ARECIBO    14. EVNJb-1    15. EVNJb-2    
+16. EVNCm      17. EVNWb      18. EVNEb/Ef   19. EVNMc      20. EVNNt      
+21. EVNOn-85   22. EVNOn-60   23. EVNSh      24. EVNUr      25. EVNTr      
+26. EVNMh      27. EVNYb      28. EVNAr      29. EVNHh      30. EVNWz      
+31. VERAMZ     32. VERAIR     33. VERAOG     34. VERAIS     35. KASHIM34   
+36. NRO45      37. USUDA64    38. KVNSEO     39. KVNULS     40. KVNJEJ     
+41. TAEDUK     42. LBANAR     43. LBAMOP     44. LBAPKS     45. LBATID     
+46. LBAHBT     47. LBACED     48. HARTRO     49. SEST       50. ALMA       
+
+Input number (0, CR->Exit) : 
+
+    If you would like to add or delete a specified antenna, input 
+    the number. If you are satisfied by the list, input 0 or carriage 
+    return. 
+
+How many space telescopes [0-2] (CR->1) : 
+
+    If you want to add one or two space telescopes into your simulation 
+    tasks, input the number of the satellite here. Otherwise, input 0. 
+    At this moment, we assume are not goint to explain the space-VLBI 
+    function at this moment. You see 
+
+SRT pointing error (y/n; CR->n) : 
+
+    This option can simulation pointing error 
+
+
+
+ARIS starts....
+REF Position Shift [sec] : (RA, Dec)=(-0.000007453,  0.000008554)
+TGT Position Shift [sec] : (RA, Dec)=(-0.000007422,  0.000008581)
+
+    If you have selected the error source of ``Reference Position 
+    Error", the minor position shift is added to the reference 
+    source. The quantity is ramdomly selected. Target position 
+    is not changed while the position shift of the reference 
+    source occurs. ARIS just shows the prediction of the apparent 
+    position shift of the target source in the case that the 
+    reference position is not correct. 
+
+    If you have selected the error source of the TROPOSPHERIC 
+    disturbance, the phase-screen simlation starts. It takes 
+    a few minutes, depending on the observing duration and 
+    CPU power. 
+
+**** Tropospheric Phase Screen ****
+Frozen Flow  SITE :   VLBA_SC   0-10-20-30-
+Frozen Flow  SITE :   VLBA_HN   0-10-20-30-
+Frozen Flow  SITE :   VLBA_NL   0-10-20-30-
+Frozen Flow  SITE :   VLBA_FD   0-10-20-30-
+Frozen Flow  SITE :   VLBA_LA   0-10-20-30-
+Frozen Flow  SITE :   VLBA_PT   0-10-20-30-
+Frozen Flow  SITE :   VLBA_KP   0-10-20-30-
+Frozen Flow  SITE :   VLBA_OV   0-10-20-30-
+Frozen Flow  SITE :   VLBA_BR   0-10-20-30-
+Frozen Flow  SITE :   VLBA_MK   0-10-20-30-
+
+     If you have selected the error source of the IONOSPHERIC 
+     disturbance, the phase-screen simlation starts. It takes 
+     a few minutes, depending on the observing duration and 
+     CPU power. 
+
+**** Ionospheric Phase Screen ****
+Frozen Flow  SITE :  VLBA_SC   0-10
+Frozen Flow  SITE :  VLBA_HN   0-10
+Frozen Flow  SITE :  VLBA_NL   0-10
+Frozen Flow  SITE :  VLBA_FD   0-10
+Frozen Flow  SITE :  VLBA_LA   0-10
+Frozen Flow  SITE :  VLBA_PT   0-10
+Frozen Flow  SITE :  VLBA_KP   0-10
+Frozen Flow  SITE :  VLBA_OV   0-10
+Frozen Flow  SITE :  VLBA_BR   0-10
+Frozen Flow  SITE :  VLBA_MK   0-10
+
+     If you have selected the error source of the TEC TID
+     (Total Electron Content / Traveling Ionospheric Disturbance),
+     the simlation starts. 
+
+**** TEC TID Simulation ****
+**** UVW Calculation ****
+1. Ground-Ground    0. EXIT (CR->1) : 
+
+     Select baseline set which you need. 
+
+1. All    2. Ground-Ground    3.Space-Ground    0. EXIT (CR->1) : 1
+Tropospheric Noise Power:
+1. Good Condition  2. Typical Codition  3. Poor Condition (CR->1) : 
+
+     Select the tropospheric condition for the trpospheric phase 
+     fluctuations. The difinition of GOOD, TYPICAL, and BAD 
+     is based on the documents written by Ulvestad (VLBA Scientific 
+     memo, No.20, 1999), and by Beasley and Conway (VLBI Phase-
+     Referencing, Very Long Baseline Interferometry and the VLBA, 
+     1995). 
+
+1. Good   2. Typical   3. Poor (CR->1) : 2
+Ionospheric Noise Power:
+1. Half Condition  2. Normal Codition  3. Double Condition (CR->2) : 
+
+     Select the ionospheric condition as shown in the above. 
+
+Input Tropospheric Zenith Error [cm] (CR->6.000000[cm]) : 6
+
+     Input the excess path length error due to the troposphere. 
+     We consider that 3-10 cm is a usual selection. 
+
+Input Ionospheric Zenith Error [TECU] (CR->6.000000[TECU]) : 6
+
+     Input the TEC error causing the excess path legth error. 
+     We consider that 6-20 TECU is a usual selection. 
+
+Target Wave Band
+1.L   2.S   3.C   4.X   5.Ku  6.Ka  7.Q   8.BAND3  9.BAND4  (CR->6) : 
+
+     Select the receiver for the target source. 
+
+Reference Wave Band
+1.L   2.S   3.C   4.X   5.Ku  6.Ka  7.Q   8.BAND3  9.BAND4  (CR->6) : 
+
+     Select the receiver for the reference source. 
+
+Observing Band Width
+[1.2MHz 2.8MHz 3.16MHz 4.32MHz 5.64MHz 6.128MHz 7.256MHz 8.512MHz]
+(CR->3) : 
+
+    Select the observing band width both for the target and reference 
+    sources. 
+
+Frequency Channel
+[1. 1CH   2. 4CH   3. 8CH   4. 16CH  5. 32CH ]
+(CR->3) : 
+
+    Select the number of the frequency channels in the bandwidth.
+    Note that the larger you select, the havier the load. If you 
+    do not need the delay search in the following analysis, select 
+    ``1CH" option. Even if you want to carry our the delay search 
+    later in the data analysis, select as small number as possible. 
+
+Sampling Bit Number [1.1-bit  2.2-bit] (CR->2) : 
+
+     Select the sampling bit number to set the quantization level. 
+
+Switching Cycle Time [sec] (CR->60.000000) : 
+
+     Input the switching cycle time for the phase-referencing. 
+     ON-source duration is automatically calculated in the 
+     simulator from the antenna slew parameters mentioned in 
+     the source code. If you don't need the switching observations, 
+     input 0. 0-sec of the switching cycle time does not kill 
+     the phase-referecing mode, but simulate an in-beam mode or 
+     dual beam mode. 
+
+Target Position    : 1. source_1    2. source_2
+Select number (CR->1) : 
+
+     Select the position of the target source from the two candidates 
+     (source_1 or source_2). 
+
+Target Morphology :
+1. Single Point
+2. Two-Component
+3. Disk & Jet-CJet
+4. Disk & VSOP2-Jet
+5. AIPS CC Table
+Select number (CR->1) : 1
+
+    Select the morphology of the target source. 
+
+Target Total Flux [Jy]   (CR->0.100000) : 
+
+    Input the total flux density of the target source. 
+
+Reference Position : 1. source_1    2. source_2
+Select number (CR->2) : 
+
+     Select the position of the target source from the two candidates 
+     (source_1 or source_2). 
+
+Reference Morphology :
+1. Single Point
+2. Two-Component
+3. Disk & Jet-CJet
+4. Disk & VSOP2-Jet
+5. AIPS CC Table
+Select number (CR->1) : 
+Reference Total Flux [Jy]   (CR->0.400000) : 
+
+    Do the same thing for the reference source as you did 
+    for the target source. 
+
+ARIS continues...
+SEFD (VLBASC) :   888.11 Jy      888.11 Jy
+SEFD (VLBAHN) :   888.11 Jy      888.11 Jy
+SEFD (VLBANL) :   888.11 Jy      888.11 Jy
+SEFD (VLBAFD) :   888.11 Jy      888.11 Jy
+SEFD (VLBALA) :   888.11 Jy      888.11 Jy
+SEFD (VLBAPT) :   888.11 Jy      888.11 Jy
+SEFD (VLBAKP) :   888.11 Jy      888.11 Jy
+SEFD (VLBAOV) :   888.11 Jy      888.11 Jy
+SEFD (VLBABR) :   888.11 Jy      888.11 Jy
+SEFD (VLBAMK) :   888.11 Jy      888.11 Jy
+**** Target data processed.      ****
+**** Reference data processed.   ****
+**** plot : OBSERVING RESULTS ****
+1. ON source duration
+2. GRT error quantities
+3. Az-El plot
+4. (u, v) Plane
+5. Fringe Phase & Amplitude
+6. FITS-IDI save
+7. Simple FFT Imaging (no CLEAN)
+g. XXXX GPS - Link Conditions (statistics) XXXX
+h. Error Path Length time series
+i. Error Path Length power spectrum (target)
+
+0. RETURN
+-. EXIT
+Select number: 
+
+     You can see the menu. Please try them if you are interested. 
+     If you just want to make FITS-IDI format file, select 6.
+
+Select number: 6
+which data
+[1.target without P-R  2.Cal source  3.target with P-R  0.RETURN] :
+
+     Select what you want. Then, input the file name of the newly 
+     created fits file.
+
+which data
+[1.target without P-R  2.Cal source  3.target with P-R  0.RETURN] : 3
+File name (CR->ARIS-03.FITS) : J0200+60-PR.FITS
+
+
+
+-----------------------
+HOW TO USE (PHASE SCREEN GENERATION)
+-----------------------
+
+    Run aris with -g option working in X-Window system, 
+
+% aris -g
+
+    In the lower half side, you can find four buttons of "START", 
+    "ANTENNA VISIBILITY", "PHASE SCREEN", and "EXIT". Click 
+    "PHASE SCREEN" in order to generate atmospheric phase screens. 
+
+    Then you can see a parametger input windows. Please input your 
+    preferable parameters for your purpose. 
+
+    - Inner Scale [m]
+    It is considered that the atmospheric turbulence has two regions: 
+    3-dimensional and 2-dimensional turbulences for smaller and 
+    larger spatial scales, respectively. Inner Scale is a horizontal 
+    length of a border between the 3-d and 2-d scales. This should 
+    be a perfect power of the 2^M multiplied by "Pixel Size".
+
+    - Outer Scale [m]
+    Outer Scale is a horizontal length over which the 2-d turbulence 
+    no more develops. This shoud be greater than Inner Scale and 
+    2^N multiplied by "Pixel Size". (N > M)
+
+    - Inner Exponent
+    Structure exponent of the spatial structure function of the 
+    inner (3-d) atmospheric phase fluctuations.
+
+    - Outer Exponent
+    Structure exponent of the spatial structure function of the 
+    outer (2-d) atmospheric phase fluctuations.
+
+    - Pixel Size [m]
+    A scale of the single pixel of the screen. In other words, 
+    spatial resolution of the phase screen.
+
+    - Width (x) [m]
+    The full length of the 2-dimensional phase screen.
+
+    - Width (y) [m]
+    The full length of the 2-dimensional phase screen. "Width (y)" should 
+    not be smaller than "Width (x)".
+
+    - RMS Value
+    Root mean square of the fluctuation for the horizaontal scale 
+    of "Baseline Length".
+
+    - Baseline length [m]
+    Horizontal length in setting "RMS".
+
+    - BIAS
+    Offset value or expectation over the 2-d screen.
+
+    - Save File Name
+    Preferable file name for saving the result.
+
+    - Screen generation mode   (Single screen / Multi screen)
+    If "Single screen" is selected, ARIS calculates a single phase screen 
+    with Wsdth (x) x Width (y). If "Multi screen" is selected, ARIS 
+    generates a number of the screens devided by an adjycent length 
+    along y-axis.
+
+
+    In the bottom, there are three buttons: "DISPLAY SCNREEN", "SAVE", and 
+    "Return". 
+
+    If you set all the parameters above, just click "SAVE". If you click 
+    "Return", ARIS moves back to show the primary menu window.
+
+    "DISPLAY SCREEN" button is for visial comfirmation of the 
+    generated screen. This does not affect the calculation result.
+
+
+
+
+-----------------------
+COPYLIGHT AND INTERECTUAL PROPERTIES
+-----------------------
+The basic algorithm of this software is mentioned in 
+Asaki et al. (PASJ, 2007, 
+This software has been distributed under Gnu Public Licence 
+since March 25, 2010.  Read ./COPYING.
+
+-----------------------
+CHANGE HISTORY
+-----------------------
+2004-11-04 08:30 UTC
+
+2005-04-25 09:55 UTC
+
+2007-11-24 11:05 UTC
+
+2009-12-10 04:00 UTC (Ver 1.0)
+  * Update
+
+2010-03-12 14:00 UT  (Ver 1.1)
+  * Update
+
+2010-03-25 03:00 UT  (Ver 1.1.1)
+  * Update
+  * Distribution under GPL have been started. 
+
+2010-04-14 03:00 UT  (Ver 1.2)
+  * Update
+
+2010-04-26 13:00 UT  (Ver 1.2.1)
+  * Update
+
+2010-04-27 18:00 UT  (Ver 1.2.2)
+  * Update
+
+2010-05-01 13:00 UT  (Ver 1.2.3)
+  * Update
+
+2010-05-04 00:00 UT  (Ver 1.2.4)
+  * Update
+
+2010-07-09 08:30 UT  (Ver 1.2.5)
+  * Update
+  * Bugs in TEC turbulence generation subroutines are corrected. 
+
+2010-07-14 08:30 UT  (Ver 1.2.6)
+  * Update
+
+2010-08-16 12:00 UT  (Ver 1.2.7)
+  * A bug in ver 1.2.6 causing a segmentation error under the pgplot 
+    graphical mode was fixed. 
+  * A very primitive ``configure" file was newly generated. 
+
+2010-08-31 06:00 UT  (Ver 1.2.8)
+  * Timezone structure in seed_random.c has been commented out because 
+    it is too old to be taken care of. 
+
+2010-10-19 13:00 UT  (Ver 1.2.9)
+  * KVN antenna parameters were revised. 
+  * Bugs included in get_vis, ccm_read, imager were fixed. 
+  * Bugs in Simple FFT Imaging have been fixed. 
+
+2010-10-22 10:35 UT  (Ver 1.2.10)
+  * Bugs in calculating the visibility and a dirty map were fixed. 
+
+2010-11-26 13:00 UT  (Ver 1.2.11)
+  * Bugs in ccm_read were fixed. 
+
+2012-01-16 12:00 UT  (Ver 1.3.0)
+  * L-O (Local Oscillator) Phase offset has a option for the local 
+    oscillator phase at each of the frequency bands for each of the 
+    stations. Stantion-dependent clock offsets and its drifts are 
+    not turned on with L-O Phase offset. Those are turned on when 
+    a new function of error, ``Frequency Standard Error'', is 
+    turned on. 
+  * Frequency Standard error can simulate the frequency instabilities 
+    of Hydrogen masers and Cryocooled Capphaire Oscillators (10MHz and 
+    100MHz reference signal) based on Nant et al. (2011). If you 
+    want to try the H-maser simulation, set ``H_M'' to ant_prm.FRQSTD 
+    of a specified antenna in array_config.c. For the cryoCSO 10-MHz 
+    and 100-MHz signals, you set CSO_10 and CSO_100, respectively. 
+    station 
+  * ``Very Good'' tropospheric condition was added. This option has 
+    a 50-percentile tropospheric condition at Chajonantor measured 
+    with site-test radio seeing monitors: 100 micorn RMS in EPL with 
+    a 100-m baseline. 
+  * Source position selection was added in the observation condition menu.
+  * A smooth display for source structures has been added. 
+  * CC component reading subrotine has a bug when the list has a 
+    large number of CC components. The bug was fixed. 
+  * visibility_calc, pgcont_map, pg_color_map have been revised. 
+  * tracking_status was modified, though it doen not have a bug. 
+  * BUG fix in calculating the thermal noise for space antennas in 
+    uvw_calc. 
+  * Frequebcy of BAND 5, 6, 7, 8 of ALMA was added. 
+  * Frequency band width of 1024 MHz was added. 
+  * Source position calculation function has a bug: the sign of the 
+    position angle was opsite. Fixed. 
+
+2012-01-17 07:00 UT  (Ver 1.3.1)
+  * Minor changes for several source codes. 
+  * Allan standard deviation had benn shown in a fixed dynamic range 
+    for y-axis. It can be shown in the dynamical dynamic range. 
+
+2012-01-19 14:00 UT  (Ver 1.3.2)
+  * Since there is a serious bug in uvw_calc.c in calculating fringe 
+    errors due to errors in EOP, antenna positions, and source positions. 
+    There had been the bug since version 1.3.0. Fixed. 
+
+2012-01-20 08:00 UT  (Ver 1.3.3)
+  * Wavelengths can be set by user in aris_input/fixed_parameter.prm. 
+
+2012-01-22 02:00 UT  (Ver 1.3.4)
+  * On graphical user I/F mode, you can confirm the observing 
+    frequency which is calculeted based on fixed_parameter.prm 
+    if a button is changed to ON. 
+
+2012-02-07 10:00 UT  (Ver 1.3.5)
+  * The source position of Source-2 had been written in the calibrator 
+    FITS file even if Source-1 is selected. This bug was fixed. 
+  * Antenna parameter file (aris_input/antenna.prm) was prepared for 
+    users to set their preference freely. 
+
+2012-02-08 16:00 UT  (Ver 1.3.6)
+  * A bug causing the wrong thermal noise calculation was removed. 
+
+2012-02-23 09:00 UT  (Ver 1.3.7)
+  * In the previous versions, there have been several bugs which 
+    make the performance unstable. It was found that the biggest 
+    problem was to address pointers which are not allocated. 
+    Not all but several sub-programs related to calculations of 
+    a pair of source positions and the parameter input section 
+    were checked carefully. It seems that the performance is more 
+    stable than ever. 
+  * Bugs causing troubles in calculating tropospheric delays were 
+    fixed. Those have been made since ver 1.3.5, the antenna selection 
+    sub-programs were replaced. Because the elevation limit did not 
+    work, uvw_calc calculated the mapping function at the very low 
+    elevation including zero. 
+
+2012-04-02 03:00 UT  (Ver 1.3.8)
+  * Antenna code character had not been correctly processed because 
+    the NULL character had not been set at the end of the string. 
+  * Source position could not be processed correctly. The bug was 
+    fixed. 
+
+2012-09-10 17:00 UT  (Ver 1.3.9)
+  * When the source position input is the source1-source2 mode, the 
+    separation angle, Delta RA, and Delta Dec were not calculated. 
+    This bug has existed since Version 1.3.7. Fixed. 
+  * WVR phase correction mode is added. 
+    - ALMA 50-percentile condition: RMS path length fluxtuation of 100 
+      micron for a 100-m baseline length with the structure exponent of 5/3.
+    - Structure coefficient: 30-% amplitude comparing with the ALMA 
+      50-percentile condition. 
+    - Structure exponent   : the same as the Kolmogorov turbulence.
+  * src/astrotools/MJD.c had had a bug in calculating leap days. 
+    Fixed. 
+
+2013-04-08 04:00 UT  (Ver 1.3.10)
+  * Black hole shadow images provided by Dr. R. Tahakashi have been 
+    includeded. 
+  * tracking_config.c has been deleted. You have to prepare 
+    ``./aris_input/tracking_network.prm". err_parameter_set.c and 
+    tracking_init.c were modified. 
+  * Color coordination in Graphical User I/F has been changed. 
+  * It happened in the previous version that ARIS has abnormally 
+    terminated when TROPOSPHERIC TURBULENCE is set to OFF. This bug 
+    has been fixed. 
+  * fitidi_save.c and include/aris.h was modified.
+
+2013-09-20 03:00 UT  (Ver 1.3.11)
+  * Ascii data text output is available for output the simulated 
+    data of azimuth-elevation of GRTs, (u, v) posirions, and oprbit 
+    prediction. 
+
+2014-01-17 03:00 UT  (Ver 1.3.12)
+  * Beucase the latest AIPS cannot treat with the simulated data 
+    due to a kind of a format change of AN tables in ANTENNA CODE 
+    NAMEs. This bug has been fixed. 
+
+2014-05-09 08:30 UT  (Ver 1.3.13)
+  * Bug fixed. 
+
+2014-05-13 01:30 UT  (Ver 1.3.14)
+  * Bug fixed. 
+  * Derivatives of Omega and omega of spacecraft orbits can be 
+    adjusted from Version 1.3.14. 
+
+2015-01-23 03:30 UT  (Ver 1.3.15)
+  * Bug fixed. 
+
+2015-10-15 05:30 UT  (Ver 1.3.16)
+  * Bug fixed. 
+  * In compiling, "configure" is available. 
+
+2019-09-04 12:00 UT  (Ver 1.4.0)
+  * ALMA observation simulation function has been implemented.
+
+2019-12-16 11:00 UT  (Ver 1.4.1)
+  * Atmospheric turbulent phase screen generation: aris.h: 
+    NOISE_MTRX: 16384 -> 32768
+
+2019-12-16 21:00 UT  (Ver 1.4.2)
+  * Atmospheric turbulent phase screen generation: bug fix in displaing 
+    the result.
+
+2019-12-16 22:00 UT  (Ver 1.4.3)
+  * Atmospheric turbulent phase screen generation: bug fix in displaing 
+    the result.
+
+2020-01-10 03:12 UT  (Ver 1.4.4)
+  * Turbulent phase screen can be generated with a very wide length 
+    (x direction) like (32x5) x (262144x5) points.
+
+2020-05-05 17:00 UT  (Ver 1.4.5)
+  * Bugs with the phase screen generation function have been removed.
+
+2020-05-11 19:30 UT  (Ver 1.4.6)
+  * Bugs with the phase screen generation function have been removed.
+    (phase_screen_check.c and turbulent_phase_screen.c)
+
+2020-05-14 11:30 UT  (Ver 1.4.7)
+  * Bugs with the phase screen generation function have been removed.
+    (phase_screen_check.c and turbulent_phase_screen.c)
+  * In the phase screen generation, the following changes have been added:
+    - In the data header, "SCREEN WIDTH (NX)", "SCREEN WIDTH (NY)",
+      "SCREEN GENERATION" parameters have been added to show the number of 
+      X and Y, and single/multi screen mode, respectively.
+    - In generating screens, "multi screen mode" or "single screen mode" 
+      can be selected.
+
+2020-06-01 04:30 UT  (Ver 1.4.8)
+  * Bugs with the phase screen generation function have been fixed.
+
+2022-01-06 16:00 UT  (Ver 1.4.9)
+  * Bugs in simulating the ALMA antenna position error have been fixed. (aris.c)
+  * Bugs to dispay the simulation results have been fixed (menu_config.c, 
+    ant_pos_err.c, SSF_disp.c)
+  * "ON"/"OFF" selection is changed to Boolean algebra (_Bool) with stdbool.h 
+  * ALMA antenna position definition has been changed.

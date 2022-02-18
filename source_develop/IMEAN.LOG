@@ -1,0 +1,232 @@
+********************************************************************************
+IMEAN run on 03-JUL-2020  at 16:51:23
+Image= 1000        .ICL001.   1 1   xywind=  462  463  562  563
+Mean and rms found by fitting peak in histogram:
+Mean=-3.4464E-03 Rms= 1.3899E-02  **** from histogram
+Mean and rms found by including all data:
+Mean= 1.322E-02 Rms= 5.578E-02 JY/BEAM  over       10201. pixels
+Flux density =  1.0329E+00 Jy      beam area =   130.58 pixels
+Minimum=-5.9374E-02 at  496  498    1    1
+Skypos: RA 17 45 40.0006098  DEC -29 00 28.207500
+Maximum= 5.5289E-01 at  514  513    1    1
+Skypos: RA 17 45 39.9999238  DEC -29 00 28.200000
+Skypos: IPOL  6.5000E+11 Hz
+            0. pixels below    -62.4358           MilliJY/B
+            9. pixels between  -62.4358  -56.3131 MilliJY/B
+           27. pixels between  -56.3131  -50.1904 MilliJY/B
+           31. pixels between  -50.1904  -44.0678 MilliJY/B
+           59. pixels between  -44.0678  -37.9451 MilliJY/B
+          158. pixels between  -37.9451  -31.8225 MilliJY/B
+          332. pixels between  -31.8225  -25.6998 MilliJY/B
+          624. pixels between  -25.6998  -19.5771 MilliJY/B
+          834. pixels between  -19.5771  -13.4545 MilliJY/B
+         1159. pixels between  -13.4545   -7.3318 MilliJY/B
+         1414. pixels between   -7.3318   -1.2091 MilliJY/B
+         1426. pixels between   -1.2091    4.9135 MilliJY/B
+          903. pixels between    4.9135   11.0362 MilliJY/B
+          607. pixels between   11.0362   17.1588 MilliJY/B
+          427. pixels between   17.1588   23.2815 MilliJY/B
+          407. pixels between   23.2815   29.4042 MilliJY/B
+          302. pixels between   29.4042   35.5268 MilliJY/B
+          257. pixels between   35.5268   41.6495 MilliJY/B
+          201. pixels between   41.6495   47.7721 MilliJY/B
+          164. pixels between   47.7721   53.8948 MilliJY/B
+          115. pixels between   53.8948   60.0175 MilliJY/B
+           68. pixels between   60.0175   66.1401 MilliJY/B
+           64. pixels between   66.1401   72.2628 MilliJY/B
+           50. pixels between   72.2628   78.3855 MilliJY/B
+           50. pixels between   78.3854   84.5081 MilliJY/B
+           27. pixels between   84.5081   90.6308 MilliJY/B
+           25. pixels between   90.6308   96.7534 MilliJY/B
+           28. pixels between   96.7534  102.8761 MilliJY/B
+           39. pixels between  102.8761  108.9987 MilliJY/B
+           28. pixels between  108.9988  115.1214 MilliJY/B
+           16. pixels between  115.1214  121.2441 MilliJY/B
+           24. pixels between  121.2441  127.3667 MilliJY/B
+           17. pixels between  127.3667  133.4894 MilliJY/B
+           14. pixels between  133.4894  139.6121 MilliJY/B
+           11. pixels between  139.6120  145.7347 MilliJY/B
+           14. pixels between  145.7347  151.8574 MilliJY/B
+           16. pixels between  151.8574  157.9800 MilliJY/B
+            9. pixels between  157.9800  164.1027 MilliJY/B
+            9. pixels between  164.1027  170.2254 MilliJY/B
+           11. pixels between  170.2254  176.3480 MilliJY/B
+            5. pixels between  176.3480  182.4707 MilliJY/B
+           12. pixels between  182.4707  188.5933 MilliJY/B
+            8. pixels between  188.5933  194.7160 MilliJY/B
+            8. pixels between  194.7160  200.8387 MilliJY/B
+            8. pixels between  200.8387  206.9613 MilliJY/B
+            6. pixels between  206.9613  213.0840 MilliJY/B
+            8. pixels between  213.0840  219.2067 MilliJY/B
+            6. pixels between  219.2066  225.3293 MilliJY/B
+            9. pixels between  225.3293  231.4520 MilliJY/B
+            4. pixels between  231.4520  237.5746 MilliJY/B
+            6. pixels between  237.5746  243.6973 MilliJY/B
+            8. pixels between  243.6973  249.8199 MilliJY/B
+            4. pixels between  249.8200  255.9426 MilliJY/B
+            6. pixels between  255.9426  262.0653 MilliJY/B
+            2. pixels between  262.0653  268.1879 MilliJY/B
+            7. pixels between  268.1880  274.3106 MilliJY/B
+            1. pixels between  274.3106  280.4333 MilliJY/B
+            8. pixels between  280.4333  286.5559 MilliJY/B
+            6. pixels between  286.5559  292.6786 MilliJY/B
+            1. pixels between  292.6786  298.8012 MilliJY/B
+            4. pixels between  298.8013  304.9239 MilliJY/B
+            6. pixels between  304.9239  311.0466 MilliJY/B
+            2. pixels between  311.0466  317.1692 MilliJY/B
+            5. pixels between  317.1693  323.2919 MilliJY/B
+            1. pixels between  323.2919  329.4146 MilliJY/B
+            3. pixels between  329.4146  335.5372 MilliJY/B
+            4. pixels between  335.5372  341.6599 MilliJY/B
+            3. pixels between  341.6599  347.7825 MilliJY/B
+            2. pixels between  347.7825  353.9052 MilliJY/B
+            6. pixels between  353.9052  360.0279 MilliJY/B
+            4. pixels between  360.0279  366.1505 MilliJY/B
+            1. pixels between  366.1505  372.2732 MilliJY/B
+            3. pixels between  372.2732  378.3958 MilliJY/B
+            1. pixels between  378.3958  384.5185 MilliJY/B
+            2. pixels between  384.5185  390.6412 MilliJY/B
+            5. pixels between  390.6412  396.7638 MilliJY/B
+            2. pixels between  396.7638  402.8865 MilliJY/B
+            2. pixels between  402.8865  409.0092 MilliJY/B
+            2. pixels between  409.0092  415.1318 MilliJY/B
+            2. pixels between  415.1318  421.2545 MilliJY/B
+            1. pixels between  421.2545  427.3771 MilliJY/B
+            3. pixels between  427.3771  433.4998 MilliJY/B
+            5. pixels between  433.4998  439.6224 MilliJY/B
+            2. pixels between  439.6225  445.7451 MilliJY/B
+            3. pixels between  445.7451  451.8678 MilliJY/B
+            1. pixels between  451.8678  457.9904 MilliJY/B
+            1. pixels between  457.9904  464.1131 MilliJY/B
+            1. pixels between  464.1131  470.2357 MilliJY/B
+            1. pixels between  470.2358  476.3584 MilliJY/B
+            3. pixels between  476.3584  482.4810 MilliJY/B
+            2. pixels between  482.4811  488.6037 MilliJY/B
+            4. pixels between  488.6038  494.7264 MilliJY/B
+            1. pixels between  494.7264  500.8491 MilliJY/B
+            1. pixels between  500.8491  506.9717 MilliJY/B
+            2. pixels between  506.9718  513.0944 MilliJY/B
+            1. pixels between  513.0944  519.2171 MilliJY/B
+            2. pixels between  519.2170  525.3397 MilliJY/B
+            1. pixels between  525.3397  531.4624 MilliJY/B
+            2. pixels between  531.4624  537.5851 MilliJY/B
+            3. pixels between  537.5850  543.7077 MilliJY/B
+            0. pixels between  543.7077  549.8304 MilliJY/B
+            2. pixels between  549.8304  555.9531 MilliJY/B
+            0. pixels above    555.9530           MilliJY/B
+********************************************************************************
+IMEAN run on 03-JUL-2020  at 16:53:40
+Image= 1000        .ICL001.   1 1   xywind=  462  463  562  563
+Mean and rms found by fitting peak in histogram:
+Mean= 8.9577E-04 Rms= 3.4143E-03  **** from histogram
+Mean and rms found by including all data:
+Mean= 1.356E-02 Rms= 7.108E-02 JY/BEAM  over       10201. pixels
+Flux density =  1.0607E+00 Jy      beam area =   130.38 pixels
+Minimum=-1.7937E-02 at  534  503    1    1
+Skypos: RA 17 45 39.9991615  DEC -29 00 28.205000
+Maximum= 8.9429E-01 at  512  513    1    1
+Skypos: RA 17 45 40.0000000  DEC -29 00 28.200000
+Skypos: IPOL  6.5000E+11 Hz
+            0. pixels below    -22.4984           MilliJY/B
+           67. pixels between  -22.4984  -13.3761 MilliJY/B
+          872. pixels between  -13.3761   -4.2538 MilliJY/B
+         6628. pixels between   -4.2538    4.8685 MilliJY/B
+         1560. pixels between    4.8685   13.9908 MilliJY/B
+          401. pixels between   13.9908   23.1131 MilliJY/B
+          179. pixels between   23.1131   32.2354 MilliJY/B
+           61. pixels between   32.2354   41.3577 MilliJY/B
+           39. pixels between   41.3577   50.4800 MilliJY/B
+           24. pixels between   50.4800   59.6023 MilliJY/B
+           20. pixels between   59.6023   68.7246 MilliJY/B
+           16. pixels between   68.7246   77.8469 MilliJY/B
+           23. pixels between   77.8469   86.9692 MilliJY/B
+           14. pixels between   86.9692   96.0915 MilliJY/B
+            9. pixels between   96.0915  105.2138 MilliJY/B
+            9. pixels between  105.2138  114.3361 MilliJY/B
+           15. pixels between  114.3361  123.4584 MilliJY/B
+           11. pixels between  123.4584  132.5807 MilliJY/B
+           10. pixels between  132.5807  141.7030 MilliJY/B
+            8. pixels between  141.7030  150.8253 MilliJY/B
+            5. pixels between  150.8253  159.9476 MilliJY/B
+            5. pixels between  159.9476  169.0699 MilliJY/B
+            8. pixels between  169.0699  178.1922 MilliJY/B
+           10. pixels between  178.1922  187.3145 MilliJY/B
+            7. pixels between  187.3145  196.4368 MilliJY/B
+           11. pixels between  196.4368  205.5591 MilliJY/B
+            0. pixels between  205.5591  214.6814 MilliJY/B
+            6. pixels between  214.6814  223.8037 MilliJY/B
+            4. pixels between  223.8037  232.9260 MilliJY/B
+            4. pixels between  232.9260  242.0483 MilliJY/B
+            5. pixels between  242.0483  251.1706 MilliJY/B
+            6. pixels between  251.1706  260.2929 MilliJY/B
+            3. pixels between  260.2929  269.4153 MilliJY/B
+            8. pixels between  269.4153  278.5376 MilliJY/B
+            5. pixels between  278.5375  287.6599 MilliJY/B
+            4. pixels between  287.6599  296.7822 MilliJY/B
+            4. pixels between  296.7821  305.9044 MilliJY/B
+            3. pixels between  305.9044  315.0268 MilliJY/B
+            2. pixels between  315.0267  324.1490 MilliJY/B
+            3. pixels between  324.1490  333.2714 MilliJY/B
+            2. pixels between  333.2713  342.3936 MilliJY/B
+            5. pixels between  342.3936  351.5160 MilliJY/B
+            6. pixels between  351.5160  360.6383 MilliJY/B
+            2. pixels between  360.6382  369.7606 MilliJY/B
+            5. pixels between  369.7606  378.8829 MilliJY/B
+            4. pixels between  378.8828  388.0052 MilliJY/B
+            3. pixels between  388.0052  397.1275 MilliJY/B
+            1. pixels between  397.1274  406.2498 MilliJY/B
+            5. pixels between  406.2498  415.3721 MilliJY/B
+            0. pixels between  415.3721  424.4944 MilliJY/B
+            3. pixels between  424.4944  433.6167 MilliJY/B
+            0. pixels between  433.6167  442.7390 MilliJY/B
+            4. pixels between  442.7390  451.8613 MilliJY/B
+            4. pixels between  451.8613  460.9836 MilliJY/B
+            3. pixels between  460.9836  470.1059 MilliJY/B
+            2. pixels between  470.1059  479.2282 MilliJY/B
+            3. pixels between  479.2282  488.3505 MilliJY/B
+            4. pixels between  488.3505  497.4728 MilliJY/B
+            4. pixels between  497.4727  506.5951 MilliJY/B
+            2. pixels between  506.5950  515.7173 MilliJY/B
+            2. pixels between  515.7173  524.8397 MilliJY/B
+            1. pixels between  524.8397  533.9620 MilliJY/B
+            0. pixels between  533.9619  543.0842 MilliJY/B
+            1. pixels between  543.0842  552.2065 MilliJY/B
+            3. pixels between  552.2065  561.3289 MilliJY/B
+            3. pixels between  561.3289  570.4512 MilliJY/B
+            0. pixels between  570.4512  579.5735 MilliJY/B
+            4. pixels between  579.5734  588.6957 MilliJY/B
+            2. pixels between  588.6957  597.8181 MilliJY/B
+            5. pixels between  597.8181  606.9404 MilliJY/B
+            2. pixels between  606.9404  616.0627 MilliJY/B
+            2. pixels between  616.0626  625.1849 MilliJY/B
+            2. pixels between  625.1849  634.3073 MilliJY/B
+            0. pixels between  634.3073  643.4296 MilliJY/B
+            0. pixels between  643.4296  652.5519 MilliJY/B
+            2. pixels between  652.5519  661.6742 MilliJY/B
+            3. pixels between  661.6741  670.7964 MilliJY/B
+            2. pixels between  670.7964  679.9188 MilliJY/B
+            1. pixels between  679.9188  689.0411 MilliJY/B
+            0. pixels between  689.0411  698.1634 MilliJY/B
+            3. pixels between  698.1633  707.2856 MilliJY/B
+            5. pixels between  707.2856  716.4080 MilliJY/B
+            1. pixels between  716.4080  725.5303 MilliJY/B
+            1. pixels between  725.5303  734.6526 MilliJY/B
+            2. pixels between  734.6526  743.7749 MilliJY/B
+            2. pixels between  743.7748  752.8972 MilliJY/B
+            0. pixels between  752.8972  762.0195 MilliJY/B
+            0. pixels between  762.0195  771.1418 MilliJY/B
+            2. pixels between  771.1418  780.2641 MilliJY/B
+            0. pixels between  780.2641  789.3864 MilliJY/B
+            3. pixels between  789.3864  798.5087 MilliJY/B
+            5. pixels between  798.5087  807.6310 MilliJY/B
+            0. pixels between  807.6310  816.7533 MilliJY/B
+            2. pixels between  816.7533  825.8756 MilliJY/B
+            0. pixels between  825.8755  834.9979 MilliJY/B
+            1. pixels between  834.9979  844.1202 MilliJY/B
+            1. pixels between  844.1202  853.2425 MilliJY/B
+            2. pixels between  853.2425  862.3648 MilliJY/B
+            2. pixels between  862.3648  871.4871 MilliJY/B
+            2. pixels between  871.4871  880.6094 MilliJY/B
+            0. pixels between  880.6094  889.7317 MilliJY/B
+            1. pixels between  889.7317  898.8540 MilliJY/B
+            0. pixels above    898.8540           MilliJY/B

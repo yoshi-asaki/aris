@@ -1,0 +1,196 @@
+################################################################
+##
+## ANTENNA PARAMETER
+##
+################################################################
+##
+## BEGIN_ANT
+## STATION        : "(antenna code name within 8 characters)"
+## ARRAY          : "(array code name)"
+## MOUNT          : "(ALAZ/EQUA/ORBT)"
+## FREQ_STANDARD  : "(H_M/CSO_10/CSO_100)"
+## POSITION       : (station position (x, y, z) [m])
+## POSITION_ERROR : (station position systeatic error (x, y, z) [m])
+## POS_OFFSET     : (station position offset (x, y, z) [m])
+## STAXOF         :            2.1270
+## LONGITUDE      : (station position longitude (E:[+] W:[-]) ddd mm ss.s)
+## LATITUDE       : (station position latitude  (N:[+] S:[-])  dd mm ss.s)
+## ALTITUDE       : (station position altitude [m])
+## AZ_RATE_ACCEL  : (azimuth motor slew rate [deg/s] & acceleration [deg/s/s])
+## EL_RATE_ACCEL  : (elevation motor slew rate [deg/s] & acceleration [deg/s/s])
+## EL_LIMIT       : (lower elevation limit [deg])
+## FREQ_SWT_LAG   : (time lag for the frequency switching [s])
+## SLEW_TIME      : (average antenna slew time: you don't need to set
+##                   if you set the antenna motor slew rate and the
+##                   acceleration.)
+## (band)         :diameter[m], apperture,
+##                    Trk[K], Tsky(zenith)[K]
+## KU_BAND        : 25.0, 0.69, 32.0, 18.0
+## END_ANT
+##
+#
+########################
+#
+#*+++++++++*+++++++++*+++++++++*+++++++++*+++++++++*+++++++++*
+#CODE      LATITUDE            LONGITUDE           HEIGHT
+#USUDA     +138:21:57.20       +36:07:45.30        0.0
+#GOLD      -116:47:41.63       +35:03:59.41        0.0
+#MADR      -004:14:52.80       +40:14:28.68        0.0
+#TIDB      -211:01:07.35       -35:13:15.60        0.0
+#GBANK     -079:50:09.08        38:15:02.93        0.0
+#HART      +027:26:26.52       -25:44:21.48        0.0
+#MALIND    +040:11:40.218      +02:59:44.007       0.0
+#KIRUNA    +020:20:44.000      +67:49:19.007       0.0
+#
+BEGIN_ANT
+STATION        : "USUDA"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   +138 21 57.20
+LATITUDE       :    +36 07 45.30
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+KU_BAND        : 10.0, 0.60, 30.0, 20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "GOLD"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   -116 47 41.63
+LATITUDE       :    +35 03 59.41
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "MADR"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   -004 14 52.80
+LATITUDE       :    +40 14 28.68
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "TIDB"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   -211 01 07.35
+LATITUDE       :    -35 13 15.60
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "GBANK"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   -079 50 09.08
+LATITUDE       :    +38 15 02.93
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "HART"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   +027 26 26.52
+LATITUDE       :    -25 44 21.48
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "MALIND"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   +040 11 40.218
+LATITUDE       :    +02 59 44.007
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+BEGIN_ANT
+STATION        : "KIRUNA"
+ARRAY          : "TRACKING_NETWORK"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+POS_OFFSET     :   0.0,   0.0,   0.0
+STAXOF         :            2.1270
+LONGITUDE      :   +020 20 44.000
+LATITUDE       :    +67 49 19.007
+ALTITUDE       :   0.0
+AZ_RATE_ACCEL  :   3.0, 3.0
+EL_RATE_ACCEL  :   3.0, 3.0
+EL_LIMIT       :  20.0
+END_ANT
+#
+#STATION        : "GEOCEN"
+#ARRAY          : "TRACKING_NETWORK"
+#MOUNT          : "ALAZ"
+#FREQ_STANDARD  : "H_M"
+#POSITION       :   0.0,   0.0,   0.0
+POSITION_ERROR :   0.0,   0.0,   0.0
+#POS_OFFSET     :   0.0,   0.0,   0.0
+#STAXOF         :            2.1270
+#LONGITUDE      :   +000 00 00.000
+#LATITUDE       :    +00 00 00.000
+#ALTITUDE       :   -6.378137e6
+#AZ_RATE_ACCEL  :   3.0, 3.0
+#EL_RATE_ACCEL  :   3.0, 3.0
+#EL_LIMIT       :  20.0
+#

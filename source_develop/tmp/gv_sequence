@@ -1,0 +1,19 @@
+set terminal x11
+#set terminal postscript eps enhanced
+set xrange[-60: 60] 
+set yrange[-60: 60] 
+
+set xlabel "Pointing error (pitch) [deg]" font "Times-Roman"
+set ylabel "Pointing error (roll) [deg]" font "Times-Roman"
+set zlabel "Delay [ps]" font "Times-Roman"
+
+#set view 125, 65
+#set view 0, 0
+#set contour
+#set pm3d
+#set hidden3d
+set palette color
+set style data lines
+#set output 'per.eps'
+splot "vis.dat"
+pause -1

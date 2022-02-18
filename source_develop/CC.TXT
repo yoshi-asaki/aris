@@ -1,0 +1,13 @@
+      localhos   PRTCC(31DEC06)      20               10-APR-2006   19:29:15               Page    1
+3C15AC      .ICL001.   1  Disk= 1    CC table version   2
+Title: AIPS CC CLEAN COMPONENTS TABLE
+ 
+Created by      IMAGR on 10-APR-2006 18:37:46
+Last written by CCMRG on 10-APR-2006 18:39:45
+Ncomps       2    sort on: FLUX     (DELTAY)          (ASCEND)
+ 
+    Comp        Delta X        Delta Y       Flux            Total
+       #      Microasec      Microasec        Jy               Jy
+ 
+       1           0.00           0.00       1.0000000        1.0000000
+       2           0.00         -50.00       0.5000000        1.5000000

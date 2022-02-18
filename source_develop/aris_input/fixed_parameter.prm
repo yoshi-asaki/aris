@@ -1,0 +1,25 @@
+SOURCE-1 POSITION ERROR        [as] :     0.3e-3
+SOURCE-2 POSITION ERROR        [as] :     0.3e-3
+ANTENNA POSITION ERROR-H        [m] :      3.0e-3
+ANTENNA POSITION ERROR-V        [m] :     10.0e-3
+UT1 ERROR                       [s] :     0.02e-3
+POLAR MOTION ERROR             [as] :     0.3e-3
+PRECESSION-NUTATION ERROR      [as] :     0.3e-3
+WAVE LENGTH L_BAND              [m] :     0.1798
+WAVE LENGTH S_BAND              [m] :     0.136
+WAVE LENGTH C_BAND              [m] :     6.25e-2
+WAVE LENGTH X_BAND              [m] :     3.57e-2
+WAVE LENGTH KU_BAND             [m] :     1.96e-2
+WAVE LENGTH K_BAND              [m] :     1.35e-2
+WAVE LENGTH Q_BAND              [m] :     7.00e-3
+WAVE LENGTH W_BAND              [m] :     3.4262857e-3
+WAVE LENGTH BAND01              [m] :     7.00e-3
+WAVE LENGTH BAND02              [m] :     3.4262857e-3
+WAVE LENGTH BAND03              [m] :     3.4262857e-3
+WAVE LENGTH BAND04              [m] :     2.324031e-3
+WAVE LENGTH BAND05              [m] :     1.7430233e-3
+WAVE LENGTH BAND06              [m] :     1.162011e-3
+WAVE LENGTH BAND07              [m] :     8.5657143e-4
+WAVE LENGTH BAND08              [m] :     6.6662055e-4
+WAVE LENGTH BAND09              [m] :     4.6123077e-4
+WAVE LENGTH BAND10              [m] :     3.7475000e-4

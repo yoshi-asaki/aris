@@ -1,0 +1,66 @@
+      localhos   PRTAB(31DEC15)     200               11-MAR-2016   13:03:42               Page    1
+COR14236    .MSORT .   1  Disk= 1    SU Table version   1
+Title: AIPS SU
+ 
+Created by      FITLD on 11-MAR-2016 12:52:19
+Last written by FITLD on 11-MAR-2016 12:52:19
+Ncol 21  Nrow 5    Sort cols:
+    Table has     4 keyword-value pairs:
+   NO_IF    =            1
+   VELTYP   =  LSR
+   VELDEF   =  RADIO
+   FREQID   =           -1
+   Table can be written as a FITS ASCII table
+ 
+COL. NO.     1         2       3      4        5        6        7        8           9             10          11         12
+     ROW  ID. NO.  SOURCE    QUAL  CALCODE  IFLUX    QFLUX    UFLUX    VFLUX    FREQOFF        BANDWIDTH    RAEPO      DECEPO
+  NUMBER                                    JY       JY       JY       JY       HZ             HZ           DEGREES    DEGREES
+ 
+       1     1     1622-253    1              0.000    0.000    0.000    0.000           0.00  62500.00000  123.22269   -25.46065
+       2     2     NRAO530     1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  131.63064   -13.08043
+       3     3     SGRAST      1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  133.20842   -29.00781
+       4     4     1622-297    1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  123.26254   -29.85749
+       5     5     1921-293    1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  145.60637   -29.24170
+      localhos   PRTAB(31DEC15)     200               11-MAR-2016   13:03:42               Page    2
+COL. NO.        13            14           15            16           17            18           19           20           21
+     ROW    EPOCH         RAAPP        DECAPP        RAOBS        DECOBS        LSRVEL       RESTFREQ     PMRA         PMDEC
+  NUMBER    YEARS         DEGREES      DEGREES       DEGREES      DEGREES       M/SEC        HZ           DEG/DAY      DEG/DAY
+ 
+       1    2000.00000    123.37482     -25.50503    123.22269     -25.46065      0.00000      0.00000      0.00000      0.00000
+       2    2000.00000    131.80110     -13.13470    131.63064     -13.08043      0.00000      0.00000      0.00000      0.00000
+       3    2000.00000    133.35980     -29.06355    133.20842     -29.00781      0.00000      0.00000      0.00000      0.00000
+       4    2000.00000    123.40785     -29.90184    123.26254     -29.85749      0.00000      0.00000      0.00000      0.00000
+       5    2000.00000    145.76496     -29.30917    145.60637     -29.24170      0.00000      0.00000      0.00000      0.00000
+      localhos   PRTAB(31DEC15)     200               11-MAR-2016   13:03:46               Page    1
+COR14236    .MSORT .   1  Disk= 1    SU Table version   1
+Title: AIPS SU
+ 
+Created by      FITLD on 11-MAR-2016 12:52:19
+Last written by FITLD on 11-MAR-2016 12:52:19
+Ncol 21  Nrow 5    Sort cols:
+    Table has     4 keyword-value pairs:
+   NO_IF    =            1
+   VELTYP   =  LSR
+   VELDEF   =  RADIO
+   FREQID   =           -1
+   Table can be written as a FITS ASCII table
+ 
+COL. NO.     1         2       3      4        5        6        7        8           9             10          11         12
+     ROW  ID. NO.  SOURCE    QUAL  CALCODE  IFLUX    QFLUX    UFLUX    VFLUX    FREQOFF        BANDWIDTH    RAEPO      DECEPO
+  NUMBER                                    JY       JY       JY       JY       HZ             HZ           DEGREES    DEGREES
+ 
+       1     1     1622-253    1              0.000    0.000    0.000    0.000           0.00  62500.00000  123.22269   -25.46065
+       2     2     NRAO530     1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  131.63064   -13.08043
+       3     3     SGRAST      1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  133.20842   -29.00781
+       4     4     1622-297    1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  123.26254   -29.85749
+       5     5     1921-293    1              0.000    0.000    0.000    0.000   -16000000.00  62500.00000  145.60637   -29.24170
+      localhos   PRTAB(31DEC15)     200               11-MAR-2016   13:03:46               Page    2
+COL. NO.        13            14           15            16           17            18           19           20           21
+     ROW    EPOCH         RAAPP        DECAPP        RAOBS        DECOBS        LSRVEL       RESTFREQ     PMRA         PMDEC
+  NUMBER    YEARS         DEGREES      DEGREES       DEGREES      DEGREES       M/SEC        HZ           DEG/DAY      DEG/DAY
+ 
+       1    2000.00000    123.37482     -25.50503    123.22269     -25.46065      0.00000      0.00000      0.00000      0.00000
+       2    2000.00000    131.80110     -13.13470    131.63064     -13.08043      0.00000      0.00000      0.00000      0.00000
+       3    2000.00000    133.35980     -29.06355    133.20842     -29.00781      0.00000      0.00000      0.00000      0.00000
+       4    2000.00000    123.40785     -29.90184    123.26254     -29.85749      0.00000      0.00000      0.00000      0.00000
+       5    2000.00000    145.76496     -29.30917    145.60637     -29.24170      0.00000      0.00000      0.00000      0.00000

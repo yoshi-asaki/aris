@@ -1,0 +1,768 @@
+%
+%The following is for check the manuscript.
+\documentstyle[epsf,12pt]{article}
+%
+%
+%\documentstyle[epsf,a4j,twocolumn]{article}
+%
+%
+\input{psfig}
+\pagestyle{empty}
+\setlength{\textheight}{245mm}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%The following is for check the manuscript.
+%\setlength{\baselineskip}{6mm}
+%\setlength{\parindent}{0mm}
+%
+\begin{center}
+{\Large \bf
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     Title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        Input Catalogue for Space-VLBI Phase-referencing
+} \vspace{5mm} \\
+\end{center}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% First Author
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{tabular}{l}
+Yoshiharu Asaki (ISAS) \\
+\end{tabular}
+\\
+Aug 9, 2002 \\
+\end{center}
+%
+\setlength{\parindent}{5mm}
+%%%%%%%%%%%
+%   DOCUMENT
+%%%%%%%%%%%
+%
+\begin{center}
+{\Large Abstract}
+\end{center}
+%
+An input catalogue for space-VLBI phase-referencing 
+has been made using an image simulator which has been 
+developed for this work. An example of the input catalogue 
+and the following statistical analysis are mentioned in this 
+report. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{
+    Introduction
+}
+Phase-referencing (P-R) by means of the antenna nodding method 
+is considered to be a promising technique for future space-VLBI 
+(SVLBI) missions to obtain higher sensitivities. The effectiveness 
+of P-R will depend on weather conditions, separation 
+angles between target and reference sources, observing 
+frequencies, slew rates of radio telescopes which limit the 
+achievable switching cycle time, and so on. The most important 
+factors for P-R are the existence of a reference source very 
+close to the target, and the switching cycle time: if a suitable 
+reference cannot be found the P-R will not work at all, and the 
+faster the switching cycle time is, the better the effectiveness 
+will be. 
+
+Switching the spacecraft attitude with a cycle time of less 
+than a few minutes with an positional accuracy much less than 
+the HPBW of the space radio telescope (SRT) will be hard to 
+achieve. Since spacecraft have limitations on the mass and 
+power budgets, we will not be able to prepare 
+an attitude control system for fast switching. To consider 
+the trade-off between these budgets and 
+the effectiveness of P-R, we have to investigate the 
+dependency of the effectiveness on the switching cycle time 
+as well as the probability that a reference source can 
+be found close to an arbitrary target source.  
+
+In this work the following approach is adopted to discuss 
+the effectiveness of P-R instead of investigating the 
+probability of the existence of a reference source: 
+    \begin{list}{}
+    {
+        \setlength{\itemindent}{-6mm}
+        \setlength{\parsep}{0mm}
+        \setlength{\topsep}{3mm}
+    }
+    \item{(i)}
+       Scientifically interesting pairs of sources are 
+       selected for P-R observations. 
+    \item{(ii)}
+       The effectiveness for each pair of sources is evaluated. 
+    \item{(iii)}
+       Statistical studies are applied to the effectiveness of 
+       the selected pairs. 
+    \end{list}
+To conduct the first and third items, an input catalogue for 
+SVLBI P-R has been made using an image simulator which has been 
+developed for this work. Assumed observing conditions for SVLBI 
+P-R is mentioned in section\ref{sec:02}. An example of the 
+input catalogue for weak GPS sources is shown in section \ref{sec:03}. 
+A statistical analysis about the catalogue is described in 
+section \ref{sec:04}. An appendix gives a description about the 
+image simulator for SVLBI P-R. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{
+  \label{sec:02}
+  Assumptions of the Observing Conditions
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The effectiveness of P-R is dependent on the observing conditions 
+very much. The following observing conditions are considered to 
+evaluate the effectiveness of P-R in SVLBI, though some of them 
+contribute to make more optimistic situation: 
+\begin{list}{}
+{
+    \setlength{\itemindent}{-6mm}
+    \setlength{\parsep}{0mm}
+    \setlength{\topsep}{3mm}
+}
+\item{(i)}
+All the sources listed are assumed to be completely point-like ones. 
+The assumed flux densities of the reference sources are 
+referred to correlated flux densities at 8 GHz, or total flux 
+densities at 5 GHz because almost all the flux densities at higher 
+frequencies cannot be investigated easily. 
+\item{(ii)}
+Observations using the VLBA and two spacecraft are demonstrated. 
+To evaluate the SNR of the brightness peaks of the targets, 
+only space-ground baselines are considered because we are 
+interested in how much P-R improves the sensitivities of baselines 
+with an SRT whose sensitivity is low. 
+\item{(iii)}
+The astronomical radio seeing demonstrated listed in Table 
+\ref{tbl:04-01} in Appendix \ref{sec:A3} is applied. 
+\item{(iv)}
+Maximum observing time is 14 hours while the total number of 
+samples in (u, v) depends on the declination and separation 
+angle of the sources. 
+\item{(v)}
+The switching cycle time is fixed to 120 sec independent of the 
+separation angles. The on-source duration 
+(pre-vector-average duration) is fixed to 10 sec. 
+\item{(vi)}
+The SNR of the target without P-R is calculated in the continuous 
+observation. The pre-vector-averaging duration is fixed to 10 sec. 
+\item{(vii)}
+No weighting function and no deconvolution in imaging are 
+considered. Simple 2-D Fourier transformation is just applied 
+in making synthesis maps.
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{
+  \label{sec:03}
+  Input Catalogue for the P-R SVLBI
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+reference sources:
+    \begin{list}{}
+    {
+        \setlength{\itemindent}{-6mm}
+        \setlength{\parsep}{0mm}
+        \setlength{\topsep}{3mm}
+    }
+    \item{}$*$ : VLBA calibrator source
+    \item{}$\dag$ : ICRF source 
+    \item{}$\ddag$ : correlated flux density at 8 GHz
+    \item{}$\S$ : total flux density at 5 GHz
+    \end{list}
+effectiveness: 
+    \begin{list}{}
+    {
+        \setlength{\itemindent}{-6mm}
+        \setlength{\parsep}{0mm}
+        \setlength{\topsep}{3mm}
+    }
+    \item{}$\bigcirc$ : P-R is useful. 
+    \item{}$\triangle$ : P-R is not needed although the 
+       brightness peak is obtained at the phase tracking center, 
+       because the obtained SNR with P-R is not improved so much 
+       comparing with the continuous observation. \\
+       (You have to note that the total number of samples in (u, v) 
+       is 1/12 smaller than that of the continuous observation.) 
+    \item{} $\times$ : P-R is not useful. 
+    \end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{
+  Weak GPS Sources
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%
+\subsubsection{
+  1525+6801
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1525+6801        &  30mJy (72.3)
+                 &  10mJy (4.4)
+                 &   8mJy (4.3)
+                 & (target)   \\
+\hline
+J1526+6650$^*$   &0.312Jy
+                 &0.312Jy$^\ddag$
+                 &0.312Jy$^\ddag$
+                 & 1.01$^\circ$ \\
+\hline
+J1459+7140$^\dag$&3.733Jy$^\S$
+                 &3.733Jy$^\S$
+                 &3.733Jy$^\S$
+                 & 4.45$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1525+6801 -- J1526+6650}    \\
+\hline
+                 & X
+                 & Ka
+                 & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R    &  53.9
+                 &   3.9
+                 & \multicolumn{2}{l}{3.7}     \\
+\hline
+effectiveness    & $\triangle$
+                 & $\times$
+                 & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1525+6801 -- J1459+7140}    \\
+\hline
+                 & X
+                 & Ka
+                 & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R    &  54.6
+                 &   4.0
+                 & \multicolumn{2}{l}{3.8}     \\
+\hline
+effectiveness    & $\triangle$ & $\times$
+                 & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1538+5920
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1538+5920        &  35mJy (65.4)
+                 &  15mJy (3.6)
+                 &  10mJy (3.1)
+                 & (target)   \\
+\hline
+J1551+5806$^*$   & 0.305Jy
+                 & 0.305Jy$^\ddag$
+                 & 0.305Jy$^\ddag$
+                 & 1.94$^\circ$ \\
+\hline
+J1603+5730$^*$   & 0.312Jy
+                 & 0.312Jy$^\ddag$
+                 & 0.312Jy$^\ddag$
+                 & 3.61$^\circ$ \\
+\hline
+J1604+5714$^*$   & 0.491Jy
+                 & 0.491Jy$^\ddag$
+                 & 0.491Jy$^\ddag$
+                 & 3.83$^\circ$ \\
+\hline
+J1510+5702$^\dag$& 0.264Jy
+                 & 0.264Jy$^\ddag$
+                 & 0.264Jy$^\ddag$
+                 & 4.44$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1538+5920 -- J1551+5806}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 54.3        & 6.9        & \multicolumn{2}{l}{4.1}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1538+5920 -- J1603+5730} \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 51.1        & 3.4        & \multicolumn{2}{l}{4.4}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1538+5920 -- J1604+5714} \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 50.8        & 4.4        & \multicolumn{2}{l}{4.4}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1538+5920 -- J1510+5702} \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 51.5        & 3.9        & \multicolumn{2}{l}{3.9}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1551+6822
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1551+6822        &  25mJy (73.6)
+                 &   6mJy (4.6)
+                 &   2mJy (3.5)
+                 & (target)   \\
+\hline
+J1526+6650$^*$   & 0.312Jy
+                 & 0.312Jy$^\ddag$
+                 & 0.312Jy$^\ddag$
+                 & 2.79$^\circ$ \\
+\hline
+J1623+6624$^*$   & 0.287Jy
+                 & 0.287Jy$^\ddag$
+                 & 0.287Jy$^\ddag$
+                 & 3.50$^\circ$ \\
+\hline
+J1642+6856$^\dag$& 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 4.62$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1551+6822 -- J1526+6650}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 55.5        &  3.9       & \multicolumn{2}{l}{3.5}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1551+6822 -- J1623+6624}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 55.7        & 3.8        & \multicolumn{2}{l}{4.2}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1551+6822 -- J1642+6856}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 53.7        & 3.1        & \multicolumn{2}{l}{4.1}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1557+6220
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1557+6220        &  25mJy (63.9)
+                 &   6mJy (3.3)
+                 &   2mJy (5.2)
+                 & (target)   \\
+\hline
+J1551+5806$^*$   & 0.305Jy
+                 & 0.305Jy$^\ddag$
+                 & 0.305Jy$^\ddag$
+                 & 4.15$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1557+6220 -- J1551+5806}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 45.9        &  4.0       & \multicolumn{2}{l}{3.8}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1600+7131
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1600+7131        &  30mJy (74.8)
+                 &   8mJy (3.5)
+                 &   2mJy (3.6)
+                 & (target)   \\
+\hline
+J1531+7206$^*$   & 0.231Jy
+                 & 0.231Jy$^\ddag$
+                 & 0.231Jy$^\ddag$
+                 & 2.38$^\circ$ \\
+\hline
+J1459+7140$^\dag$& 3.733Jy$^\S$
+                 & 3.733Jy$^\S$
+                 & 3.733Jy$^\S$
+                 & 4.86$^\circ$ \\
+\hline
+J1642+6856$^\dag$& 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 4.28$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1600+7131 -- J1531+7206}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 57.2        &  3.8       & \multicolumn{2}{l}{3.9}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1600+7131 -- J1459+7140}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 54.6        & 3.6        & \multicolumn{2}{l}{4.1}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1600+7131 -- J1642+6856}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 59.2        & 3.8        & \multicolumn{2}{l}{3.7}     \\
+\hline
+effectiveness & $\triangle$ & $\times$   & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1622+6630
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1622+6630        & 210mJy (70.8)
+                 & 100mJy (12.3)
+                 &  50mJy (3.5)
+                 & (target)   \\
+\hline
+J1623+6624$^*$   & 0.287Jy
+                 & 0.287Jy$^\ddag$
+                 & 0.287Jy$^\ddag$
+                 & 0.05$^\circ$ \\
+\hline
+J1629+6757$^*$   & 0.224Jy
+                 & 0.224Jy$^\ddag$
+                 & 0.224Jy$^\ddag$
+                 & 1.71$^\circ$ \\
+\hline
+J1642+6856$^\dag$& 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 3.15$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1622+6630 -- J1623+6624}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 69.2        & 45.7       & \multicolumn{2}{l}{3.8}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1622+6630 -- J1629+6757}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 70.3        & 45.9       & \multicolumn{2}{l}{4.0}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1622+6630 -- J1642+6856}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 67.0        & 41.1       & \multicolumn{2}{l}{3.2}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1642+6701
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1642+6701        &  35mJy (65.9)
+                 &  18mJy (3.7)
+                 &  10mJy (3.7)
+                 & (target)   \\
+\hline
+J1623+6624$^*$   & 0.287Jy
+                 & 0.287Jy$^\ddag$
+                 & 0.287Jy$^\ddag$
+                 & 1.98$^\circ$ \\
+\hline
+J1629+6757$^*$   & 0.224Jy
+                 & 0.224Jy$^\ddag$
+                 & 0.224Jy$^\ddag$
+                 & 1.58$^\circ$ \\
+\hline
+J1642+6856$^\dag$& 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 1.526Jy$^\S$
+                 & 2.01$^\circ$ \\
+\hline
+J1700+6830$^*$   & 0.377Jy
+                 & 0.377Jy$^\ddag$
+                 & 0.377Jy$^\ddag$
+                 & 2.30$^\circ$ \\
+\hline
+J1716+6836$^*$   & 0.829Jy
+                 & 0.829Jy$^\ddag$
+                 & 0.829Jy$^\ddag$
+                 & 3.61$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1642+6701 -- J1623+6624}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 61.3        & 7.6        & \multicolumn{2}{l}{3.2}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1642+6701 -- J1629+6757}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 61.2        & 5.2        & \multicolumn{2}{l}{5.3}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1642+6701 -- J1642+6856}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 59.6        &  8.2       & \multicolumn{2}{l}{3.4}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1642+6701 -- J1700+6830}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 60.8        & 5.2        & \multicolumn{2}{l}{4.2}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1642+6701 -- J1716+6836}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 60.0        & 5.5        & \multicolumn{2}{l}{3.7}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+
+%%%%%%%%
+\subsubsection{
+  1819+6707
+}
+%%%%%%%%
+\begin{tabular}{p{30mm}|p{30mm}|p{30mm}|p{30mm}|p{20mm}}
+\hline
+                 & \multicolumn{3}{c|}{flux density (SNR)}
+                 & separation \\
+\cline{2-4}
+                 & X
+                 & Ka
+                 & Q
+                 & angle \\
+\hline
+1819+6707        &  90mJy (62.2)
+                 &  35mJy (4.5)
+                 &  25mJy (3.7)
+                 & (target)   \\
+\hline
+J1842+6809$^\dag$& 0.932Jy$^\S$
+                 & 0.932Jy$^\S$
+                 & 0.932Jy$^\S$
+                 & 2.39$^\circ$ \\
+\hline
+%%%%
+\hline
+\multicolumn{5}{c}{1819+6707 -- J1842+6809}         \\
+\hline
+              &  X          & Ka         & \multicolumn{2}{l}{Q}       \\
+\hline
+SNR after P-R & 58.5        & 23.1       & \multicolumn{2}{l}{4.0}     \\
+\hline
+effectiveness & $\triangle$ & $\bigcirc$ & \multicolumn{2}{l}{$\times$}\\
+\hline
+\end{tabular}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{
+  \label{sec:04}
+  Statistical Analysis of SVLBI P-R Input Catalogue
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Histograms of the reference sources listed in section \ref{sec:03} 
+are shown in Figure \ref{fig:05-01}. The height of the red, blue and 
+black bars show the number of the reference sources which is useful, 
+not needed, and useless in P-R, respectively. 
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{c}
+\psfig{file=fig/histogram-x.epsi,height=70mm,width=70mm}
+\psfig{file=fig/histogram-k.epsi,height=70mm,width=70mm} \\
+\psfig{file=fig/histogram-q.epsi,height=70mm,width=70mm}
+\end{tabular}
+\caption{
+\label{fig:05-01}
+Histogram of the reference sources in the P-R input catalogue 
+for weak GPS sources. The top left, right, and bottom drawing show 
+the sources at 8, 22, and 43 GHz, respectively. 
+The height of the red, blue and black bars show the number of 
+the reference sources which is useful, not needed, and useless 
+in P-R, respectively. 
+}
+\end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+{\Large References}
+\\
+\\
+%Dravskikh,A.F., and A.M.Finkelstein,
+%Tropospheric limitations in phase
+%and frequency coordinate measurements in astronomy,
+%{\it Astrophy.Space Sci., 60},
+%251-265,
+%1979.
+%\\
+%\\
+%Holdaway,M.A., and M.Ishiguro,
+%Experimental determination of the dependence of tropospheric
+%pathlength variation on airmass,
+%{\it MMA Memo 127},
+%1995.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

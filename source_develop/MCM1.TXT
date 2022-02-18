@@ -1,0 +1,7 @@
+# TFLUX[Jy], SEMI-MAJOR-AXIS[mas], SEMI-MINOR-AXIS[mas], PA[deg], XOFFSET[mas], YOFFSET[mas], SOURCE TYPE (0: POINT  1: CYLINDOLICAL  2: GAUSSIAN
+#
+#1.0000, 0.5000, 0.5000,  0.0, 0.0,  0.0, 1
+#2.0000, 0.0000, 0.0000,  0.0, -1.0,  0.0, 1
+#
+0.0600,   13.000,  13.0000,    0.0,   0.00,   0.00, 0
+0.0048,    2.000,   2.0000,    0.0, -50.00, 200.00, 0
