@@ -20,7 +20,7 @@
 #define CHAR_LEN         30
 #define SECT_DAT        120
 #define ARRAY_MAX        20
-#define SEPANG_LIM     20.0
+#define SEPANG_LIM     40.0
 
 int  ant_list_chk(char *, float *,
                   struct comment_param      *,
