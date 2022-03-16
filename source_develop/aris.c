@@ -743,8 +743,10 @@ position. The following code is an emprical one based on Hunter et al. (2016).
         ant_err[iant].ERR[0] = xyz_tmp[0];
         ant_err[iant].ERR[1] = xyz_tmp[1];
         ant_err[iant].ERR[2] = xyz_tmp[2];
+/****
         printf("%11.6e, %11.6e, %11.6e, \n",
                 xyz_tmp[0], xyz_tmp[1], xyz_tmp[2]);
+****/
       }
 
 /****
