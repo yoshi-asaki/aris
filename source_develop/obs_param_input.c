@@ -18,10 +18,9 @@
 #define ANTLST_SECTION  100
 
 #define CHAR_LEN         30
-
 #define SECT_DAT        120
-
 #define ARRAY_MAX        20
+#define SEPANG_LIM     20.0
 
 int  ant_list_chk(char *, float *,
                   struct comment_param      *,
@@ -1547,13 +1546,14 @@ int  obs_param_input(_Bool *ERROR_FLAG, int  *ARRAY_ID, int  *wave_id,
                               &src[1].RA2k, &src[1].DC2k);
         } else if (SEP_MODE == SRC_dRA_dDEC) {
           tv_get_param("double", cursor_pos, bttn_box[I],
-                       pitch, ch_src.dlt_ra, -10.0, 10.0);
+                       pitch, ch_src.dlt_ra,
+                      -(double)SEPANG_LIM, (double)SEPANG_LIM);
           sscanf(ch_src.dlt_ra, "%lf", &pair_src.dlt_ra);
           sprintf(string, "Delta RA is set to %lf [deg].", pair_src.dlt_ra);
           comment_disp(cmnt, comment, string, true);
         } else if (SEP_MODE == SRC_SEP_POSA) {
           tv_get_param("double", cursor_pos, bttn_box[I],
-                       pitch, ch_src.sepang, 0.0, 10.0);
+                       pitch, ch_src.sepang, 0.0, (double)SEPANG_LIM);
           sscanf(ch_src.sepang, "%lf", &pair_src.sepang);
           sprintf(string, "Separation angle is set to %lf [deg].",
                   pair_src.sepang);
