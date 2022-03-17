@@ -102,8 +102,8 @@
 #define TGT               0
 #define REF               1
 
-#define ERROR_NUM     14
-#define ERROR_NUM_P2  16
+#define ERROR_NUM     15
+#define ERROR_NUM_P2  17
 #define APOSER      0   /* Antenna POSition ERror              */
 #define TPOSER      1   /* Target POSition ERror               */
 #define RPOSER      2   /* Reference POSition ERror            */
@@ -116,8 +116,9 @@
 #define THRMNS      9   /* THeRMal NoiSe                       */
 #define FQSERR     10   /* FreQuency Standard ERRor            */
 #define LOPOFS     11   /* Local Oscillator Phase OFfSet       */
-#define AMPERR     12   /* AMPlitude ERRor                     */
-#define SRTAER     13   /* SRT Attitude ERror                  */
+#define LOPJMP     12   /* Local Oscillator Phase JuMP         */
+#define AMPERR     13   /* AMPlitude ERRor                     */
+#define SRTAER     14   /* SRT Attitude ERror                  */
 
 #define OFF_SOURCE                    -1.0
 #define TELESCOPE_SLEW_SPEED_LIMIT    -2.0
