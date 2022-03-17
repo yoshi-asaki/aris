@@ -1001,16 +1001,16 @@ position. The following code is an emprical one based on Hunter et al. (2016).
 ---- Local Oscilator Phase Error ----
 */
 
-  if (ERROR_FLAG[LOPOFS] == true) {
-    for (iant=0; iant<ANT_NUM; iant++) {
-      for (i=0; i<N_WAVE; i++) {
-        ant_err[iant].LOPHS[i] = dpi * random_val1();
-      }
-    }
-  } else if (ERROR_FLAG[LOPOFS] == false) {
+  if (ERROR_FLAG[LOPOFS] == false && ERROR_FLAG[LOPJMP] == false) {
     for (iant=0; iant<ANT_NUM; iant++) {
       for (i=0; i<N_WAVE; i++) {
         ant_err[iant].LOPHS[i] = 0.0;
+      }
+    }
+  } else if (ERROR_FLAG[LOPOFS] == true) {
+    for (iant=0; iant<ANT_NUM; iant++) {
+      for (i=0; i<N_WAVE; i++) {
+        ant_err[iant].LOPHS[i] = dpi * random_val1();
       }
     }
   }
@@ -1817,35 +1817,30 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 ----------------------------------------------------
 */
 
-/**** Phase Jump Simulation ****/
+/**** ALMA B2B Phase Jump Simulation ****/
 
-    
-    for (ns=0; ns<1; ns++) {
-      for (iant=0; iant<3; iant++) {
-        if (iant == 0) {
-          I = (int)(0.25 * (float)data_num.nobs);
-          J = data_num.nobs;
-          lftmp = 57.4 / 360.0 / nu[ns];
-        } else if (iant == 1) {
-          I = (int)(0.50 * (float)data_num.nobs);
-          J = data_num.nobs;
-          lftmp = 57.4 / 360.0 / nu[ns];
-        } else if (iant == 2) {
-          I = (int)(0.75 * (float)data_num.nobs);
-          J = data_num.nobs;
-          lftmp = 57.4 / 360.0 / nu[ns];
-        }
-        i = data_num.nobs * iant;
-        for (iobs=I; iobs<J; iobs++) {
-          int_obs[ns][i].local_phs += lftmp;
-          i++;
+    if (ERROR_FLAG[LOPJMP] == true) {
+      for (ns=0; ns<1; ns++) {
+        for (iant=0; iant<ANT_NUM; iant++) {
+          if (ant_prm[iant].lo_phs_jmp_val != 0.0) {
+            I = 0;
+            J = 0;
+            if (ant_prm[iant].lo_phs_jmp_tim >= 0.0) {
+              I = (int)rint(ant_prm[iant].lo_phs_jmp_tim * (float)data_num.nobs);
+              J = data_num.nobs;
+            } else if (ant_prm[iant].lo_phs_jmp_val < 0.0) {
+              I = 0;
+              J = (int)rint((1.0 + ant_prm[iant].lo_phs_jmp_tim) * (float)data_num.nobs);
+            }
+            i = data_num.nobs * iant;
+            for (iobs=I; iobs<J; iobs++) {
+              int_obs[ns][i].local_phs += ant_prm[iant].lo_phs_jmp_val / 360.0;
+              i++;
+            }
+          }
         }
       }
     }
-
-
-
-
 
 /*
 ----------------------------------------------------
@@ -2111,7 +2106,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
             }
 
             d_lo_phs = 0.0;
-            if (ERROR_FLAG[LOPOFS] == true) {
+            if (ERROR_FLAG[LOPOFS] == false || ERROR_FLAG[LOPJMP] == false) {
               d_lo_phs = diff(ant_prm[iant].LOPHS[wave_id[ns]],
                               ant_prm[jant].LOPHS[wave_id[ns]]);
             }
