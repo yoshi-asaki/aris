@@ -87,9 +87,10 @@ HOW TO USE (MAIN)
   9  TEC Turbulence
  10  Thermal Noise Error
  11  Frequency Standard Error
- 12  L-O Phase Offset
- 13  Antenna Gain Bias Error
----- Current ERROR FLAG Status : 0000000000000
+ 12  LO Phase Offset
+ 13  LO Phase Jump (target)
+ 14  Antenna Gain Bias Error
+---- Current ERROR FLAG Status : 00000000000000
 Input ERROR FLAG: 
 
 
@@ -102,8 +103,8 @@ Input ERROR FLAG:
      input 1000000010000. 
 
 
-Input ERROR FLAG: 1111111111111
----- New ERROR FLAG Status : 1111111111111
+Input ERROR FLAG: 11111111111111
+---- New ERROR FLAG Status : 11111111111111
 Which input type for the source positions?
 1. R.A.       -   DEC.
 2. Delta_R.A. -   Delta_DEC.
