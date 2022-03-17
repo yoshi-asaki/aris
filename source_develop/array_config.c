@@ -462,6 +462,20 @@ int  array_config(
 --------
 */
 
+            if (strncmp(string, "LO_PHASE_CHANGE", 15) == 0) {
+              i = 0;
+              while (1) {
+                if (string[i++] == ':') {
+                  break;
+                }
+              }
+              sscanf(string+i, "%lf,%lf", &ant_tmp.lo_phs_jmp_val, &ant_tmp.lo_phs_jmp_tim);
+            }
+
+/*
+--------
+*/
+
             if (strncmp(string, "L_BAND", 6) == 0) {
               i = 0;
               while (1) {

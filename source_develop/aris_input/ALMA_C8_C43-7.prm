@@ -19,6 +19,7 @@ EL_RATE_ACCEL  :            1.5, 2.0
 EL_LIM         :           25.0
 FREQ_SWT_LAG   :            0.0
 SLEW_TIME      :            1.0
+LO_PHASE_CHANGE: 60.0, 0.5
 BAND01         : 12.0, 0.75,  17.0,   1.0
 BAND02         : 12.0, 0.74,  30.0,   3.0
 BAND03         : 12.0, 0.80,  41.0,  30.0

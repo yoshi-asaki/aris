@@ -241,6 +241,9 @@ struct antenna_parameter
           double LOPHS[N_WAVE]; /** Local Oscilator Phase      */
           double d_gain;   /** Delta GAIN Error                */
 
+          double lo_phs_jmp_val; /** LO phase jump value (deg)      */
+          double lo_phs_jmp_tim; /** LO phase jump timing (0-1)     */
+
 /****
           double WAVE[SRC_NUM];
 ****/

@@ -204,7 +204,8 @@ int  obs_param_input(_Bool *ERROR_FLAG, int  *ARRAY_ID, int  *wave_id,
   sprintf(error_source[IONTRB], "TEC Turbulence");
   sprintf(error_source[THRMNS], "Thermal Noise Error");
   sprintf(error_source[FQSERR], "Frequency Standard Error");
-  sprintf(error_source[LOPOFS], "L-O Phase Offset");
+  sprintf(error_source[LOPOFS], "LO Phase Offset");
+  sprintf(error_source[LOPJMP], "LO Phase Jump");
   sprintf(error_source[AMPERR], "Antenna Gain Bias Error");
   sprintf(srtaer,               "SRT Attitude Error");
 

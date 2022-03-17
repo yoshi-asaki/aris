@@ -1759,6 +1759,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
                                     ant_prm[iant].ELSV, ant_prm[iant].ELSA));
               } else if (iant >= GRT_NUM && ERROR_FLAG[SRTAER] == true) {
                 pnt_err_tau = 0.684e-12 * gauss_dev();
+
 /*
 ----
                [2009/07/31]
@@ -1811,6 +1812,40 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
                    uv_max, &uv_factor[ns], FLDMAX, -1);
       }
     }
+
+/*
+----------------------------------------------------
+*/
+
+/**** Phase Jump Simulation ****/
+
+    
+    for (ns=0; ns<1; ns++) {
+      for (iant=0; iant<3; iant++) {
+        if (iant == 0) {
+          I = (int)(0.25 * (float)data_num.nobs);
+          J = data_num.nobs;
+          lftmp = 57.4 / 360.0 / nu[ns];
+        } else if (iant == 1) {
+          I = (int)(0.50 * (float)data_num.nobs);
+          J = data_num.nobs;
+          lftmp = 57.4 / 360.0 / nu[ns];
+        } else if (iant == 2) {
+          I = (int)(0.75 * (float)data_num.nobs);
+          J = data_num.nobs;
+          lftmp = 57.4 / 360.0 / nu[ns];
+        }
+        i = data_num.nobs * iant;
+        for (iobs=I; iobs<J; iobs++) {
+          int_obs[ns][i].local_phs += lftmp;
+          i++;
+        }
+      }
+    }
+
+
+
+
 
 /*
 ----------------------------------------------------
