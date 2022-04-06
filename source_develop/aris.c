@@ -1745,6 +1745,14 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 /*XXXXXXXX*/
           }
 
+          if (nslewt >= ON_TIME[ns]) {
+            printf("wARNING: Switching Cycle Time (%d s) is too short\n", nswt);
+            printf("WARNING: to assign ON-SOURCE (%d s) ", ON_TIME[ns]);
+            printf("to Source-%d for %s.\n", ns+1, (ant_prm+iant)->IDC);
+            printf("wARNING: It is suggested to lengthen Switching Cycle Time ");
+            printf("and/or adjust TARGET ON ratio.\n");
+          }
+
           iobs = 0;
           while (iobs < data_num.nobs) {
             iave = (iobs - noffset) % nswt;
@@ -1834,7 +1842,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
             }
             i = data_num.nobs * iant;
             for (iobs=I; iobs<J; iobs++) {
-              int_obs[ns][i].local_phs += ant_prm[iant].lo_phs_jmp_val / 360.0;
+              int_obs[ns][i].local_phs += ant_prm[iant].lo_phs_jmp_val / 180.0 * dpi;
               i++;
             }
           }
@@ -2115,6 +2123,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
               I = iant  * data_num.nobs + iobs;
               J = jant  * data_num.nobs + iobs;
               K = ibase * data_num.nobs + iobs;
+
               if (int_obs[ns][I].wt >= src_flag[ns] &&
                   int_obs[ns][J].wt >= src_flag[ns]) {
                 bluvw[ns][K].u = diff(int_obs[ns][I].u, int_obs[ns][J].u);
