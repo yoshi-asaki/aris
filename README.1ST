@@ -1,3 +1,4 @@
+  * ALMA Band-to-Band phase jump error simulation has been implemented2
 ###############################################
 #
 #
@@ -5,7 +6,7 @@
 # (A            R     I              S)
 #
 #      Yoshiharu Asaki
-#         2022.02.24
+#         2022.04.06
 #
 ###############################################
 
