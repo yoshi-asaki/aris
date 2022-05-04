@@ -47,7 +47,7 @@
 #define RETURN_KEY       13
 
 #define VLBI              1
-#define CONNECTED         2
+#define CNNT              2
 
 #define NO_ANT           -1
 #define ALL_ANT           0
@@ -59,9 +59,9 @@
 #define KVN               6
 #define LBA               7
 #define KAVA              8
-#define ALMA              9
-#define ACA              10
-#define EALMA            11
+#define EALMA             9
+#define ALMA             10
+#define ACA              11
 #define STAND_ALONE      20
 #define TRACKING_NETWORK 30
 #define ORBITING         40
@@ -244,6 +244,10 @@ struct antenna_parameter
           double ERR[3];   /** ERRor in position               */
           double LOPHS[N_WAVE]; /** Local Oscilator Phase      */
           double d_gain;   /** Delta GAIN Error                */
+
+          int    WVtrub;   /** Water Vapor turnulence          */
+          int    DAturb;   /** Dry Air turbulence              */
+          int    IOturb;   /** Ionosphere turbulence           */
 
           double lo_phs_jmp_val; /** LO phase jump value (deg)      */
           double lo_phs_jmp_tim; /** LO phase jump timing (0-1)     */
@@ -495,7 +499,7 @@ int     obs_param_set
         );
 int     obs_param_input
         (
-          _Bool     *,    int       *,    int       *,
+          _Bool     *,    int       *,    int       *,    int       *,
           int       *,    int       *,    int       *,
           struct srt_orbit_parameter                *,
           double    *,
@@ -509,7 +513,8 @@ int     obs_param_input
           _Bool      ,    float     *,    int       *
         );
 int     obs_param_file_io(
-          _Bool     *,    char      *,    int       *,
+          _Bool     *,    char      *,
+          int       *,    int       *,
           int       *,    int       *,    int       *,
           struct srt_orbit_parameter                *,
           double    *,

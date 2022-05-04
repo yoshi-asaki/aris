@@ -122,7 +122,9 @@ int  obs_param_file_io(
         } else {
           string[strlen(string)-1] = '\0';
         }
-        if (strncmp(string, "ARRAY               ", 20) == 0) {
+        if (       strncmp(string, "ARRAY TYPE          ", 20) == 0) {
+          sscanf(string+20, "%d", ARRAY_TYPE);
+        } else if (strncmp(string, "ARRAY               ", 20) == 0) {
           sscanf(string+20, "%d", ARRAY_ID);
         } else if (strncmp(string, "STATION             ", 20) == 0) {
           sprintf(ant_code[*GRT_NUM], "%s", string+20);
@@ -323,6 +325,7 @@ int  obs_param_file_io(
           ch_obs_t->start_t[3], ch_obs_t->start_t[4], ch_obs_t->start_t[5]);
       fprintf(fp, "OBS DURATION        %s\n",  ch_obs_t->obsd);
       fprintf(fp, "GRT MINIMUM EL      %s\n",  ch_grt_el_lim);
+      fprintf(fp, "ARRAY TYPE          %d\n",  *ARRAY_TYPE);
       fprintf(fp, "ANTENNA LIST FILE   %s\n",  antenna_list_file_name);
       fprintf(fp, "ARRAY               %d\n",  *ARRAY_ID);
       for (i=0; i<*GRT_NUM; i++) {
