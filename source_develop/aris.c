@@ -56,7 +56,8 @@ int  main(int argc, char **argv)
   int    itmp, proc_mode;
   _Bool  ana__mode;
   int    wave_id[SRC_NUM_P1];
-  int    ARRAY_ID, iant, jant, ANT_NUM, GRT_NUM;
+  int    ARRAY_TYPE, ARRAY_ID;
+  int    iant, jant, ANT_NUM, GRT_NUM;
   int    ndata, nant[SRC_NUM];
   int    BGN_ANT_I, BGN_ANT_J, END_ANT_I, END_ANT_J;
   int    isite;
@@ -297,7 +298,7 @@ int  main(int argc, char **argv)
       cpgscr(0, 0.8, 0.8, 0.8);
       cpgscr(1, 0.0, 0.0, 0.0);
     }
-    proc_mode = obs_param_input(ERROR_FLAG, &ARRAY_ID, wave_id,
+    proc_mode = obs_param_input(ERROR_FLAG, &ARRAY_TYPE, &ARRAY_ID, wave_id,
                     &ANT_NUM, &GRT_NUM, &SRT_NUM, srt, &grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, &UT1_UTC, &obs_duration, src, &sun,
