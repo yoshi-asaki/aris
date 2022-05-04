@@ -5,7 +5,7 @@
 
 Astronomical Radio Interferometer Simulator
 
-      Last Update : 2022-04-06 17:00 UT  (Ver 1.4.10)
+      Last Update : 2022-05-02 17:15 UT  (Ver 1.4.10)
 
 ------------------------------------------------------
 ------------------------------------------------------
@@ -31,14 +31,14 @@ HOW TO INSTALL
 
 4. Uncompress tar-ball with tar command: 
 
-    % tar xvfz aris-1.4.9.tar.gz
+    % tar xvfz aris-1.4.10.tar.gz
 
-   You can see a new directory (aris-1.4.9). This directory is here 
+   You can see a new directory (aris-1.4.10). This directory is here 
    called $(ARIS). 
 
 5. Now you can compile the simulation program, aris.
 
-    a: % cd aris-1.4.9
+    a: % cd aris-1.4.10
     b. % ./configure
 
 6. Edit Makefile if needed. 
@@ -792,8 +792,9 @@ CHANGE HISTORY
   * "ON"/"OFF" selection is changed to Boolean algebra (_Bool) with stdbool.h 
   * ALMA antenna position definition has been changed.
 
-2022-03-16 00:00 UT (Ver 1.4.10)
+2022-05-02 17:15 UT (Ver 1.4.10)
   * Minor bug fix.
   * ALMA Band-to-Band phase jump error simulation has been implemented.
   * WARNING messge is shown when the switching cycle time is too short 
     to assign on-source scans.
+  * Modification for the independent atmospheric condition for VLBI observations
