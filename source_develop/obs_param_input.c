@@ -27,7 +27,10 @@ int  ant_list_chk(char *, float *,
                   char [][NCOMLEN],  _Bool  );
 
 
-int  obs_param_input(_Bool *ERROR_FLAG, int  *ARRAY_ID, int  *wave_id,
+int  obs_param_input(_Bool *ERROR_FLAG,
+                     int  *ARRAY_TYPE,
+                     int  *ARRAY_ID,
+                     int  *wave_id,
                      int   *ANT_NUM,    int  *GRT_NUM,  int  *SRT_NUM,
                      struct srt_orbit_parameter *srt,
                      double *grt_elevation_limit,

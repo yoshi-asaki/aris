@@ -46,6 +46,9 @@
 #define BACKSPACE_KEY     8
 #define RETURN_KEY       13
 
+#define VLBI              1
+#define CONNECTED         2
+
 #define NO_ANT           -1
 #define ALL_ANT           0
 #define VLBA              1

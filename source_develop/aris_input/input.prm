@@ -1,70 +1,26 @@
-ERROR FLAG          00000000000000
-SOURCE POS CAL TYPE 0
+ERROR FLAG          100000101000000
+SOURCE POS CAL TYPE 4
 SOURCE TGT RA       04 39 17.808
 SOURCE TGT DC       +22 21 03.008
-SOURCE REF RA       04 31 03.761
-SOURCE REF DC       +20 37 34.263
-SOURCE MID RA       04 35 09.32061
-SOURCE MID DC       +21 29 29.980491
-SOURCE DELTA RA       -1.9153618745
-SOURCE DELTA DC       -1.7246887393
-SOURCE SEPARATION   2.5773795486
-POSITION ANGLE      -132.0014729378
+SOURCE REF RA       04 08 30.931918
+SOURCE REF DC       +15 29 15.944884
+SOURCE MID RA       04 23 35.362334
+SOURCE MID DC       +18 57 32.304645
+SOURCE DELTA RA       -7.6953170104
+SOURCE DELTA DC       -6.8630730878
+SOURCE SEPARATION   10
+POSITION ANGLE      -132.001473
 OBS DATE            20211111
 START TIME          041300
 OBS DURATION        1.5
 GRT MINIMUM EL      20
-ANTENNA LIST FILE   aris_input/prtspr-54301.prm
-ARRAY               9
-STATION             DA41
-STATION             DA43
-STATION             DA44
-STATION             DA45
-STATION             DA46
-STATION             DA49
-STATION             DA50
-STATION             DA51
-STATION             DA52
-STATION             DA53
-STATION             DA55
-STATION             DA57
-STATION             DA58
-STATION             DA59
-STATION             DA60
-STATION             DA61
-STATION             DA62
-STATION             DA63
-STATION             DA64
-STATION             DA65
-STATION             DV01
-STATION             DV02
-STATION             DV03
-STATION             DV04
-STATION             DV05
-STATION             DV06
-STATION             DV07
-STATION             DV08
-STATION             DV09
-STATION             DV10
-STATION             DV11
-STATION             DV12
-STATION             DV13
-STATION             DV14
-STATION             DV15
-STATION             DV16
-STATION             DV17
-STATION             DV18
-STATION             DV19
-STATION             DV20
-STATION             DV21
-STATION             DV22
-STATION             DV23
-STATION             DV24
-STATION             DV25
-STATION             PM01
-STATION             PM02
-STATION             PM03
-STATION             PM04
+ARRAY TYPE          2
+ANTENNA LIST FILE   aris_input/antenna.prm
+ARRAY               7
+STATION             VLBASC
+STATION             VLBANL
+STATION             VLBALA
+STATION             VLBAKP
 SRT NUMBER          0
 SRT APOGEE          1 36001
 SRT PERIGEE         1 36000

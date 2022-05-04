@@ -29,6 +29,8 @@
 ## SLEW_TIME      : (average antenna slew time: you don't need to set 
 ##                   if you set the antenna motor slew rate and the 
 ##                   acceleration.)
+## WV_TURBLENCE   : Magnitude of the water vapor turbulence (1-5): =-1 -> controlable by users
+## IO_TURBLENCE   : Magnitude of the ionosphere turbulence (1-3) =-1 -> controlable by users
 ## (band)         :diameter[m], apperture,
 ##                    Trk[K], Tsky(zenith)[K]
 ## L_BAND         : 25.0, 0.63,  9.0, 26.0

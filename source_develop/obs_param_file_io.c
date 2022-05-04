@@ -9,6 +9,7 @@
 
 int  obs_param_file_io(
                        _Bool *ERROR_FLAG,  char *antenna_list_file_name,
+                       int  *ARRAY_TYPE,
                        int  *ARRAY_ID,
                        int  *ANT_NUM,  int  *GRT_NUM,  int  *SRT_NUM,
                        struct srt_orbit_parameter *srt,
