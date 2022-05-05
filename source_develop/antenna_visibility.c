@@ -71,7 +71,7 @@ int  antenna_visibility(
   int    idum;
   _Bool  PROC_SWT, ERROR_FLAG[ERROR_NUM];
   char   string[100];
-  int    ARRAY_TYPE, ARRAY_ID;
+  struct array_parameter array;
   struct char_src_info  ch_src;
   struct pair_src_info  pair_src;
   struct char_srt_info  ch_srt[SRTMAX];
@@ -150,7 +150,7 @@ int  antenna_visibility(
       ion_ds[ns] = NULL;
     }
     obs_param_file_io(ERROR_FLAG, antenna_list_file_name,
-                      &ARRAY_TYPE, &ARRAY_ID, &ANT_NUM, &GRT_NUM, &SRT_NUM,
+                      &array, &ANT_NUM, &GRT_NUM, &SRT_NUM,
                       srt, &grt_elevation_limit,
                       sep_angle_limit_from_earth_limb,
                       TimUTC, &UT1_UTC, &obs_duration,
@@ -612,7 +612,7 @@ int  antenna_visibility(
   }
   GRT_NUM = grt_num;
   obs_param_file_io(ERROR_FLAG, antenna_list_file_name,
-                    &ARRAY_TYPE, &ARRAY_ID, &ANT_NUM, &GRT_NUM, &SRT_NUM,
+                    &array, &ANT_NUM, &GRT_NUM, &SRT_NUM,
                     srt, &grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, &UT1_UTC, &obs_duration,

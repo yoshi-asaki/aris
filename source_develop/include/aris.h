@@ -201,6 +201,13 @@ TRP5    : Bad tropospheric condition
 ---------------------------------------------------------
 */
 
+struct array_config
+        {
+          int    ID;
+          int    TYPE;
+          int    SITE_NUM;
+        };
+
 struct antenna_position
         {
           char   IDC[10];  /** IDentificatio Code of antenna **/

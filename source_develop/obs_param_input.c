@@ -28,8 +28,7 @@ int  ant_list_chk(char *, float *,
 
 
 int  obs_param_input(_Bool *ERROR_FLAG,
-                     int  *ARRAY_TYPE,
-                     int  *ARRAY_ID,
+                     struct array_parameter *array,
                      int  *wave_id,
                      int   *ANT_NUM,    int  *GRT_NUM,  int  *SRT_NUM,
                      struct srt_orbit_parameter *srt,
@@ -55,6 +54,9 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   _Bool   SEPANG_UPDATE;
   int     ANT_NUM_tmp, GRT_NUM_tmp, grt_num;
   struct  char_obs_time  ch_obs_t;
+/****
+  int     *ARRAY_ID, *ARRAY_TYPE;
+****/
 
   char    error_source[ERROR_NUM_P2][CHAR_LEN], srtaer[CHAR_LEN];
   float   y_pos, source_y_pos;
@@ -112,7 +114,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   array_type[1].flag = false;
 
   obs_param_file_io(ERROR_FLAG, antenna_list_file,
-                    ARRAY_TYPE, ARRAY_ID, ANT_NUM, GRT_NUM, SRT_NUM,
+                    array->TYPE, array->ID, ANT_NUM, GRT_NUM, SRT_NUM,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,
@@ -120,10 +122,10 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     ch_grt_el_lim, &pair_src, &ch_src,
                     ch_srt, &ch_obs_t, 0);
 
-  if (*ARRAY_TYPE == VLBI) {
+  if (array->TYPE == VLBI) {
     array_type[0].flag = true;
     array_type[1].flag = false;
-  } else if (*ARRAY_TYPE == CNNT) {
+  } else if (array->TYPE == CNNT) {
     array_type[0].flag = false;
     array_type[1].flag = true;
   }
@@ -698,7 +700,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       printf("Which array type?\n");
       printf("1. VLBI (indepndent atmosphere and frequency standard)\n");
       printf("2. Conneced array\n");
-      printf("(CR->%d) : ", *ARRAY_TYPE);
+      printf("(CR->%d) : ", array->TYPE);
       if (fgets(string, nstr, stdin) == NULL) {
         printf("ERROR: OBS_PARAM_INPUT : Input may have a problem.\n");
         return (__NG__);
@@ -708,11 +710,11 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       } else {
         sscanf(string, "%d", &i);
         if        (i == 1) {
-          *ARRAY_TYPE = VLBI;
+          array->TYPE = VLBI;
           printf("Array type: VLBI\n");
           break;
         } else if (i == 2) {
-          *ARRAY_TYPE = CNNT;
+          array->TYPE = CNNT;
           printf("Array type: Connected array\n");
           break;
         } else {
@@ -841,16 +843,16 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       if (string[0] == '0' || string[0] == '\n') {
         break;
       } else if (string[0] >= 'a' && string[0] <= 'a' + ARRAY_NUM) {
-        *ARRAY_ID = string[0] - 'a';
-        if (*ARRAY_ID == ACA) {
+        array->ID = string[0] - 'a';
+        if (array->ID == ACA) {
           break;
-        } else if (*ARRAY_ID == 0) {
+        } else if (array->ID == 0) {
           for (i=0; i<GRT_NUM_tmp; i++) {
             ant_prm[i].UFL = false;
           }
         } else {
           for (i=0; i<GRT_NUM_tmp; i++) {
-            idum = array_config(*ARRAY_ID, wave_id, 0, &grt_num,
+            idum = array_config(array->ID, wave_id, 0, &grt_num,
                                 &ant_prm_tmp, ant_prm[i].IDC,
                                 antenna_list_file,  true, true);
             if (idum == 1 &&
@@ -875,7 +877,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 ------------------------------
 */
 
-    if (*ARRAY_ID != ACA) {
+    if (array->ID != ACA) {
       idum = *SRT_NUM;
       while (1) {
         printf("How many space telescopes [0-%d] (CR->%d) : ",
@@ -1358,7 +1360,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 ----
 */
 
-    if (*ARRAY_ID == ACA || *ARRAY_ID == ALMA) {
+    if (array->ID == ACA || array->ID == ALMA) {
       SRT_SWT = false;
     } else {
       SRT_SWT = true;
@@ -1435,7 +1437,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
           }
         }
         obs_param_file_io(ERROR_FLAG, antenna_list_file,
-                          ARRAY_TYPE, ARRAY_ID, ANT_NUM, GRT_NUM, SRT_NUM,
+                          array->TYPE, array->ID, ANT_NUM, GRT_NUM, SRT_NUM,
                           srt, grt_elevation_limit,
                           sep_angle_limit_from_earth_limb,
                           TimUTC, UT1_UTC, obs_duration,
@@ -1694,11 +1696,11 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         if (_button_chk(cursor_pos, bttn_box[i]) == true) {
           I = i - ANTLST_SECTION;
           _toggle_button(&array_type[I].flag, "", bttn_box[i]);
-          *ARRAY_TYPE = VLBI;
+          array->TYPE = VLBI;
         } else {
           I = i - ANTLST_SECTION;
           _toggle_button(&array_type[I].flag, "", bttn_box[i]);
-          *ARRAY_TYPE = CNNT;
+          array->TYPE = CNNT;
         }
       }
 
@@ -1785,9 +1787,9 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       for (i=ARRAY_SECTION; i<ARRAY_SECTION+ARRAY_NUM; i++) {
         if (_button_chk(cursor_pos, bttn_box[i]) == true) {
           I = i - ARRAY_SECTION;
-          *ARRAY_ID = array_id[I].id;
+          array->ID = array_id[I].id;
           _toggle_button(&array_id[I].flag, array_id[I].name, bttn_box[i]);
-          if (*ARRAY_ID == NO_ANT) {
+          if (array->ID == NO_ANT) {
             for (j=0; j<ARRAY_NUM; j++) {
               J = ARRAY_SECTION + j;
               _off_button(&array_id[j].flag, array_id[j].name, bttn_box[J]);
@@ -1797,7 +1799,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             }
           } else {
             for (j=0; j<GRT_NUM_tmp; j++) {
-              idum = array_config(*ARRAY_ID, wave_id, 0, &grt_num,
+              idum = array_config(array->ID, wave_id, 0, &grt_num,
                                   &ant_prm_tmp, ant_prm[j].IDC,
                                   antenna_list_file,   true, true);
               if (idum == 1 &&
@@ -1814,7 +1816,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             }
           }
 
-          if (*ARRAY_ID == ACA) {
+          if (array->ID == ACA) {
             cpgsci(0);
           } else {
             cpgsci(1);
@@ -1825,7 +1827,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
           cpgtext(0.02, text_bottom(bttn_box[I][2], bttn_box[I][3]), string);
           cpgrect(bttn_box[I][0], bttn_box[I][1],
                   bttn_box[I][2], bttn_box[I][3]);
-          if (*ARRAY_ID == ACA) {
+          if (array->ID == ACA) {
             *SRT_NUM = 0;
             SRT_SWT = false;
           } else {
@@ -2040,7 +2042,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     }
   }
   obs_param_file_io(ERROR_FLAG, antenna_list_file,
-                    ARRAY_TYPE, ARRAY_ID, ANT_NUM, GRT_NUM, SRT_NUM,
+                    array->TYPE, array->ID, ANT_NUM, GRT_NUM, SRT_NUM,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,

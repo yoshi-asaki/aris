@@ -41,7 +41,7 @@ int     channel_num_set(int  );
 int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
                 int *BGN_ANT_I, int *END_ANT_I,
                 int *BGN_ANT_J, int *END_ANT_J,
-                int ARRAY_ID,
+                struct array_parameter *array,
                 int *TRP_CONDITION,  int *ION_CONDITION,
                 double *CW,     double *CI,
                 struct phase_screen_parameter   *wvc,
@@ -78,7 +78,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   double wl, fr;
   FILE   *fp;
 
-  int    blsel_num;
+  int    blsel_num=0;
   _Bool  blsel_code[4];
   char   blsel_name[4][20];
 
@@ -545,9 +545,9 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ----------------------------------------------------
 */
 
-    if (ARRAY_ID == ACA || ARRAY_ID == ALMA) {
+    if (array->TYPE == CNNT) {
       BL_SELECT == ALLBL;
-    } else {
+    } else if (array->TYPE == VLBI) {
       while (1) {
         if (SRT_NUM >= 1) {
           printf("1. Full  2. Ground-Ground  3.Ground-Space  ");
@@ -652,8 +652,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ----------------------------------------------------
 */
 
-    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
-        && !(ARRAY_ID == ALMA || ARRAY_ID == ACA)) {
+    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE == VLBI) {
       printf("Input Tropospheric Zenith Error [mm] (CR->%lf[mm]) : ", tdscz);
 
       if (fgets(ch_tdscz, sizeof(ch_tdscz), stdin) == NULL) {
@@ -1366,17 +1365,14 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
     y_pos = 0.950;
 
-    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
-        && !(ARRAY_ID == ALMA || ARRAY_ID == ACA) || 
-        ERROR_FLAG[IDSECZ] == true && GRT_NUM > 0) {
+    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE ==  VLBI) {
       cpgsfs(2);
       cpgsci(1);
       cpgrect(0.020, 0.485, y_pos-0.039, y_pos+0.035);
       cpgsfs(1);
     }
 
-    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
-        && !(ARRAY_ID == ALMA || ARRAY_ID == ACA)) {
+    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE ==  VLBI) {
       I = TROPOS_SECTION + TRP_NUM;
       cpgsci(1);
       cpgtext(0.035, y_pos + 0.3 * pitch,
@@ -2204,8 +2200,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ---------------------------
 */
 
-      if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
-          && !(ARRAY_ID == ALMA || ARRAY_ID == ACA)) {
+      if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE == VLBI) {
         I = TROPOS_SECTION + TRP_NUM;
         if (_button_chk(cursor_pos, bttn_box[I]) == true) {
           tv_get_param("double", cursor_pos, bttn_box[I],
@@ -2757,11 +2752,11 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
   if (ERROR_FLAG[TDSECZ] == true) {
-    if (ARRAY_ID == ALMA || ARRAY_ID == ACA) {
+    if (       array->TYPE == CNNT) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[iant].trp /= speed_of_light;
       }
-    } else {
+    } else if (array->TYPE == VLBI) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[iant].trp *= (tdscz * 1.0e-3 / speed_of_light);
       }
