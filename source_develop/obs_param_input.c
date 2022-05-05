@@ -64,6 +64,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   struct  array_id {
             _Bool  flag;
             int    id;
+            int    type;
             char   name[10];
           } array_id[ARRAY_MAX];
   struct  array_type {
@@ -119,10 +120,10 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     ch_grt_el_lim, &pair_src, &ch_src,
                     ch_srt, &ch_obs_t, 0);
 
-  if (array->TYPE == VLBI) {
+  if (       array->TYPE == _VLBI_ARRAY_) {
     array_type[0].flag = true;
     array_type[1].flag = false;
-  } else if (array->TYPE == CNNT) {
+  } else if (array->TYPE == __CONNECTED_) {
     array_type[0].flag = false;
     array_type[1].flag = true;
   }
@@ -235,11 +236,6 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 -------------------------------------------
 */
 
-
-/*
--------------------------------------------
-*/
-
   ARRAY_NUM = 12;
 
   array_id[ 0].id = NO_ANT;
@@ -251,9 +247,22 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   array_id[ 6].id = KVN;
   array_id[ 7].id = LBA;
   array_id[ 8].id = KAVA;
-  array_id[ 9].id = ALMA;
-  array_id[10].id = ACA;
-  array_id[11].id = EALMA;
+  array_id[ 9].id = EALMA;
+  array_id[10].id = ALMA;
+  array_id[11].id = ACA;
+
+  array_id[ 0].type = NO_DEF_ARRAY;
+  array_id[ 1].type = _VLBI_ARRAY_;
+  array_id[ 2].type = _VLBI_ARRAY_;
+  array_id[ 3].type = _VLBI_ARRAY_;
+  array_id[ 4].type = _VLBI_ARRAY_;
+  array_id[ 5].type = _VLBI_ARRAY_;
+  array_id[ 6].type = _VLBI_ARRAY_;
+  array_id[ 7].type = _VLBI_ARRAY_;
+  array_id[ 8].type = _VLBI_ARRAY_;
+  array_id[ 9].type = _VLBI_ARRAY_;
+  array_id[10].type = __CONNECTED_;
+  array_id[11].type = __CONNECTED_;
 
   sprintf(array_id[ 0].name, "RESET");
   sprintf(array_id[ 1].name, "VLBA");
@@ -264,9 +273,9 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   sprintf(array_id[ 6].name, "KVN");
   sprintf(array_id[ 7].name, "LBA");
   sprintf(array_id[ 8].name, "KaVA");
-  sprintf(array_id[ 9].name, "ALMA");
-  sprintf(array_id[10].name, "ACA");
-  sprintf(array_id[11].name, "EALMA");
+  sprintf(array_id[ 9].name, "EALMA");
+  sprintf(array_id[10].name, "ALMA");
+  sprintf(array_id[11].name, "ACA");
 
   for (iarray=0; iarray<ARRAY_NUM; iarray++) {
     array_id[iarray].flag = false;
@@ -707,11 +716,11 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       } else {
         sscanf(string, "%d", &i);
         if        (i == 1) {
-          array->TYPE = VLBI;
+          array->TYPE = _VLBI_ARRAY_;
           printf("Array type: VLBI\n");
           break;
         } else if (i == 2) {
-          array->TYPE = CNNT;
+          array->TYPE = __CONNECTED_;
           printf("Array type: Connected Array\n");
           break;
         } else {
@@ -767,8 +776,8 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     while (1) {
       printf("SELECTED Antennas:\n");
       for (i=0; i<GRT_NUM_tmp; i++) {
-        if (ant_prm[i].UFL == false) {
-          printf("%2d. %s", i+1, ant_prm[i].IDC);
+        if (ant_prm[i].UFL == true) {
+          printf("%3d. %s", i+1, ant_prm[i].IDC);
           k = strlen(ant_prm[i].IDC);
           if (k > 10) {
             k = 10;
@@ -780,7 +789,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             printf("\n");
           }
         } else {
-          printf("%2d.            ", i+1);
+          printf("%3d.            ", i+1);
           if (i % 5 == 4) {
             printf("\n");
           }
@@ -791,8 +800,9 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       printf("Array List:\n");
       for (iarray=0; iarray<ARRAY_NUM; iarray++) {
         string[0] = ' ';
-        string[1] = 'a' + iarray;
-        string[2] = 0;
+        string[1] = ' ';
+        string[2] = 'a' + iarray;
+        string[3] = 0;
 
         printf("%s. %s", string, array_id[iarray].name);
         k = strlen(array_id[iarray].name);
@@ -811,7 +821,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       printf("Antenna List:\n");
       for (i=0; i<GRT_NUM_tmp; i++) {
         if (ant_prm[i].UFL == false) {
-          printf("%2d. %s", i+1, ant_prm[i].IDC);
+          printf("%3d. %s", i+1, ant_prm[i].IDC);
           k = strlen(ant_prm[i].IDC);
           if (k > 10) {
             k = 10;
@@ -823,7 +833,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             printf("\n");
           }
         } else {
-          printf("%2d.            ", i+1);
+          printf("%3d.            ", i+1);
           if (i % 5 == 4) {
             printf("\n");
           }
@@ -841,9 +851,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         break;
       } else if (string[0] >= 'a' && string[0] <= 'a' + ARRAY_NUM) {
         array->ID = string[0] - 'a';
-        if (array->ID == ACA) {
-          break;
-        } else if (array->ID == 0) {
+        if (array->ID == 0) {
           for (i=0; i<GRT_NUM_tmp; i++) {
             ant_prm[i].UFL = false;
           }
@@ -1003,6 +1011,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 
   } else if (TV_SWT == true) {
 
+/*****
     cpgbbuf();
 
     cpgslct(pgid[0]);
@@ -1017,6 +1026,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     comment_disp(cmnt, comment, string, true);
     sprintf(string, "Welcome!! Please set the observing parameters.");
     comment_disp(cmnt, comment, string, true);
+****/
 
 /*
 -----
@@ -1692,15 +1702,24 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       for (i=ANTLST_SECTION; i<ANTLST_SECTION+2; i++) {
         if (_button_chk(cursor_pos, bttn_box[i]) == true) {
           I = i - ANTLST_SECTION;
-          if (array->TYPE == VLBI && I == 1) {
+          if (array->TYPE == _VLBI_ARRAY_ && I == 1) {
             _toggle_button(&array_type[0].flag, "", bttn_box[ANTLST_SECTION  ]);
             _toggle_button(&array_type[1].flag, "", bttn_box[ANTLST_SECTION+1]);
-            array->TYPE = CNNT;
-          } else if (array->TYPE == CNNT && I == 0) {
+            array->TYPE = __CONNECTED_;
+          } else if (array->TYPE == __CONNECTED_ && I == 0) {
             _toggle_button(&array_type[0].flag, "", bttn_box[ANTLST_SECTION  ]);
             _toggle_button(&array_type[1].flag, "", bttn_box[ANTLST_SECTION+1]);
-            array->TYPE = VLBI;
+            array->TYPE = _VLBI_ARRAY_;
           }
+          obs_param_file_io(ERROR_FLAG, antenna_list_file,
+                    array, ANT_NUM, GRT_NUM, SRT_NUM,
+                    srt, grt_elevation_limit,
+                    sep_angle_limit_from_earth_limb,
+                    TimUTC, UT1_UTC, obs_duration,
+                    &SRCPROC_MODE, src, sun, ant_code,
+                    ch_grt_el_lim, &pair_src, &ch_src,
+                    ch_srt, &ch_obs_t, 1);
+          return (RE_LOAD);
         }
       }
 
@@ -1778,6 +1797,15 @@ int  obs_param_input(_Bool *ERROR_FLAG,
           cpgsfs(1);
         }
         char_copy(antenna_list_file, antenna_list_file_tmp);
+        obs_param_file_io(ERROR_FLAG, antenna_list_file,
+                    array, ANT_NUM, GRT_NUM, SRT_NUM,
+                    srt, grt_elevation_limit,
+                    sep_angle_limit_from_earth_limb,
+                    TimUTC, UT1_UTC, obs_duration,
+                    &SRCPROC_MODE, src, sun, ant_code,
+                    ch_grt_el_lim, &pair_src, &ch_src,
+                    ch_srt, &ch_obs_t, 1);
+        return (RE_LOAD);
       }
 
 /*

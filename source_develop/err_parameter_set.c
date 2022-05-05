@@ -545,9 +545,9 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ----------------------------------------------------
 */
 
-    if (array->TYPE == CNNT) {
+    if (       array->TYPE == __CONNECTED_) {
       BL_SELECT == ALLBL;
-    } else if (array->TYPE == VLBI) {
+    } else if (array->TYPE == _VLBI_ARRAY_) {
       while (1) {
         if (SRT_NUM >= 1) {
           printf("1. Full  2. Ground-Ground  3.Ground-Space  ");
@@ -652,7 +652,8 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ----------------------------------------------------
 */
 
-    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE == VLBI) {
+    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
+     && array->TYPE == _VLBI_ARRAY_) {
       printf("Input Tropospheric Zenith Error [mm] (CR->%lf[mm]) : ", tdscz);
 
       if (fgets(ch_tdscz, sizeof(ch_tdscz), stdin) == NULL) {
@@ -1365,14 +1366,16 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
     y_pos = 0.950;
 
-    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE ==  VLBI) {
+    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
+     && array->TYPE ==  _VLBI_ARRAY_) {
       cpgsfs(2);
       cpgsci(1);
       cpgrect(0.020, 0.485, y_pos-0.039, y_pos+0.035);
       cpgsfs(1);
     }
 
-    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE ==  VLBI) {
+    if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
+     && array->TYPE ==  _VLBI_ARRAY_) {
       I = TROPOS_SECTION + TRP_NUM;
       cpgsci(1);
       cpgtext(0.035, y_pos + 0.3 * pitch,
@@ -2200,7 +2203,8 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ---------------------------
 */
 
-      if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0 && array->TYPE == VLBI) {
+      if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
+       && array->TYPE == _VLBI_ARRAY_) {
         I = TROPOS_SECTION + TRP_NUM;
         if (_button_chk(cursor_pos, bttn_box[I]) == true) {
           tv_get_param("double", cursor_pos, bttn_box[I],
@@ -2752,11 +2756,11 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
   if (ERROR_FLAG[TDSECZ] == true) {
-    if (       array->TYPE == CNNT) {
+    if (       array->TYPE == __CONNECTED_) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[iant].trp /= speed_of_light;
       }
-    } else if (array->TYPE == VLBI) {
+    } else if (array->TYPE == _VLBI_ARRAY_) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[iant].trp *= (tdscz * 1.0e-3 / speed_of_light);
       }

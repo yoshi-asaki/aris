@@ -14,13 +14,19 @@ OBS DATE            20211111
 START TIME          041300
 OBS DURATION        1.5
 GRT MINIMUM EL      20
-ARRAY TYPE          2
+ARRAY TYPE          1
 ANTENNA LIST FILE   aris_input/antenna.prm
-ARRAY               7
+ARRAY               1
 STATION             VLBASC
+STATION             VLBAHN
 STATION             VLBANL
+STATION             VLBAFD
 STATION             VLBALA
+STATION             VLBAPT
 STATION             VLBAKP
+STATION             VLBAOV
+STATION             VLBABR
+STATION             VLBAMK
 SRT NUMBER          0
 SRT APOGEE          1 36001
 SRT PERIGEE         1 36000

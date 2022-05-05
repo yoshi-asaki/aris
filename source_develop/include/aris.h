@@ -15,7 +15,7 @@
 
 #define SRC_NUM           2
 #define SRC_NUM_P1        3
-#define ANTMAX          110
+#define ANTMAX          120
 #define SRTMAX            2
 #define TRKMAX           20
 /****
@@ -46,8 +46,9 @@
 #define BACKSPACE_KEY     8
 #define RETURN_KEY       13
 
-#define VLBI              1
-#define CNNT              2
+#define NO_DEF_ARRAY      0
+#define _VLBI_ARRAY_      1
+#define __CONNECTED_      2
 
 #define NO_ANT           -1
 #define ALL_ANT           0
@@ -72,6 +73,7 @@
 #define _EXIT_           20
 #define PHS_SCR          30
 #define ANT_VIS          40
+#define RE_LOAD          50
 
 #define ONBOARD           0
 #define TRACKING          1

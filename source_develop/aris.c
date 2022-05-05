@@ -61,6 +61,7 @@ int  main(int argc, char **argv)
   int    ndata, nant[SRC_NUM];
   int    BGN_ANT_I, BGN_ANT_J, END_ANT_I, END_ANT_J;
   int    isite;
+  int    NLOOP;
   int    IX[ANTMAX], IY[ANTMAX], TX, TY;
 
   _Bool  ERROR_FLAG[ERROR_NUM];
@@ -284,7 +285,8 @@ int  main(int argc, char **argv)
     }
   }
 
-  while (1) {
+  NLOOP = 1;
+  while (NLOOP) {
     if (TV_SWT == true) {
       cpgslct(pgid[0]);
     }
@@ -296,7 +298,34 @@ int  main(int argc, char **argv)
     if (TV_SWT == true) {
       cpgscr(0, 0.8, 0.8, 0.8);
       cpgscr(1, 0.0, 0.0, 0.0);
+
+      cpgbbuf();
+
+      cpgslct(pgid[0]);
+      cpgpap(2.00*pgpap_prm, 1.0/1.4);
+      cpgsch(1.5*pgpap_prm/13.0);
+      cpgsvp(0.0,  1.0, 0.0, 1.0);
+      cpgswin(0.0, 1.4, 0.0, 1.0);
+      comment_init(&cmnt, comment, true);
+  
+      sprintf(string,
+       "ARIS: Observation Parameter Setup --GRAPHICAL USER INTERFACE MODE--");
+      comment_disp(&cmnt, comment, string, true);
+      sprintf(string, "Welcome!! Please set the observing parameters.");
+      comment_disp(&cmnt, comment, string, true);
+      if (NLOOP > 1) {
+        sprintf(string, "Antenna list file reloaded.");
+        comment_disp(&cmnt, comment, string, true);
+      }
+
+    } else if (TV_SWT == false) {
+      printf("ARIS: Observation Parameter Setup --TERMINAL USER INTERFACE MODE--\n");
+      printf("Welcome!! Please set the observing parameters.\n");
+      if (NLOOP > 1) {
+        printf("Antenna list file reloaded.\n");
+      }
     }
+
     proc_mode = obs_param_input(ERROR_FLAG, &array, wave_id,
                     &ANT_NUM, &GRT_NUM, &SRT_NUM, srt, &grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
@@ -330,7 +359,7 @@ int  main(int argc, char **argv)
       }
     } else if (proc_mode == PHS_SCR) {
       phase_screen_check(NOISE_MTRX, wvc[0], cursor_pos, TV_SWT, pgid);
-    } else {
+    } else if (proc_mode == __GO__) {
       antenna_selection(&ANT_NUM, &GRT_NUM, &SRT_NUM, wave_id,
                         grt_elevation_limit, ant_prm, antenna_code,
                         antenna_list_file, true);
@@ -347,6 +376,7 @@ int  main(int argc, char **argv)
 #endif
       break;
     }
+    NLOOP++;
   }
 
   bl_max = 0;
@@ -396,11 +426,11 @@ int  main(int argc, char **argv)
      3.0 - 4.0. 
   */
 
-  if (array.TYPE == CNNT) {
+  if (       array.TYPE == __CONNECTED_) {
     SITE_NUM = 1;
     NELEM    = GRT_NUM;
     nseries  = SRC_NUM * GRT_NUM;
-  } else if (array.TYPE == VLBI) {
+  } else if (array.TYPE == _VLBI_ARRAY_) {
     SITE_NUM = GRT_NUM;
     NELEM    = 1;
     nseries  = 2;
@@ -410,11 +440,11 @@ int  main(int argc, char **argv)
 ==============================================================
 */
 
-  if (array.TYPE == CNNT) {
+  if (       array.TYPE == __CONNECTED_) {
     alpha1  = 2.0 * 0.60;   /* Matsushita et al. (2017), Holdaway (2004) */
     alpha2  = 2.0 * 0.20;   /* Matsushita et al. (2017) */
     wind_v  =  -6.0;
-  } else if (array.TYPE == VLBI) {
+  } else if (array.TYPE == _VLBI_ARRAY_) {
     alpha1  = 5.0 / 3.0;    /* Kolmogorov turbulence */
     alpha2  = 2.0 / 3.0;    /* Kolmogorov turbulence */
     wind_v  = -10.0;
@@ -429,7 +459,7 @@ int  main(int argc, char **argv)
   if (ERROR_FLAG[TWVTRB] == true) {
     for (isite=0; isite<SITE_NUM; isite++) {
       wvc[isite].pixel      = 1.0;
-      if (array.TYPE == CNNT) {
+      if (array.TYPE == __CONNECTED_) {
         if (bl_max > 800.0) {
           wvc[isite].pixel      = (bl_max / 800.0) * 2.0;
           wvc[isite].pixel      = bl_max / 8000.0;
@@ -461,7 +491,7 @@ int  main(int argc, char **argv)
 ==============================================================
 */
 
-  if (ERROR_FLAG[DRYTRB] == true && array.TYPE == CNNT) {
+  if (ERROR_FLAG[DRYTRB] == true && array.TYPE == __CONNECTED_) {
     for (isite=0; isite<SITE_NUM; isite++) {
       dry[isite].H_d        = 20.0e+3;
       dry[isite].H_s        = 20.0e+3;
@@ -640,7 +670,7 @@ Band3. Later, the observing wavelength is multiplied.
 */
 
   if (ERROR_FLAG[APOSER] == true) {
-    if (array.TYPE == CNNT) {
+    if (array.TYPE == __CONNECTED_) {
 
 /****
 #### __ALMA_ANTENNA_POSITION_ERROR__ ####
@@ -757,7 +787,7 @@ position. The following code is an emprical one based on Hunter et al. (2016).
 ---- VLBI ----
 */
 
-    } else if (array.TYPE == VLBI) {
+    } else if (array.TYPE == _VLBI_ARRAY_) {
       for (iant=0; iant<GRT_NUM; iant++) {
         if (ant_prm[iant].AAE[0] == 0.0 &
             ant_prm[iant].AAE[1] == 0.0 &
@@ -915,7 +945,7 @@ with Asaki et al. (2007).
   }
 
   if (ERROR_FLAG[TDSECZ] == true) {
-    if (array.TYPE == CNNT) {
+    if (array.TYPE == __CONNECTED_) {
 
 /****
 #### __ALMA_ANTENNA_POSITION_ERROR__ ####
@@ -982,7 +1012,7 @@ position. The following code is an emprical one based on Hunter et al. (2016).
 ---- VLBI ----
 */
 
-    } else if (array.TYPE == VLBI) {
+    } else if (array.TYPE == _VLBI_ARRAY_) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[0][iant].trp = gauss_dev();
       }
@@ -990,7 +1020,7 @@ position. The following code is an emprical one based on Hunter et al. (2016).
   }
 
   if (ERROR_FLAG[IDSECZ] == true) {
-    if (array.TYPE == VLBI) {
+    if (array.TYPE == _VLBI_ARRAY_) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[0][iant].tec = gauss_dev();
       }
@@ -1254,7 +1284,8 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 ---- ACA_DEMO ----
 */
 
-  if (array.TYPE == CNNT) {
+/******** Asaki et al. ALMA MEMO 535 (2005)
+  if (array.ID == ACA) {
     for (ns=0; ns<SRC_NUM; ns++) {
       for (iant=0; iant<GRT_NUM; iant++) {
         i = data_num.nobs * iant;
@@ -1266,6 +1297,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
       }
     }
   }
+********/
 
 /*
 ==============================================================
