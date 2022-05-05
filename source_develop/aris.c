@@ -147,8 +147,7 @@ int  main(int argc, char **argv)
   struct antenna_error_parameter ant_err[ANTMAX];
   char   antenna_code[ANTMAX][10];
   char   antenna_list_file[500];
-  int    array_num;
-  struct array_param array_param[100];
+  struct array_parameter array;
   struct data_number data_num;
   int    reference_phase_process_mode;
 
@@ -290,7 +289,7 @@ int  main(int argc, char **argv)
       cpgslct(pgid[0]);
     }
     SRT_NUM  = 0;
-    ARRAY_ID = ALL_ANT;
+    array.ID = ALL_ANT;
     for (ns=0; ns<SRC_NUM; ns++) {
       wave_id[ns] = -1;
     }
@@ -298,7 +297,7 @@ int  main(int argc, char **argv)
       cpgscr(0, 0.8, 0.8, 0.8);
       cpgscr(1, 0.0, 0.0, 0.0);
     }
-    proc_mode = obs_param_input(ERROR_FLAG, &ARRAY_TYPE, &ARRAY_ID, wave_id,
+    proc_mode = obs_param_input(ERROR_FLAG, &array, wave_id,
                     &ANT_NUM, &GRT_NUM, &SRT_NUM, srt, &grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, &UT1_UTC, &obs_duration, src, &sun,
@@ -397,11 +396,11 @@ int  main(int argc, char **argv)
      3.0 - 4.0. 
   */
 
-  if (ARRAY_ID == ALMA || ARRAY_ID == ACA) {
+  if (array.TYPE == CNNT) {
     SITE_NUM = 1;
     NELEM    = GRT_NUM;
     nseries  = SRC_NUM * GRT_NUM;
-  } else {
+  } else if (array.TYPE == VLBI) {
     SITE_NUM = GRT_NUM;
     NELEM    = 1;
     nseries  = 2;
@@ -411,11 +410,11 @@ int  main(int argc, char **argv)
 ==============================================================
 */
 
-  if (ARRAY_ID == ALMA || ARRAY_ID == ACA) {
+  if (array.TYPE == CNNT) {
     alpha1  = 2.0 * 0.60;   /* Matsushita et al. (2017), Holdaway (2004) */
     alpha2  = 2.0 * 0.20;   /* Matsushita et al. (2017) */
     wind_v  =  -6.0;
-  } else {
+  } else if (array.TYPE == VLBI) {
     alpha1  = 5.0 / 3.0;    /* Kolmogorov turbulence */
     alpha2  = 2.0 / 3.0;    /* Kolmogorov turbulence */
     wind_v  = -10.0;
@@ -430,7 +429,7 @@ int  main(int argc, char **argv)
   if (ERROR_FLAG[TWVTRB] == true) {
     for (isite=0; isite<SITE_NUM; isite++) {
       wvc[isite].pixel      = 1.0;
-      if (ARRAY_ID == ALMA || ARRAY_ID == ACA) {
+      if (array.TYPE == CNNT) {
         if (bl_max > 800.0) {
           wvc[isite].pixel      = (bl_max / 800.0) * 2.0;
           wvc[isite].pixel      = bl_max / 8000.0;
@@ -462,7 +461,7 @@ int  main(int argc, char **argv)
 ==============================================================
 */
 
-  if (ERROR_FLAG[DRYTRB] == true && (ARRAY_ID == ALMA || ARRAY_ID == ACA)) {
+  if (ERROR_FLAG[DRYTRB] == true && array.TYPE == CNNT) {
     for (isite=0; isite<SITE_NUM; isite++) {
       dry[isite].H_d        = 20.0e+3;
       dry[isite].H_s        = 20.0e+3;
@@ -641,7 +640,7 @@ Band3. Later, the observing wavelength is multiplied.
 */
 
   if (ERROR_FLAG[APOSER] == true) {
-    if (ARRAY_ID == ALMA || ARRAY_ID == ACA) {
+    if (array.TYPE == CNNT) {
 
 /****
 #### __ALMA_ANTENNA_POSITION_ERROR__ ####
@@ -758,7 +757,7 @@ position. The following code is an emprical one based on Hunter et al. (2016).
 ---- VLBI ----
 */
 
-    } else {
+    } else if (array.TYPE == VLBI) {
       for (iant=0; iant<GRT_NUM; iant++) {
         if (ant_prm[iant].AAE[0] == 0.0 &
             ant_prm[iant].AAE[1] == 0.0 &
@@ -916,7 +915,7 @@ with Asaki et al. (2007).
   }
 
   if (ERROR_FLAG[TDSECZ] == true) {
-    if (ARRAY_ID == ALMA || ARRAY_ID == ACA) {
+    if (array.TYPE == CNNT) {
 
 /****
 #### __ALMA_ANTENNA_POSITION_ERROR__ ####
@@ -983,7 +982,7 @@ position. The following code is an emprical one based on Hunter et al. (2016).
 ---- VLBI ----
 */
 
-    } else {
+    } else if (array.TYPE == VLBI) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[0][iant].trp = gauss_dev();
       }
@@ -991,7 +990,7 @@ position. The following code is an emprical one based on Hunter et al. (2016).
   }
 
   if (ERROR_FLAG[IDSECZ] == true) {
-    if (ARRAY_ID != ALMA && ARRAY_ID != ACA) {
+    if (array.TYPE == VLBI) {
       for (iant=0; iant<GRT_NUM; iant++) {
         dz[0][iant].tec = gauss_dev();
       }
@@ -1255,7 +1254,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 ---- ACA_DEMO ----
 */
 
-  if (ARRAY_ID == ACA && AZEL_FIX == true) {
+  if (array.TYPE == CNNT) {
     for (ns=0; ns<SRC_NUM; ns++) {
       for (iant=0; iant<GRT_NUM; iant++) {
         i = data_num.nobs * iant;
@@ -1489,7 +1488,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
     }
     if (err_parameter_set(ANT_NUM, GRT_NUM, SRT_NUM,
               &BGN_ANT_I, &END_ANT_I, &BGN_ANT_J, &END_ANT_J,
-              ARRAY_ID, &TRP_CONDITION, &ION_CONDITION,
+              &array, &TRP_CONDITION, &ION_CONDITION,
               &CW, &CI, wvc,
               dz[1], src_proc, ch_file,
               wave_id, wave_length, nu,
