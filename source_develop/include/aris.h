@@ -201,7 +201,7 @@ TRP5    : Bad tropospheric condition
 ---------------------------------------------------------
 */
 
-struct array_config
+struct array_parameter
         {
           int    ID;
           int    TYPE;
@@ -280,11 +280,6 @@ struct antenna_error_parameter
           double ERR[3];
           double LOPHS[N_WAVE];
           double d_gain;
-        };
-struct array_param
-        {
-          int   ID;
-          char  array_idc[20];
         };
 struct atmospheric_zenith_error
         {
@@ -506,7 +501,8 @@ int     obs_param_set
         );
 int     obs_param_input
         (
-          _Bool     *,    int       *,    int       *,    int       *,
+          _Bool     *,    struct array_parameter    *,
+          int       *,
           int       *,    int       *,    int       *,
           struct srt_orbit_parameter                *,
           double    *,
@@ -521,7 +517,7 @@ int     obs_param_input
         );
 int     obs_param_file_io(
           _Bool     *,    char      *,
-          int       *,    int       *,
+          struct array_parameter    *,
           int       *,    int       *,    int       *,
           struct srt_orbit_parameter                *,
           double    *,
@@ -577,7 +573,7 @@ int     err_parameter_set
           int        ,    int        ,    int        ,
           int       *,    int       *,
           int       *,    int       *,
-          int        ,
+          struct array_parameter    *,
           int       *,    int       *,
           double    *,    double    *,
           struct phase_screen_parameter             *,
