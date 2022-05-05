@@ -54,9 +54,6 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   _Bool   SEPANG_UPDATE;
   int     ANT_NUM_tmp, GRT_NUM_tmp, grt_num;
   struct  char_obs_time  ch_obs_t;
-/****
-  int     *ARRAY_ID, *ARRAY_TYPE;
-****/
 
   char    error_source[ERROR_NUM_P2][CHAR_LEN], srtaer[CHAR_LEN];
   float   y_pos, source_y_pos;
@@ -114,7 +111,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   array_type[1].flag = false;
 
   obs_param_file_io(ERROR_FLAG, antenna_list_file,
-                    array->TYPE, array->ID, ANT_NUM, GRT_NUM, SRT_NUM,
+                    array, ANT_NUM, GRT_NUM, SRT_NUM,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,
@@ -276,7 +273,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   }
 
   sprintf(array_type[0].name, "VLBI");
-  sprintf(array_type[1].name, "Connected array");
+  sprintf(array_type[1].name, "Connected Array");
 
 /*
 -------------------------------------------
@@ -715,7 +712,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
           break;
         } else if (i == 2) {
           array->TYPE = CNNT;
-          printf("Array type: Connected array\n");
+          printf("Array type: Connected Array\n");
           break;
         } else {
           printf("WARNING: Wrong number for the array type.\n");
@@ -1437,7 +1434,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
           }
         }
         obs_param_file_io(ERROR_FLAG, antenna_list_file,
-                          array->TYPE, array->ID, ANT_NUM, GRT_NUM, SRT_NUM,
+                          array, ANT_NUM, GRT_NUM, SRT_NUM,
                           srt, grt_elevation_limit,
                           sep_angle_limit_from_earth_limb,
                           TimUTC, UT1_UTC, obs_duration,
@@ -1695,12 +1692,15 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       for (i=ANTLST_SECTION; i<ANTLST_SECTION+2; i++) {
         if (_button_chk(cursor_pos, bttn_box[i]) == true) {
           I = i - ANTLST_SECTION;
-          _toggle_button(&array_type[I].flag, "", bttn_box[i]);
-          array->TYPE = VLBI;
-        } else {
-          I = i - ANTLST_SECTION;
-          _toggle_button(&array_type[I].flag, "", bttn_box[i]);
-          array->TYPE = CNNT;
+          if (array->TYPE == VLBI && I == 1) {
+            _toggle_button(&array_type[0].flag, "", bttn_box[ANTLST_SECTION  ]);
+            _toggle_button(&array_type[1].flag, "", bttn_box[ANTLST_SECTION+1]);
+            array->TYPE = CNNT;
+          } else if (array->TYPE == CNNT && I == 0) {
+            _toggle_button(&array_type[0].flag, "", bttn_box[ANTLST_SECTION  ]);
+            _toggle_button(&array_type[1].flag, "", bttn_box[ANTLST_SECTION+1]);
+            array->TYPE = VLBI;
+          }
         }
       }
 
@@ -2042,7 +2042,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     }
   }
   obs_param_file_io(ERROR_FLAG, antenna_list_file,
-                    array->TYPE, array->ID, ANT_NUM, GRT_NUM, SRT_NUM,
+                    array, ANT_NUM, GRT_NUM, SRT_NUM,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,

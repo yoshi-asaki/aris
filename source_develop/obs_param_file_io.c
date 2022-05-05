@@ -113,7 +113,6 @@ int  obs_param_file_io(
     }
 *******************/
 
-
     if ((fp = fopen("aris_input/input.prm", "r")) != NULL) {
       while (1) {
         if (fgets(string, sizeof(string), fp) == NULL) {
@@ -122,9 +121,9 @@ int  obs_param_file_io(
           string[strlen(string)-1] = '\0';
         }
         if (       strncmp(string, "ARRAY TYPE          ", 20) == 0) {
-          sscanf(string+20, "%d", array->TYPE);
+          sscanf(string+20, "%d", &array->TYPE);
         } else if (strncmp(string, "ARRAY               ", 20) == 0) {
-          sscanf(string+20, "%d", array->ID);
+          sscanf(string+20, "%d", &array->ID);
         } else if (strncmp(string, "STATION             ", 20) == 0) {
           sprintf(ant_code[*GRT_NUM], "%s", string+20);
           (*GRT_NUM)++;
