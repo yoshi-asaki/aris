@@ -22,9 +22,9 @@ int  antenna_selection(int *ANT_NUM, int *GRT_NUM, int *SRT_NUM,
 
   I = 0;
   for (iant=0; iant<*GRT_NUM; iant++) {
-    array_config(-1,        wave_id,         0,  &itmp,
+    array_config(0,         NO_ANT,    wave_id,         0,  &itmp,
                  ant_prm+I, antenna_code[iant], antenna_file,
-                false,  ERR_RESET_SWT);
+                 false,  ERR_RESET_SWT);
     if (grt_elevation_limit > ant_prm[I].ELLIM) {
       ant_prm[I].ELLIM = grt_elevation_limit;
     }
@@ -37,7 +37,7 @@ int  antenna_selection(int *ANT_NUM, int *GRT_NUM, int *SRT_NUM,
   *GRT_NUM = I;
   *ANT_NUM = I;
   if (*SRT_NUM >= 1) {
-    *ANT_NUM += array_config(ORBITING, wave_id,  *SRT_NUM,  &itmp,
+    *ANT_NUM += array_config(0,        ORBITING, wave_id,  *SRT_NUM,  &itmp,
                              ant_prm + *GRT_NUM, "", antenna_file,
                              false,   ERR_RESET_SWT);
   }

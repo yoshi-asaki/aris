@@ -86,7 +86,7 @@ int  main(int argc, char **argv)
   double DS[SRC_NUM];
   double sefd[SRC_NUM];
   double soffx, soffy;
-  int    nseries, SITE_NUM, NELEM; 
+  int    nseries, NELEM, SITE_NUM=1; 
   double *D_S;
 
   char   comment[40][NCOMLEN];

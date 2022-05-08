@@ -34,7 +34,7 @@ int  obs_param_file_io(
 ==================================================
 */
 
-  if (io_swt == 0) {
+  if (io_swt == __READ__) {
     for (i=0; i<ERROR_NUM; i++) {
       ERROR_FLAG[i] = false;
     }
@@ -285,7 +285,7 @@ int  obs_param_file_io(
 ==================================================
 */
 
-  } else if (io_swt == 1) {
+  } else if (io_swt == _WRITE__) {
     number_char_cut(ch_obs_t->obsd);
     number_char_cut(ch_src->sepang);
     number_char_cut(ch_src->posang);

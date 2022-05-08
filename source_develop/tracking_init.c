@@ -18,7 +18,7 @@ int  tracking_init(int   trk_num,
 --------
 */
 
-  TRK_NUM = array_config(ALL_ANT, wave_id, 0, &idum,
+  TRK_NUM = array_config(0,        ALL_ANT, wave_id, 0, &idum,
                          trk_pos, "", "aris_input/tracking_network.prm",
                          false, true);
   for (i=0; i<trk_num; i++) {

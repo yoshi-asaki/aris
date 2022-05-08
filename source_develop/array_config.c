@@ -14,6 +14,7 @@
 ****/
 
 int  array_config(
+                  int    ARRAY_TYPE,
                   int    ARRAY_ID,
                   int    *wave_id,
                   int    SRT_NUM,
@@ -24,7 +25,7 @@ int  array_config(
                   _Bool  INDIVIDUAL_PICK_UP_SWT,
                   _Bool  ERR_RESET_SWT)
 {
-  int    i, j, k, nline, array_id;
+  int    i, j, k, nline, array_id, array_type;
   int    iant, ANT_NUM, ns;
   int    dd, mm;
   double ss, DPI;
@@ -143,9 +144,37 @@ int  array_config(
               if (strlen(antenna_code) == j &&
                   strncmp(antenna_code, ant_tmp.IDC, j) == 0) {
                 STATION_REC_FLAG = true;
-                if (ARRAY_ID == -1) {
+                if (ARRAY_ID == NO_ANT) {
                   REC_FLAG = true;
                 }
+              }
+            }
+
+/*
+--------
+*/
+
+            if (strncmp(string, "ARRAY TYPE", 10) == 0) {
+              i = 0;
+              while (1) {
+                if (string[i++] == '\"') {
+                  break;
+                }
+              }
+              j = 0;
+              while (1) {
+                if (string[i+j] == '\"') {
+                  break;
+                }
+                j++;
+              }
+              string[i+j] = 0;
+              if (       strncmp(string+i, "VLBI",             j) == 0) {
+                array_type = _VLBI_ARRAY_;
+              } else if (strncmp(string+i, "CONNECTED",        j) == 0) {
+                array_type = __CONNECTED_;
+              } else {
+                array_type = -100;
               }
             }
 
@@ -168,7 +197,7 @@ int  array_config(
                 j++;
               }
               string[i+j] = 0;
-              if (strncmp(string+i, "VLBA",                    j) == 0) {
+              if (       strncmp(string+i, "VLBA",             j) == 0) {
                 array_id = VLBA;
               } else if (strncmp(string+i, "EVN",              j) == 0) {
                 array_id = EVN;

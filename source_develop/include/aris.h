@@ -11,18 +11,28 @@
 #include <mathtools.h>
 #include <astrotools.h>
 
-#define EPOCH          2000
+#define __NG__              -10
+#define __GO__               10
+#define _EXIT_               20
+#define PHS_SCR              30
+#define ANT_VIS              40
+#define RE_LOAD              50
 
-#define SRC_NUM           2
-#define SRC_NUM_P1        3
-#define ANTMAX          120
-#define SRTMAX            2
-#define TRKMAX           20
+#define __READ__              0
+#define _WRITE__              1
+
+#define EPOCH              2000
+
+#define SRC_NUM               2
+#define SRC_NUM_P1            3
+#define ANTMAX              120
+#define SRTMAX                2
+#define TRKMAX               20
 /****
-#define NOISE_MTRX     8192
-#define NOISE_MTRX    16384
+#define NOISE_MTRX         8192
+#define NOISE_MTRX        16384
 ****/
-#define NOISE_MTRX    32768
+#define NOISE_MTRX        32768
 
 #define SRC_MORPH_CANDIDATE   6
 #define SRC_POINT             0
@@ -32,53 +42,46 @@
 #define SRC_CC_COMP           4
 #define SRC_BHS_MOD           5
 
-#define LFDMAX          512
-#define FLDMAX         2048
+#define LFDMAX              512
+#define FLDMAX             2048
 
-#define DAY               1
-#define NIGHT             0
+#define DAY                   1
+#define NIGHT                 0
 
-#define SSF_PHASE         0
-#define SSF_DELAY         1
+#define SSF_PHASE             0
+#define SSF_DELAY             1
 
-#define CTRL_C            3
-#define CTRL_D            4
-#define BACKSPACE_KEY     8
-#define RETURN_KEY       13
+#define CTRL_C                3
+#define CTRL_D                4
+#define BACKSPACE_KEY         8
+#define RETURN_KEY           13
 
-#define NO_DEF_ARRAY      0
-#define _VLBI_ARRAY_      1
-#define __CONNECTED_      2
+#define NO_DEF_ARRAY          0
+#define _VLBI_ARRAY_          1
+#define __CONNECTED_          2
 
-#define NO_ANT           -1
-#define ALL_ANT           0
-#define VLBA              1
-#define EVN               2
-#define HSA               3
-#define VERA              4
-#define JVN               5
-#define KVN               6
-#define LBA               7
-#define KAVA              8
-#define EALMA             9
-#define ALMA             10
-#define ACA              11
-#define STAND_ALONE      20
-#define TRACKING_NETWORK 30
-#define ORBITING         40
-#define SLR_NETWORK      50
+#define NO_ANT               -1
+#define ALL_ANT               0
+#define VLBA                  1
+#define EVN                   2
+#define HSA                   3
+#define VERA                  4
+#define JVN                   5
+#define KVN                   6
+#define LBA                   7
+#define KAVA                  8
+#define EALMA                 9
+#define ALMA                 10
+#define ACA                  11
+#define STAND_ALONE          20
+#define TRACKING_NETWORK     30
+#define ORBITING             40
+#define SLR_NETWORK          50
 
-#define __NG__          -10
-#define __GO__           10
-#define _EXIT_           20
-#define PHS_SCR          30
-#define ANT_VIS          40
-#define RE_LOAD          50
+#define ONBOARD               0
+#define TRACKING              1
 
-#define ONBOARD           0
-#define TRACKING          1
-
-#define N_WAVE           20
+#define N_WAVE               20
 
 /**** HEMT ****/
 #define ALLBAND           0
@@ -778,7 +781,8 @@ int     ref_pos_shift
         );
 int     array_config
         (
-          int        ,    int       *,    int        ,    int       *,
+          int        ,    int        ,    int       *,    int        ,
+          int       *,
           struct antenna_parameter  *,
           char      *,
           char      *,    _Bool      ,    _Bool

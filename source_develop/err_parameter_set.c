@@ -2727,7 +2727,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     for (I=1; I<=*TRK_NUM; I++) {
       for (itrk=0; itrk<*TRK_NUM; itrk++) {
         if (trk_priority[itrk] == I) {
-          array_config(-1,                 wave_id,       0,     &idum,
+          array_config(0,      NO_ANT,          wave_id,       0,     &idum,
                        trk_pos+trk_num,
                        trk_name[itrk],
                        "aris_input/tracking_network.prm",  false,   false);

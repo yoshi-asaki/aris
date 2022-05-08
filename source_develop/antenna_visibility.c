@@ -156,7 +156,7 @@ int  antenna_visibility(
                       TimUTC, &UT1_UTC, &obs_duration,
                       &SRCPROC_MODE, src, &sun, antenna_code,
                       ch_grt_el_lim, &pair_src, &ch_src,
-                      ch_srt, &ch_obs_t, 0);
+                      ch_srt, &ch_obs_t, __READ__);
     for (iant=0; iant<GRT_NUM; iant++) {
       if (strncmp(antenna_code[iant], (ant_prm+iant)->IDC, 
                   strlen(antenna_code[iant])) == 0) {
@@ -618,7 +618,7 @@ int  antenna_visibility(
                     TimUTC, &UT1_UTC, &obs_duration,
                     &SRCPROC_MODE, src, &sun, antenna_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
-                    ch_srt, &ch_obs_t, 1);
+                    ch_srt, &ch_obs_t, _WRITE__);
   if (SRT_NUM >= 1) {
     free (srt_link);
   }

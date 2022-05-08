@@ -118,7 +118,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     TimUTC, UT1_UTC, obs_duration,
                     &SRCPROC_MODE, src, sun, ant_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
-                    ch_srt, &ch_obs_t, 0);
+                    ch_srt, &ch_obs_t, __READ__);
 
   if (       array->TYPE == _VLBI_ARRAY_) {
     array_type[0].flag = true;
@@ -130,7 +130,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 
   if (ant_list_chk(antenna_list_file, bttn_box[I=ANTLST_SECTION+2],
                    cmnt, comment, false) == 1) {
-    ANT_NUM_tmp = array_config(ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
+    ANT_NUM_tmp = array_config(0,      ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
                                ant_prm,   "",
                                antenna_list_file,  false,   true);
     for (iant=0; iant<ANT_NUM_tmp; iant++) {
@@ -744,9 +744,15 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         char_copy(antenna_list_file_tmp, string);
         if (ant_list_chk(antenna_list_file_tmp, bttn_box[I=ANTLST_SECTION+2],
                          cmnt, comment, false) == 1) {
+
+
+
+
+/*xxxxxxxxxxxxxxxxxxxxxxxxx*/
           if (strcmp(antenna_list_file, antenna_list_file_tmp) != 0) {
             char_copy(antenna_list_file, antenna_list_file_tmp);
-            ANT_NUM_tmp = array_config(ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
+            ANT_NUM_tmp = array_config(0,      ALL_ANT, wave_id,
+                                       *SRT_NUM, &GRT_NUM_tmp,
                                        ant_prm,   "",
                                        antenna_list_file, false,    true);
             for (iant=0; iant<ANT_NUM_tmp; iant++) {
@@ -763,6 +769,13 @@ int  obs_param_input(_Bool *ERROR_FLAG,
               }
             }
           }
+/*xxxxxxxxxxxxxxxxxxxxxxxxx*/
+
+
+
+
+
+
         }
       }
       break;
@@ -857,7 +870,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
           }
         } else {
           for (i=0; i<GRT_NUM_tmp; i++) {
-            idum = array_config(array->ID, wave_id, 0, &grt_num,
+            idum = array_config(0,     array->ID, wave_id, 0, &grt_num,
                                 &ant_prm_tmp, ant_prm[i].IDC,
                                 antenna_list_file,  true, true);
             if (idum == 1 &&
@@ -1195,45 +1208,45 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     cpgsfs(1);
 
     I = TIME_SECTION;
-    bttn_box[I][0] = 0.21;
-    bttn_box[I][1] = 0.28;
+    bttn_box[I][0] = 0.23;
+    bttn_box[I][1] = 0.30;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
     cpgptxt(bttn_box[I][0], text_bottom(bttn_box[I][2], bttn_box[I][3]),
-            0.0, 1.05, "Obs Date (YYYYMMDD)");
+            0.0, 1.05, "Obs Date (YYYY MM DD)");
     tv_button_disp(bttn_box[I], ch_obs_t.start_t[0]);
     I++;
 
-    bttn_box[I][0] = 0.29;
-    bttn_box[I][1] = 0.34;
+    bttn_box[I][0] = 0.31;
+    bttn_box[I][1] = 0.36;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
     tv_button_disp(bttn_box[I], ch_obs_t.start_t[1]);
     I++;
 
-    bttn_box[I][0] = 0.35;
-    bttn_box[I][1] = 0.40;
+    bttn_box[I][0] = 0.37;
+    bttn_box[I][1] = 0.42;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
     tv_button_disp(bttn_box[I], ch_obs_t.start_t[2]);
     I++;
 
-    bttn_box[I][0] = 0.60;
-    bttn_box[I][1] = 0.65;
+    bttn_box[I][0] = 0.65;
+    bttn_box[I][1] = 0.70;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
     cpgptxt(bttn_box[I][0], text_bottom(bttn_box[I][2], bttn_box[I][3]),
-            0.0, 1.05, "Start UTC (hhmmss)");
+            0.0, 1.05, "Start UTC (hh mm ss)");
     tv_button_disp(bttn_box[I],  ch_obs_t.start_t[3]);
     cpgsci(1);
     I++;
 
-    bttn_box[I][0] = 0.66;
-    bttn_box[I][1] = 0.71;
+    bttn_box[I][0] = 0.71;
+    bttn_box[I][1] = 0.76;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
@@ -1241,8 +1254,8 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     cpgsci(1);
     I++;
 
-    bttn_box[I][0] = 0.72;
-    bttn_box[I][1] = 0.77;
+    bttn_box[I][0] = 0.77;
+    bttn_box[I][1] = 0.82;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
@@ -1250,13 +1263,13 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     cpgsci(1);
     I++;
 
-    bttn_box[I][0] = 0.96;
-    bttn_box[I][1] = 1.03;
+    bttn_box[I][0] = 1.00;
+    bttn_box[I][1] = 1.07;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
     cpgptxt(bttn_box[I][0], text_bottom(bttn_box[I][2], bttn_box[I][3]),
-            0.0, 1.05, "Obs Duration [h]");
+            0.0, 1.05, "Obs duration [h]");
     tv_button_disp(bttn_box[I], ch_obs_t.obsd);
     cpgsci(1);
     I++;
@@ -1266,8 +1279,8 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 */
 
     I = GRT_SECTION;
-    bttn_box[I][0] = 1.29;
-    bttn_box[I][1] = 1.37;
+    bttn_box[I][0] = 1.31;
+    bttn_box[I][1] = 1.39;
     bttn_box[I][2] = y_pos;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
     cpgsci(1);
@@ -1296,8 +1309,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         _off_button(&array_type[i].flag, "", bttn_box[I]);
       }
       cpgsci(1);
-      cpgptxt(bttn_box[I][1]+0.01, text_bottom(bttn_box[I][2], bttn_box[I][3]),
-            0.0, 0.0, array_type[i].name);
+      cpgptxt(bttn_box[I][1]+0.01, y_pos, 0.0, 0.0, array_type[i].name);
     }
 
 /*
@@ -1450,7 +1462,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                           TimUTC, UT1_UTC, obs_duration,
                           &SRCPROC_MODE, src, sun, ant_code,
                           ch_grt_el_lim, &pair_src, &ch_src,
-                          ch_srt, &ch_obs_t, 1);
+                          ch_srt, &ch_obs_t, _WRITE__);
         return (ANT_VIS);
       }
 
@@ -1718,7 +1730,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     TimUTC, UT1_UTC, obs_duration,
                     &SRCPROC_MODE, src, sun, ant_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
-                    ch_srt, &ch_obs_t, 1);
+                    ch_srt, &ch_obs_t, _WRITE__);
           return (RE_LOAD);
         }
       }
@@ -1751,7 +1763,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             cpgsci(1);
             cpgsfs(1);
 
-            ANT_NUM_tmp = array_config(ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
+            ANT_NUM_tmp = array_config(0,     ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
                                        ant_prm,   "",
                                        antenna_list_file, false,  true);
             for (iant=0; iant<ANT_NUM_tmp; iant++) {
@@ -1773,7 +1785,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
               _off_button(&array_id[iarray].flag, array_id[iarray].name,
                           bttn_box[I]);
             }
-            array_config(ALL_ANT, wave_id, *SRT_NUM, GRT_NUM,
+            array_config(0,      ALL_ANT, wave_id, *SRT_NUM, GRT_NUM,
                          ant_prm,   "", antenna_list_file, false,  true);
             for (iant=0; iant<*GRT_NUM; iant++) {
               strncpy(ant_code[iant], (ant_prm+iant)->IDC,
@@ -1804,7 +1816,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     TimUTC, UT1_UTC, obs_duration,
                     &SRCPROC_MODE, src, sun, ant_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
-                    ch_srt, &ch_obs_t, 1);
+                    ch_srt, &ch_obs_t, _WRITE__);
         return (RE_LOAD);
       }
 
@@ -1827,7 +1839,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             }
           } else {
             for (j=0; j<GRT_NUM_tmp; j++) {
-              idum = array_config(array->ID, wave_id, 0, &grt_num,
+              idum = array_config(0,     array->ID, wave_id, 0, &grt_num,
                                   &ant_prm_tmp, ant_prm[j].IDC,
                                   antenna_list_file,   true, true);
               if (idum == 1 &&
@@ -2076,7 +2088,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     TimUTC, UT1_UTC, obs_duration,
                     &SRCPROC_MODE, src, sun, ant_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
-                    ch_srt, &ch_obs_t, 1);
+                    ch_srt, &ch_obs_t, _WRITE__);
 
 /*
 -----------------------------------------------------
