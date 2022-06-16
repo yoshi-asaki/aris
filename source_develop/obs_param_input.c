@@ -22,9 +22,9 @@
 #define ARRAY_MAX        20
 #define SEPANG_LIM     40.0
 
-int  ant_list_chk(char *, float *,
-                  struct comment_param      *,
-                  char [][NCOMLEN],  _Bool  );
+int  ant_list_file_chk(char *, float *,
+                       struct comment_param      *,
+                       char [][NCOMLEN],  _Bool  );
 
 
 int  obs_param_input(_Bool *ERROR_FLAG,
@@ -39,20 +39,20 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                      struct source_parameter *sun,
                      char   *antenna_list_file,
                      struct antenna_parameter  *ant_prm,
-                     char   ant_code[][10],
+                     char   antenna_code[][10],
                      struct comment_param      *cmnt,
                      char comment[][NCOMLEN],
-                     _Bool  TV_SWT, float *cursor_pos, int  *pgid)
+                     _Bool  TV_SWT, int  NLOOP, float *cursor_pos, int  *pgid)
 {
   int     i, j, k, I, J;
-  int     idum, nstr, iant, iarray;
+  int     idum, idum2, nstr, iant, iarray;
   char    string[500];
   char    antenna_list_file_tmp[500];
   int     timUTC[6];
   int     ERROR_MENU_NUM;
   int     ALL_ERROR_FLAG;
   _Bool   SEPANG_UPDATE;
-  int     ANT_NUM_tmp, GRT_NUM_tmp, grt_num;
+  int     ANT_NUM_tmp=0, GRT_NUM_tmp, grt_num;
   struct  char_obs_time  ch_obs_t;
 
   char    error_source[ERROR_NUM_P2][CHAR_LEN], srtaer[CHAR_LEN];
@@ -60,13 +60,13 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   float   bttn_box[SECT_DAT][4];
   float   ant_bttn_box[ANTMAX][4];
 
-  int     ARRAY_NUM;
+  int     ARRAY_NUM, array_num;
   struct  array_id {
             _Bool  flag;
             int    id;
             int    type;
             char   name[10];
-          } array_id[ARRAY_MAX];
+          } array_id[ARRAY_MAX], array_id_tmp[ARRAY_MAX];
   struct  array_type {
             _Bool  flag;
             char   name[20];
@@ -116,7 +116,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,
-                    &SRCPROC_MODE, src, sun, ant_code,
+                    &SRCPROC_MODE, src, sun, antenna_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
                     ch_srt, &ch_obs_t, __READ__);
 
@@ -128,18 +128,26 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     array_type[1].flag = true;
   }
 
-  if (ant_list_chk(antenna_list_file, bttn_box[I=ANTLST_SECTION+2],
-                   cmnt, comment, false) == 1) {
-    ANT_NUM_tmp = array_config(0,      ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
-                               ant_prm,   "",
-                               antenna_list_file,  false,   true);
+  if (ant_list_file_chk(antenna_list_file, bttn_box[I=ANTLST_SECTION+2],
+                        cmnt, comment, false) == 1) {
+    if (       array->TYPE == _VLBI_ARRAY_) {
+      ANT_NUM_tmp = array_config(array->TYPE,  ALL_ANT,   wave_id,
+                                 *SRT_NUM, &GRT_NUM_tmp,
+                                 ant_prm,   "",
+                                 antenna_list_file,  false,   true);
+    } else if (array->TYPE == __CONNECTED_) {
+      ANT_NUM_tmp = array_config(array->TYPE,  array->ID, wave_id,
+                                 *SRT_NUM, &GRT_NUM_tmp,
+                                 ant_prm,   "",
+                                 antenna_list_file,  false,   true);
+    }
     for (iant=0; iant<ANT_NUM_tmp; iant++) {
       ant_prm[iant].UFL = false;
     }
     for (j=0; j<*GRT_NUM; j++) {
       for (iant=0; iant<GRT_NUM_tmp; iant++) {
-        if (strncmp(ant_code[j], (ant_prm+iant)->IDC,
-                    strlen(ant_code[j])) == 0) {
+        if (strncmp(antenna_code[j], (ant_prm+iant)->IDC,
+                    strlen(antenna_code[j])) == 0) {
           ant_prm[iant].UFL = true;
           break;
         }
@@ -238,7 +246,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 
   ARRAY_NUM = 12;
 
-  array_id[ 0].id = NO_ANT;
+  array_id[ 0].id = ANT_RESET;
   array_id[ 1].id = VLBA;
   array_id[ 2].id = EVN;
   array_id[ 3].id = HSA;
@@ -742,8 +750,8 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       }
       if (string[0] != '\n') {
         char_copy(antenna_list_file_tmp, string);
-        if (ant_list_chk(antenna_list_file_tmp, bttn_box[I=ANTLST_SECTION+2],
-                         cmnt, comment, false) == 1) {
+        if (ant_list_file_chk(antenna_list_file_tmp, bttn_box[I=ANTLST_SECTION+2],
+                              cmnt, comment, false) == 1) {
 
 
 
@@ -751,7 +759,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 /*xxxxxxxxxxxxxxxxxxxxxxxxx*/
           if (strcmp(antenna_list_file, antenna_list_file_tmp) != 0) {
             char_copy(antenna_list_file, antenna_list_file_tmp);
-            ANT_NUM_tmp = array_config(0,      ALL_ANT, wave_id,
+            ANT_NUM_tmp = array_config(array->TYPE,     ALL_ANT, wave_id,
                                        *SRT_NUM, &GRT_NUM_tmp,
                                        ant_prm,   "",
                                        antenna_list_file, false,    true);
@@ -761,8 +769,8 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 
             for (j=0; j<*GRT_NUM; j++) {
               for (iant=0; iant<GRT_NUM_tmp; iant++) {
-                if (strncmp(ant_code[j], (ant_prm+iant)->IDC,
-                            strlen(ant_code[j])) == 0) {
+                if (strncmp(antenna_code[j], (ant_prm+iant)->IDC,
+                            strlen(antenna_code[j])) == 0) {
                   ant_prm[iant].UFL = true;
                   break;
                 }
@@ -811,14 +819,21 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       printf("\n");
 
       printf("Array List:\n");
+      array_num = 0;
       for (iarray=0; iarray<ARRAY_NUM; iarray++) {
+        if (array_id[iarray].type == array->TYPE || array_id[iarray].type == NO_DEF_ARRAY) {
+          array_id_tmp[array_num++] = array_id[iarray];
+        }
+      }
+
+      for (iarray=0; iarray<array_num; iarray++) {
         string[0] = ' ';
         string[1] = ' ';
         string[2] = 'a' + iarray;
         string[3] = 0;
 
-        printf("%s. %s", string, array_id[iarray].name);
-        k = strlen(array_id[iarray].name);
+        printf("%s. %s", string, array_id_tmp[iarray].name);
+        k = strlen(array_id_tmp[iarray].name);
         if (k > 10) {
           k = 10;
         }
@@ -830,6 +845,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         }
       }
       printf("\n");
+
 
       printf("Antenna List:\n");
       for (i=0; i<GRT_NUM_tmp; i++) {
@@ -862,21 +878,34 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 
       if (string[0] == '0' || string[0] == '\n') {
         break;
-      } else if (string[0] >= 'a' && string[0] <= 'a' + ARRAY_NUM) {
-        array->ID = string[0] - 'a';
-        if (array->ID == 0) {
+      } else if (string[0] >= 'a' && string[0] <= 'a' + array_num) {
+        idum2 = string[0] - 'a';
+        if (idum2 == 0) {
           for (i=0; i<GRT_NUM_tmp; i++) {
             ant_prm[i].UFL = false;
           }
         } else {
+
+          for (iarray=0; iarray<ARRAY_NUM; iarray++) {
+            if (strncmp(array_id_tmp[idum2].name, array_id[iarray].name,
+                        strlen(array_id_tmp[idum2].name)) == 0) {
+              array->ID = iarray;
+              break;
+            }
+          }
+
           for (i=0; i<GRT_NUM_tmp; i++) {
-            idum = array_config(0,     array->ID, wave_id, 0, &grt_num,
+            idum = array_config(array->TYPE, array->ID, wave_id, 0, &grt_num,
                                 &ant_prm_tmp, ant_prm[i].IDC,
                                 antenna_list_file,  true, true);
             if (idum == 1 &&
                 strncmp(ant_prm_tmp.IDC,
                         ant_prm[i].IDC, strlen(ant_prm[i].IDC)) == 0) {
-              ant_prm[i].UFL = true;
+              if (       ant_prm[i].UFL == true) {
+                ant_prm[i].UFL = false;
+              } else if (ant_prm[i].UFL == false) {
+                ant_prm[i].UFL = true;
+              }
             }
           }
         }
@@ -895,7 +924,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 ------------------------------
 */
 
-    if (array->ID != ACA) {
+    if (array->TYPE == _VLBI_ARRAY_) {
       idum = *SRT_NUM;
       while (1) {
         printf("How many space telescopes [0-%d] (CR->%d) : ",
@@ -1327,7 +1356,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             0.0, 1.05, "Antenna list file: ");
     tv_button_disp(bttn_box[I], antenna_list_file);
     cpgsci(1);
-    ant_list_chk(antenna_list_file, bttn_box[I], cmnt, comment, TV_SWT);
+    ant_list_file_chk(antenna_list_file, bttn_box[I], cmnt, comment, TV_SWT);
 
 /*
 ----
@@ -1336,7 +1365,19 @@ int  obs_param_input(_Bool *ERROR_FLAG,
     SRT_SWT = false;
     I = ARRAY_SECTION;
     y_pos -= 0.035;
-    for (i=0; i<ARRAY_NUM; i++) {
+
+
+
+    array_num = 0;
+    for (iarray=0; iarray<ARRAY_NUM; iarray++) {
+      if (array_id[iarray].type == array->TYPE || array_id[iarray].type == NO_DEF_ARRAY) {
+        array_id_tmp[array_num++] = array_id[iarray];
+      }
+    }
+
+
+
+    for (i=0; i<array_num; i++) {
       I = ARRAY_SECTION + i;
       bttn_box[I][0] = 0.020 + 0.075 * (float)i;
       bttn_box[I][1] = 0.090 + 0.075 * (float)i;
@@ -1344,10 +1385,23 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       bttn_box[I][3] = bttn_box[I][2] + pitch;
     }
 
-    for (iarray=0; iarray<ARRAY_NUM; iarray++) {
-      array_id[iarray].flag = false;
-      I = ARRAY_SECTION + iarray;
-      _off_button(&array_id[iarray].flag, array_id[iarray].name, bttn_box[I]);
+    if (array->TYPE == __CONNECTED_) {
+      for (iarray=0; iarray<array_num; iarray++) {
+        I = ARRAY_SECTION + iarray;
+        if (array_id_tmp[iarray].id == array->ID) {
+          array_id_tmp[iarray].flag = true;
+          _on_button( &array_id_tmp[iarray].flag, array_id_tmp[iarray].name, bttn_box[I]);
+        } else {
+          array_id_tmp[iarray].flag = false;
+          _off_button(&array_id_tmp[iarray].flag, array_id_tmp[iarray].name, bttn_box[I]);
+        }
+      }
+    } else if (array->TYPE == _VLBI_ARRAY_) {
+      for (iarray=0; iarray<array_num; iarray++) {
+        I = ARRAY_SECTION + iarray;
+        array_id_tmp[iarray].flag = false;
+        _off_button(&array_id_tmp[iarray].flag, array_id_tmp[iarray].name, bttn_box[I]);
+      }
     }
 
 /*
@@ -1379,7 +1433,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 ----
 */
 
-    if (array->ID == ACA || array->ID == ALMA) {
+    if (array->TYPE == __CONNECTED_) {
       SRT_SWT = false;
     } else {
       SRT_SWT = true;
@@ -1416,8 +1470,10 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 ----
 */
 
-    cursor_pos[0] = 0.5 * (bttn_box[0][0] + bttn_box[0][1]);
-    cursor_pos[1] = 0.5 * (bttn_box[0][2] + bttn_box[0][3]);
+    if (NLOOP == 0) {
+      cursor_pos[0] = 0.5 * (bttn_box[0][0] + bttn_box[0][1]);
+      cursor_pos[1] = 0.5 * (bttn_box[0][2] + bttn_box[0][3]);
+    }
 
     while (1) {
 
@@ -1451,7 +1507,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         *GRT_NUM = 0;
         for (iant=0; iant<GRT_NUM_tmp; iant++) {
           if (ant_prm[iant].UFL == true) {
-            sprintf(ant_code[*GRT_NUM], "%s", (ant_prm+iant)->IDC);
+            sprintf(antenna_code[*GRT_NUM], "%s", (ant_prm+iant)->IDC);
             (*GRT_NUM)++;
           }
         }
@@ -1460,7 +1516,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                           srt, grt_elevation_limit,
                           sep_angle_limit_from_earth_limb,
                           TimUTC, UT1_UTC, obs_duration,
-                          &SRCPROC_MODE, src, sun, ant_code,
+                          &SRCPROC_MODE, src, sun, antenna_code,
                           ch_grt_el_lim, &pair_src, &ch_src,
                           ch_srt, &ch_obs_t, _WRITE__);
         return (ANT_VIS);
@@ -1714,7 +1770,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
       for (i=ANTLST_SECTION; i<ANTLST_SECTION+2; i++) {
         if (_button_chk(cursor_pos, bttn_box[i]) == true) {
           I = i - ANTLST_SECTION;
-          if (array->TYPE == _VLBI_ARRAY_ && I == 1) {
+          if (       array->TYPE == _VLBI_ARRAY_ && I == 1) {
             _toggle_button(&array_type[0].flag, "", bttn_box[ANTLST_SECTION  ]);
             _toggle_button(&array_type[1].flag, "", bttn_box[ANTLST_SECTION+1]);
             array->TYPE = __CONNECTED_;
@@ -1728,7 +1784,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,
-                    &SRCPROC_MODE, src, sun, ant_code,
+                    &SRCPROC_MODE, src, sun, antenna_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
                     ch_srt, &ch_obs_t, _WRITE__);
           return (RE_LOAD);
@@ -1745,8 +1801,8 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                      pitch, string, 0.0, 0.0);
         tv_button_disp(bttn_box[I], string);
         char_copy(antenna_list_file_tmp, string);
-        if (ant_list_chk(antenna_list_file_tmp, bttn_box[I=ANTLST_SECTION+2],
-                         cmnt, comment, true) == 1) {
+        if (ant_list_file_chk(antenna_list_file_tmp, bttn_box[I=ANTLST_SECTION+2],
+                              cmnt, comment, true) == 1) {
 
           if (strcmp(antenna_list_file, antenna_list_file_tmp) != 0) {
             char_copy(antenna_list_file, antenna_list_file_tmp);
@@ -1763,7 +1819,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             cpgsci(1);
             cpgsfs(1);
 
-            ANT_NUM_tmp = array_config(0,     ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
+            ANT_NUM_tmp = array_config(array->TYPE, ALL_ANT, wave_id, *SRT_NUM, &GRT_NUM_tmp,
                                        ant_prm,   "",
                                        antenna_list_file, false,  true);
             for (iant=0; iant<ANT_NUM_tmp; iant++) {
@@ -1772,24 +1828,27 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 
             for (j=0; j<*GRT_NUM; j++) {
               for (iant=0; iant<GRT_NUM_tmp; iant++) {
-                if (strncmp(ant_code[j], (ant_prm+iant)->IDC,
-                            strlen(ant_code[j])) == 0) {
+                if (strncmp(antenna_code[j], (ant_prm+iant)->IDC,
+                            strlen(antenna_code[j])) == 0) {
                   ant_prm[iant].UFL = true;
                   break;
                 }
               }
             }
-            for (iarray=0; iarray<ARRAY_NUM; iarray++) {
-              array_id[iarray].flag = false;
+            for (iarray=0; iarray<array_num; iarray++) {
+              array_id_tmp[iarray].flag = false;
               I = ARRAY_SECTION + iarray;
-              _off_button(&array_id[iarray].flag, array_id[iarray].name,
+              _off_button(&array_id_tmp[iarray].flag, array_id_tmp[iarray].name,
                           bttn_box[I]);
             }
-            array_config(0,      ALL_ANT, wave_id, *SRT_NUM, GRT_NUM,
+            array_config(array->TYPE, ALL_ANT, wave_id, *SRT_NUM, GRT_NUM,
                          ant_prm,   "", antenna_list_file, false,  true);
             for (iant=0; iant<*GRT_NUM; iant++) {
-              strncpy(ant_code[iant], (ant_prm+iant)->IDC,
+/****
+              strncpy(antenna_code[iant], (ant_prm+iant)->IDC,
                       strlen((ant_prm+iant)->IDC));
+****/
+              sprintf(antenna_code[iant], "%s", (ant_prm+iant)->IDC);
               ant_prm[iant].UFL = false;
               _off_button(&ant_prm[iant].UFL, &ant_prm[iant].IDC[0],
                           ant_bttn_box[iant]);
@@ -1814,7 +1873,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,
-                    &SRCPROC_MODE, src, sun, ant_code,
+                    &SRCPROC_MODE, src, sun, antenna_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
                     ch_srt, &ch_obs_t, _WRITE__);
         return (RE_LOAD);
@@ -1824,53 +1883,95 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 -----------------------------------------
 */
 
-      for (i=ARRAY_SECTION; i<ARRAY_SECTION+ARRAY_NUM; i++) {
+      for (i=ARRAY_SECTION; i<ARRAY_SECTION+array_num; i++) {
         if (_button_chk(cursor_pos, bttn_box[i]) == true) {
-          I = i - ARRAY_SECTION;
-          array->ID = array_id[I].id;
-          _toggle_button(&array_id[I].flag, array_id[I].name, bttn_box[i]);
-          if (array->ID == NO_ANT) {
-            for (j=0; j<ARRAY_NUM; j++) {
+
+
+          idum2 = i - ARRAY_SECTION;
+
+
+          for (iarray=0; iarray<ARRAY_NUM; iarray++) {
+            if (strncmp(array_id_tmp[idum2].name, array_id[iarray].name,
+                        strlen(array_id_tmp[idum2].name)) == 0) {
+              array->ID = iarray;
+              break;
+            }
+          }
+
+
+          if (array_id_tmp[idum2].id == ANT_RESET) {
+            for (j=0; j<array_num; j++) {
               J = ARRAY_SECTION + j;
-              _off_button(&array_id[j].flag, array_id[j].name, bttn_box[J]);
+              _off_button(&array_id_tmp[j].flag, array_id_tmp[j].name, bttn_box[J]);
             }
             for (j=0; j<GRT_NUM_tmp; j++) {
               _off_button(&ant_prm[j].UFL, &ant_prm[j].IDC[0], ant_bttn_box[j]);
             }
           } else {
-            for (j=0; j<GRT_NUM_tmp; j++) {
-              idum = array_config(0,     array->ID, wave_id, 0, &grt_num,
-                                  &ant_prm_tmp, ant_prm[j].IDC,
-                                  antenna_list_file,   true, true);
-              if (idum == 1 &&
-                  strncmp(ant_prm_tmp.IDC,
-                          ant_prm[j].IDC, strlen(ant_prm[j].IDC)) == 0) {
-                if (array_id[I].flag == true) {
-                  _on_button (&ant_prm[j].UFL,
-                              &ant_prm[j].IDC[0], ant_bttn_box[j]);
-                } else if (array_id[I].flag == false) {
-                  _off_button(&ant_prm[j].UFL,
-                              &ant_prm[j].IDC[0], ant_bttn_box[j]);
+            if (array->TYPE == _VLBI_ARRAY_) {
+              _toggle_button(&array_id_tmp[idum2].flag, array_id_tmp[idum2].name, bttn_box[i]);
+              for (j=0; j<GRT_NUM_tmp; j++) {
+                idum = array_config(array->TYPE, array->ID, wave_id, 0, &grt_num,
+                                    &ant_prm_tmp, ant_prm[j].IDC,
+                                    antenna_list_file,   true, true);
+                if (idum == 1 &&
+                    strncmp(ant_prm_tmp.IDC,
+                            ant_prm[j].IDC, strlen(ant_prm[j].IDC)) == 0) {
+                  if (array_id_tmp[idum2].flag == true) {
+                    _on_button (&ant_prm[j].UFL,
+                                &ant_prm[j].IDC[0], ant_bttn_box[j]);
+                  } else if (array_id_tmp[idum2].flag == false) {
+                    _off_button(&ant_prm[j].UFL,
+                                &ant_prm[j].IDC[0], ant_bttn_box[j]);
+                  }
                 }
               }
+
+
+
+
+
+
+            } else if (array->TYPE == __CONNECTED_) {
+              idum = array_config(array->TYPE, array->ID, wave_id, 0, GRT_NUM,
+                                  ant_prm, "",
+                                  antenna_list_file,   false, true);
+              for (iant=0; iant<*GRT_NUM; iant++) {
+/**
+                strncpy(antenna_code[iant], (ant_prm+iant)->IDC,
+                        strlen((ant_prm+iant)->IDC));
+**/
+                sprintf(antenna_code[iant], "%s", (ant_prm+iant)->IDC);
+              }
+              obs_param_file_io(ERROR_FLAG, antenna_list_file,
+                          array, ANT_NUM, GRT_NUM, SRT_NUM,
+                          srt, grt_elevation_limit,
+                          sep_angle_limit_from_earth_limb,
+                          TimUTC, UT1_UTC, obs_duration,
+                          &SRCPROC_MODE, src, sun, antenna_code,
+                          ch_grt_el_lim, &pair_src, &ch_src,
+                          ch_srt, &ch_obs_t, _WRITE__);
+              return (RE_LOAD);
             }
           }
 
-          if (array->ID == ACA) {
+
+
+
+
+
+          if (array->TYPE == __CONNECTED_) {
             cpgsci(0);
-          } else {
-            cpgsci(1);
-          }
-          I = SRT_SECTION;
-          sprintf(string, "SRT Number (0-%d)", SRTMAX);
-          cpgsci(1);
-          cpgtext(0.02, text_bottom(bttn_box[I][2], bttn_box[I][3]), string);
-          cpgrect(bttn_box[I][0], bttn_box[I][1],
-                  bttn_box[I][2], bttn_box[I][3]);
-          if (array->ID == ACA) {
             *SRT_NUM = 0;
             SRT_SWT = false;
           } else {
+            cpgsci(1);
+            I = SRT_SECTION;
+            sprintf(string, "SRT Number (0-%d)", SRTMAX);
+            cpgsci(1);
+            cpgtext(0.02, text_bottom(bttn_box[I][2], bttn_box[I][3]), string);
+            cpgrect(bttn_box[I][0], bttn_box[I][1],
+                    bttn_box[I][2], bttn_box[I][3]);
             sprintf(string, "%d", *SRT_NUM);
             cpgsci(0);
             cpgptxt(bttn_box[I][1] - 0.015,
@@ -2077,7 +2178,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   *GRT_NUM = 0;
   for (iant=0; iant<GRT_NUM_tmp; iant++) {
     if (ant_prm[iant].UFL == true) {
-      sprintf(ant_code[*GRT_NUM], "%s", (ant_prm+iant)->IDC);
+      sprintf(antenna_code[*GRT_NUM], "%s", (ant_prm+iant)->IDC);
       (*GRT_NUM)++;
     }
   }
@@ -2086,7 +2187,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
                     srt, grt_elevation_limit,
                     sep_angle_limit_from_earth_limb,
                     TimUTC, UT1_UTC, obs_duration,
-                    &SRCPROC_MODE, src, sun, ant_code,
+                    &SRCPROC_MODE, src, sun, antenna_code,
                     ch_grt_el_lim, &pair_src, &ch_src,
                     ch_srt, &ch_obs_t, _WRITE__);
 
@@ -2125,9 +2226,9 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 }
 
 
-int  ant_list_chk(char *antenna_list_file, float *bttn_box,
-                  struct comment_param      *cmnt,
-                  char comment[][NCOMLEN], _Bool  TV_SWT)
+int  ant_list_file_chk(char *antenna_list_file, float *bttn_box,
+                       struct comment_param      *cmnt,
+                       char comment[][NCOMLEN], _Bool  TV_SWT)
 {
   FILE   *fp;
   char   string[500];

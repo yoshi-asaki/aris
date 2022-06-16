@@ -12,6 +12,7 @@
 /****
 #define __DEMO__
 #define __ANT_DEBUG__
+#define __ANTPOS_DEBUG__
 #define __UV_DEBUG__
 #define __CF_DEBUG__
 #define __RANDOM_SEED__
@@ -277,16 +278,8 @@ int  main(int argc, char **argv)
 ----------------
 */
 
-  for (iant=0; iant<ANTMAX; iant++) {
-    for (i=0; i<10; i++) {
-      ant_prm[iant].IDC[i]  = 0;
-      ant_err[iant].IDC[i]  = 0;
-      antenna_code[iant][i] = 0;
-    }
-  }
-
-  NLOOP = 1;
-  while (NLOOP) {
+  NLOOP = 0;
+  while (NLOOP+1) {
     if (TV_SWT == true) {
       cpgslct(pgid[0]);
     }
@@ -313,7 +306,7 @@ int  main(int argc, char **argv)
       comment_disp(&cmnt, comment, string, true);
       sprintf(string, "Welcome!! Please set the observing parameters.");
       comment_disp(&cmnt, comment, string, true);
-      if (NLOOP > 1) {
+      if (NLOOP > 0) {
         sprintf(string, "Antenna list file reloaded.");
         comment_disp(&cmnt, comment, string, true);
       }
@@ -321,8 +314,16 @@ int  main(int argc, char **argv)
     } else if (TV_SWT == false) {
       printf("ARIS: Observation Parameter Setup --TERMINAL USER INTERFACE MODE--\n");
       printf("Welcome!! Please set the observing parameters.\n");
-      if (NLOOP > 1) {
+      if (NLOOP > 0) {
         printf("Antenna list file reloaded.\n");
+      }
+    }
+
+    for (iant=0; iant<ANTMAX; iant++) {
+      for (i=0; i<10; i++) {
+        ant_prm[iant].IDC[i]  = 0;
+        ant_err[iant].IDC[i]  = 0;
+        antenna_code[iant][i] = 0;
       }
     }
 
@@ -331,8 +332,7 @@ int  main(int argc, char **argv)
                     sep_angle_limit_from_earth_limb,
                     TimUTC, &UT1_UTC, &obs_duration, src, &sun,
                     antenna_list_file, ant_prm, antenna_code,
-                    &cmnt, comment,
-                    TV_SWT, cursor_pos, pgid);
+                    &cmnt, comment, TV_SWT, NLOOP, cursor_pos, pgid);
 
     if (proc_mode == __NG__) {
       sprintf(string, "ERROR: ARIS: in OBS_PARAM_INPUT: exit.");
@@ -350,6 +350,7 @@ int  main(int argc, char **argv)
       return (0);
     } else if (proc_mode == ANT_VIS) {
       proc_mode = antenna_visibility(
+                    antenna_list_file,
                     ANT_NUM, GRT_NUM, SRT_NUM, ant_prm, antenna_code, src, sun,
                     wvc, dry, ion, Cw, Cd, Ci, fqs_ds, src_flag, srt,
                     trk_pos, sep_angle_limit_from_earth_limb,
@@ -365,7 +366,7 @@ int  main(int argc, char **argv)
                         antenna_list_file, true);
 #ifdef __ANT_DEBUG__
       for (iant=0; iant<GRT_NUM; iant++) {
-        printf("__ANT_DEBUG__   %d   %d    %s    %s  %lf  %lf  %lf\n",
+        printf("__ANT_DEBUG__   %2d   %2d    %s    %s  %lf  %lf  %lf\n",
               iant+1, strlen(antenna_code[iant]),
               antenna_code[iant],
               ant_prm[iant].IDC,
@@ -773,10 +774,10 @@ position. The following code is an emprical one based on Hunter et al. (2016).
         ant_err[iant].ERR[0] = xyz_tmp[0];
         ant_err[iant].ERR[1] = xyz_tmp[1];
         ant_err[iant].ERR[2] = xyz_tmp[2];
-/****
+#ifdef __ANTPOS_DEBUG__
         printf("%11.6e, %11.6e, %11.6e, \n",
                 xyz_tmp[0], xyz_tmp[1], xyz_tmp[2]);
-****/
+#endif /* __ANTPOS_DEBUG__ */
       }
 
 /****
@@ -1221,7 +1222,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 
   for (ns=0; ns<SRC_NUM; ns++) {
     if (nant[ns] == 0) {
-      printf("ERROR: ARIS: NO valid data because the elevation ");
+      printf("ERROR: ARIS: No valid data because the elevation ");
       printf("angle is below the limit.\n");
 
       if (SRT_NUM >= 1) {
@@ -1609,6 +1610,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
     antenna_selection(&ANT_NUM, &GRT_NUM, &SRT_NUM, wave_id,
                       grt_elevation_limit, ant_prm, antenna_code,
                       antenna_list_file, false);
+
     for (iant=0; iant<ANT_NUM; iant++) {
       ant_prm[iant].ERR[0] = ant_prm[iant].XYZ[0] + ant_err[iant].ERR[0];
       ant_prm[iant].ERR[1] = ant_prm[iant].XYZ[1] + ant_err[iant].ERR[1];
@@ -2242,9 +2244,24 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
       ndata = 0;
       for (iant=0; iant<ANT_NUM; iant++) {
         for (jant=iant+1; jant<ANT_NUM; jant++) {
+
+
+/*****
+          printf("aaaaaaaaaaaa  %d  %d  %d  \n", ANT_NUM, iant, jant);
+          printf("AAAAAAAAAAAA  %d  %d  %d  %d\n", BGN_ANT_I, END_ANT_I, BGN_ANT_J, END_ANT_J);
+*****/
+
+
           if (baseline_check(iant, jant, ns,
                              BGN_ANT_I, END_ANT_I, BGN_ANT_J, END_ANT_J,
                              ant_prm) == true) {
+
+
+
+
+
+
+
             ibase = baseline_number(ANT_NUM, iant, jant);
             for (iobs=0; iobs<data_num.nobs; iobs++) {
               I = ibase * data_num.nobs + iobs;
@@ -2256,7 +2273,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
         }
       }
       if (ndata == 0 && ANT_NUM >= 2) {
-        sprintf(string, "WARNING: ARIS: NO valid data for the source.");
+        sprintf(string, "WARNING: ARIS: No valid data for the source.");
         printf("%s\n", string);
         if (TV_SWT == true) {
           comment_disp(&cmnt, comment, string, true);

@@ -33,6 +33,8 @@ int  main()
   scale2 = 13107.2;
   expon1 =     1.2;
   expon2 =     0.6;
+  expon1 =     1.6667;
+  expon2 =     0.8333;
 
   scale0 =  100.0;
   amp0    =   0.2;

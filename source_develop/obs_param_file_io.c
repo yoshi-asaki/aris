@@ -18,7 +18,7 @@ int  obs_param_file_io(
                        int  *SRCPROC_MODE,
                        struct source_parameter   *src,
                        struct source_parameter   *sun,
-                       char    ant_code[][10],
+                       char    antenna_code[][10],
                        char    *ch_grt_el_lim,
                        struct  pair_src_info     *pair_src,
                        struct  char_src_info     *ch_src,
@@ -125,7 +125,7 @@ int  obs_param_file_io(
         } else if (strncmp(string, "ARRAY               ", 20) == 0) {
           sscanf(string+20, "%d", &array->ID);
         } else if (strncmp(string, "STATION             ", 20) == 0) {
-          sprintf(ant_code[*GRT_NUM], "%s", string+20);
+          sprintf(antenna_code[*GRT_NUM], "%s", string+20);
           (*GRT_NUM)++;
         } else if (strncmp(string, "SRT NUMBER          ", 20) == 0) {
           sscanf(string+20, "%d", SRT_NUM);
@@ -323,11 +323,11 @@ int  obs_param_file_io(
           ch_obs_t->start_t[3], ch_obs_t->start_t[4], ch_obs_t->start_t[5]);
       fprintf(fp, "OBS DURATION        %s\n",  ch_obs_t->obsd);
       fprintf(fp, "GRT MINIMUM EL      %s\n",  ch_grt_el_lim);
-      fprintf(fp, "ARRAY TYPE          %d\n",  array->TYPE);
       fprintf(fp, "ANTENNA LIST FILE   %s\n",  antenna_list_file_name);
+      fprintf(fp, "ARRAY TYPE          %d\n",  array->TYPE);
       fprintf(fp, "ARRAY               %d\n",  array->ID);
       for (i=0; i<*GRT_NUM; i++) {
-        fprintf(fp, "STATION             %s\n",  ant_code[i]);
+        fprintf(fp, "STATION             %s\n",  antenna_code[i]);
       }
       fprintf(fp, "SRT NUMBER          %d\n",  *SRT_NUM);
       for (i=0; i<SRTMAX; i++) {

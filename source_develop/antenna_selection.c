@@ -22,13 +22,14 @@ int  antenna_selection(int *ANT_NUM, int *GRT_NUM, int *SRT_NUM,
 
   I = 0;
   for (iant=0; iant<*GRT_NUM; iant++) {
-    array_config(0,         NO_ANT,    wave_id,         0,  &itmp,
+    array_config(NO_DEF_ARRAY,  ALL_ANT,    wave_id,         0,  &itmp,
                  ant_prm+I, antenna_code[iant], antenna_file,
-                 false,  ERR_RESET_SWT);
+                 true,  ERR_RESET_SWT);
     if (grt_elevation_limit > ant_prm[I].ELLIM) {
       ant_prm[I].ELLIM = grt_elevation_limit;
     }
-    strncpy(antenna_code[I], (ant_prm+iant)->IDC, strlen((ant_prm+iant)->IDC));
+    strncpy(antenna_code[I], (ant_prm+iant)->IDC,
+            strlen((ant_prm+iant)->IDC));
     if ((i=strlen((ant_prm+iant)->IDC)) < 10) {
       antenna_code[I][i] = 0;
     }
@@ -37,7 +38,8 @@ int  antenna_selection(int *ANT_NUM, int *GRT_NUM, int *SRT_NUM,
   *GRT_NUM = I;
   *ANT_NUM = I;
   if (*SRT_NUM >= 1) {
-    *ANT_NUM += array_config(0,        ORBITING, wave_id,  *SRT_NUM,  &itmp,
+    *ANT_NUM += array_config(NO_DEF_ARRAY,  ORBITING, wave_id,
+                             *SRT_NUM,  &itmp,
                              ant_prm + *GRT_NUM, "", antenna_file,
                              false,   ERR_RESET_SWT);
   }

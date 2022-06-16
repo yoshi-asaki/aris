@@ -46,6 +46,12 @@ int     uv_display(
             for (ns=0; ns<SRC_NUM; ns++) {
               if (int_obs[ns][I].wt >= src_flag[ns] &&
                   int_obs[ns][J].wt >= src_flag[ns]) {
+/**
+                printf("aaaaaaaaaaaa   %d  %d\n", iant, jant);
+                printf("aaaaaaaaaaaa   %lf   %lf   %s\n", int_obs[ns][I].u,  int_obs[ns][I].v, ant_prm[iant].IDC);
+                printf("bbbbbbbbbbbb   %lf   %lf   %s\n", int_obs[ns][J].u,  int_obs[ns][J].v, ant_prm[jant].IDC);
+                printf("dddddddddddd   %lf   %lf \n", *uv_max, uv_length);
+**/
                 uv_length =
                      pow(diff(int_obs[ns][I].u, int_obs[ns][J].u), 2.0) +
                      pow(diff(int_obs[ns][I].v, int_obs[ns][J].v), 2.0);

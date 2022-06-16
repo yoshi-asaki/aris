@@ -5,7 +5,7 @@
 
 Astronomical Radio Interferometer Simulator
 
-      Last Update : 2022-05-02 17:15 UT  (Ver 1.4.10)
+      Last Update : 2022-06-16 20:00 UT  (Ver 1.5.0)
 
 ------------------------------------------------------
 ------------------------------------------------------
@@ -792,7 +792,7 @@ CHANGE HISTORY
   * "ON"/"OFF" selection is changed to Boolean algebra (_Bool) with stdbool.h 
   * ALMA antenna position definition has been changed.
 
-2022-05-02 17:15 UT (Ver 1.4.10)
+2022-06-16 20:00 UT (Ver 1.5.0)
   * Minor bug fix.
   * ALMA Band-to-Band phase jump error simulation has been implemented.
   * WARNING messge is shown when the switching cycle time is too short 

@@ -60,7 +60,7 @@
 #define _VLBI_ARRAY_          1
 #define __CONNECTED_          2
 
-#define NO_ANT               -1
+#define ANT_RESET            -1
 #define ALL_ANT               0
 #define VLBA                  1
 #define EVN                   2
@@ -518,7 +518,7 @@ int     obs_param_input
           char      *,
           struct antenna_parameter  *,    char [][10],
           struct comment_param      *,    char   [][NCOMLEN],
-          _Bool      ,    float     *,    int       *
+          _Bool      ,    int        ,    float     *,    int       *
         );
 int     obs_param_file_io(
           _Bool     *,    char      *,
@@ -828,7 +828,7 @@ int     phase_screen_check
         );
 int     antenna_visibility
         (
-          int        ,    int        ,    int        ,
+          char      *,    int        ,    int        ,    int        ,
           struct antenna_parameter  *,    char [][10],
           struct source_parameter   *,    struct source_parameter    ,
           struct phase_screen_parameter             *,

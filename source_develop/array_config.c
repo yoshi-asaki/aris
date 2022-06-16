@@ -11,7 +11,10 @@
 
 /****
 #define __DEBUG__
+#define __DEBUG_1__
 ****/
+
+void   word_extract(char *, int *, int *);
 
 int  array_config(
                   int    ARRAY_TYPE,
@@ -32,8 +35,9 @@ int  array_config(
   double XYZ[3];
   char   string[1000];
   FILE   *fp;
-  _Bool  REC_FLAG, ARRAY_REC_FLAG, STATION_REC_FLAG;
+  int    PROC_MODE;
   struct antenna_parameter ant_tmp, srt_tmp;
+  _Bool  REC_FLAG, ARRAY_ID_REC_FLAG, ARRAY_TYPE_REC_FLAG, STATION_REC_FLAG;
 
 /*
 ----------------
@@ -64,9 +68,10 @@ int  array_config(
 #ifdef __DEBUG_1__
       printf("__DEBUG_1__ : BEGIN_ANT\n");
 #endif
-      REC_FLAG         = false;
-      STATION_REC_FLAG = false;
-      ARRAY_REC_FLAG   = false;
+      REC_FLAG            = false;
+      STATION_REC_FLAG    = false;
+      ARRAY_ID_REC_FLAG   = false;
+      ARRAY_TYPE_REC_FLAG = false;
       if (ARRAY_ID == ALL_ANT) {
         REC_FLAG = true;
       }
@@ -144,9 +149,11 @@ int  array_config(
               if (strlen(antenna_code) == j &&
                   strncmp(antenna_code, ant_tmp.IDC, j) == 0) {
                 STATION_REC_FLAG = true;
-                if (ARRAY_ID == NO_ANT) {
+/****
+                if (ARRAY_ID == ALL_ANT) {
                   REC_FLAG = true;
                 }
+****/
               }
             }
 
@@ -154,27 +161,19 @@ int  array_config(
 --------
 */
 
-            if (strncmp(string, "ARRAY TYPE", 10) == 0) {
-              i = 0;
-              while (1) {
-                if (string[i++] == '\"') {
-                  break;
-                }
-              }
-              j = 0;
-              while (1) {
-                if (string[i+j] == '\"') {
-                  break;
-                }
-                j++;
-              }
-              string[i+j] = 0;
-              if (       strncmp(string+i, "VLBI",             j) == 0) {
+            if (strncmp(string, "TYPE", 4) == 0) {
+              word_extract(string, &i, &j);
+              if (       strncmp(string+i, "VLBI",       j) == 0) {
                 array_type = _VLBI_ARRAY_;
-              } else if (strncmp(string+i, "CONNECTED",        j) == 0) {
+              } else if (strncmp(string+i, "CONNECTED",  j) == 0) {
                 array_type = __CONNECTED_;
               } else {
                 array_type = -100;
+              }
+
+              if (array_type == ARRAY_TYPE || ARRAY_TYPE == NO_DEF_ARRAY) {
+                REC_FLAG            = true;
+                ARRAY_TYPE_REC_FLAG = true;
               }
             }
 
@@ -183,20 +182,7 @@ int  array_config(
 */
 
             if (strncmp(string, "ARRAY", 5) == 0) {
-              i = 0;
-              while (1) {
-                if (string[i++] == '\"') {
-                  break;
-                }
-              }
-              j = 0;
-              while (1) {
-                if (string[i+j] == '\"') {
-                  break;
-                }
-                j++;
-              }
-              string[i+j] = 0;
+              word_extract(string, &i, &j);
               if (       strncmp(string+i, "VLBA",             j) == 0) {
                 array_id = VLBA;
               } else if (strncmp(string+i, "EVN",              j) == 0) {
@@ -232,9 +218,9 @@ int  array_config(
               }
 
               ant_tmp.ARRAY = array_id;
-              if (array_id == ARRAY_ID) {
-                REC_FLAG       = true;
-                ARRAY_REC_FLAG = true;
+              if (array_id == ARRAY_ID || ARRAY_ID == ALL_ANT) {
+                REC_FLAG          = true;
+                ARRAY_ID_REC_FLAG = true;
               }
             }
 
@@ -243,20 +229,8 @@ int  array_config(
 */
 
             if (strncmp(string, "MOUNT", 5) == 0) {
-              i = 0;
-              while (1) {
-                if (string[i++] == '\"') {
-                  break;
-                }
-              }
-              j = 0;
-              while (1) {
-                if (string[i+j] == '\"') {
-                  break;
-                }
-                j++;
-              }
-              if (strncmp(string+i, "ALAZ", j) == 0) {
+              word_extract(string, &i, &j);
+              if (       strncmp(string+i, "ALAZ", j) == 0) {
                 ant_tmp.MNTSTA = ALAZ;
               } else if (strncmp(string+i, "EQUA", j) == 0) {
                 ant_tmp.MNTSTA = EQUA;
@@ -270,19 +244,7 @@ int  array_config(
 */
 
             if (strncmp(string, "FREQ_STANDARD", 13) == 0) {
-              i = 0;
-              while (1) {
-                if (string[i++] == '\"') {
-                  break;
-                }
-              }
-              j = 0;
-              while (1) {
-                if (string[i+j] == '\"') {
-                  break;
-                }
-                j++;
-              }
+              word_extract(string, &i, &j);
               if (strncmp(string+i, "H_M", j) == 0) {
                 ant_tmp.FRQSTD = H_M;
               } else if (strncmp(string+i, "CSO_10",  j) == 0) {
@@ -891,10 +853,38 @@ int  array_config(
 ----------------------------------------
 */
 
-      if ((INDIVIDUAL_PICK_UP_SWT == false && REC_FLAG == true) ||
-          (INDIVIDUAL_PICK_UP_SWT == true  &&
-           STATION_REC_FLAG == true && ARRAY_REC_FLAG == true)) {
+      PROC_MODE = 0;
+      if ((INDIVIDUAL_PICK_UP_SWT == false &&
+               REC_FLAG == true &&
+               ARRAY_TYPE_REC_FLAG == true &&
+               ARRAY_TYPE == _VLBI_ARRAY_)) {
+        PROC_MODE = 1;
+      } else if (INDIVIDUAL_PICK_UP_SWT == false &&
+               REC_FLAG == true &&
+               ARRAY_TYPE_REC_FLAG == true &&
+              (ARRAY_TYPE == __CONNECTED_  && ARRAY_ID_REC_FLAG == true)) {
+        PROC_MODE = 2;
+      } else if (INDIVIDUAL_PICK_UP_SWT == true  &&
+                 STATION_REC_FLAG == true &&
+                 ARRAY_ID_REC_FLAG == true &&
+                 ARRAY_TYPE_REC_FLAG == true) {
+        PROC_MODE = 3;
+      }
 
+
+#ifdef __DEBUG_1__
+      printf("__DEBUG_1__ Antenna Info: %s [%d]     [%d  %d  %d  %d]\n",
+              ant_tmp.IDC,
+              ant_tmp.ARRAY, 
+              INDIVIDUAL_PICK_UP_SWT,
+              STATION_REC_FLAG,
+              ARRAY_ID_REC_FLAG,
+              ARRAY_TYPE_REC_FLAG);
+      printf("____PROC_MODE____: %d\n", PROC_MODE);
+#endif /* __DEBUG_1__ */
+
+
+      if (PROC_MODE == 1 || PROC_MODE == 2 || PROC_MODE == 3) {
         ant_tmp.UFL = true;
         if (ant_tmp.XYZ[0] == 0.0 &&
             ant_tmp.XYZ[1] == 0.0 &&
@@ -1013,4 +1003,32 @@ int  array_config(
 #endif
 
   return ANT_NUM;
+}
+
+
+
+
+void  word_extract(char *string, int  *spos,  int  *epos)
+{
+  int    i, j;
+
+  i = 0;
+  while (1) {
+    if (string[i++] == '\"') {
+      break;
+    }
+  }
+  j = 0;
+  while (j != 8) {
+    if (string[i+j] == '\"') {
+      break;
+    }
+    j++;
+  }
+  string[i+j] = 0;
+
+  *spos = i;
+  *epos = j;
+
+  return;
 }

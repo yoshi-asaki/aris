@@ -14,7 +14,8 @@
 ****/
 
 int  antenna_visibility(
-                  int  ANT_NUM, int  GRT_NUM,  int  SRT_NUM,
+                  char   *antenna_list_file,
+                  int    ANT_NUM, int  GRT_NUM,  int  SRT_NUM,
                   struct antenna_parameter *ant_prm,
                   char   antenna_code[][10],
                   struct source_parameter  *src,
@@ -165,7 +166,7 @@ int  antenna_visibility(
     }
     antenna_selection(&ANT_NUM, &GRT_NUM, &SRT_NUM,
                       wave_id, grt_elevation_limit, ant_prm,
-                      antenna_code, "aris_input/antenna.prm", true);
+                      antenna_code, antenna_list_file, true);
     if ((gcode_pos = (float *)calloc(GRT_NUM, sizeof(float))) == NULL) {
       printf("ERROR: antenna_visibility: Memory allocation error.\n");
       return (0);
@@ -533,7 +534,7 @@ int  antenna_visibility(
     for (ns=0; ns<SRC_NUM; ns++) {
       uv_max[ns] = 0.0;
     }
-    uv_display(NOBS, uv_max, ANT_NUM, 0, ANT_NUM, 0, ANT_NUM, 
+    uv_display(NOBS, uv_max, ANT_NUM, 0, ANT_NUM, 0, ANT_NUM,
                timUTC, ut1_utc, ant_prm, src, src_flag,
                int_obs, wave_length, 0, false, 0.65, &c_dummy, F__STRUCTURE);
     if (SRT_NUM >= 1) {
