@@ -1305,7 +1305,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 */
 
   if (ERROR_FLAG[TWVTRB] == true) {
-    sprintf(string, "**** Tropospheric Phase Screen ****");
+    sprintf(string, "**** Lower Tropospheric Phase Screen ****");
     if (TV_SWT == false) {
       printf("%s\n", string);
     } else if (TV_SWT == true) {
@@ -1346,6 +1346,17 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 */
 
   if (ERROR_FLAG[DRYTRB] == true) {
+    sprintf(string, "**** Higher Tropospheric Phase Screen ****");
+    if (TV_SWT == false) {
+      printf("%s\n", string);
+    } else if (TV_SWT == true) {
+      comment_disp(&cmnt, comment, string, true);
+    }
+
+    for (i=0; i<6; i++) {
+      timUTC[i] = TimUTC[i];
+    }
+    ut1_utc = UT1_UTC;
     sigma = 4.0e-6 * sqrt(10.0) / speed_of_light;
     if (atmospheric_fluctuation(
            SRC_NUM,

@@ -123,6 +123,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   if (       array->TYPE == _VLBI_ARRAY_) {
     array_type[0].flag = true;
     array_type[1].flag = false;
+    ERROR_FLAG[DRYTRB] = false;
   } else if (array->TYPE == __CONNECTED_) {
     array_type[0].flag = false;
     array_type[1].flag = true;
@@ -1544,23 +1545,31 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         I = ERROR_SECTION + i;
         if (_button_chk(cursor_pos, bttn_box[I]) == true) {
           if (i < ERROR_MENU_NUM) {
-            if (ERROR_FLAG[i] == true) {
-              idum = 1;
+            if (!(i == DRYTRB && array->TYPE == _VLBI_ARRAY_)) {
+              if (ERROR_FLAG[i] == true) {
+                idum = 1;
+              } else {
+                idum = 0;
+              }
+              toggle_button(&idum, error_source[i], bttn_box[I]);
+              if (idum == 1) {
+                ERROR_FLAG[i] = true;
+              } else {
+                ERROR_FLAG[i] = false;
+              }
+              break;
             } else {
-              idum = 0;
+              sprintf(string,
+                "In the case of VLBI simulations, Dry Air Turbulence cannot be selected.");
+              comment_disp(cmnt, comment, string, true);
             }
-            toggle_button(&idum, error_source[i], bttn_box[I]);
-            if (idum == 1) {
-              ERROR_FLAG[i] = true;
-            } else {
-              ERROR_FLAG[i] = false;
-            }
-            break;
           } else if (i == ERROR_MENU_NUM) {
             for (j=0; j<ERROR_MENU_NUM; j++) {
-              J = ERROR_SECTION + j;
-              on_button(&idum, error_source[j], bttn_box[J]);
-              ERROR_FLAG[j] = true;
+              if (!(j == DRYTRB && array->TYPE == _VLBI_ARRAY_)) {
+                J = ERROR_SECTION + j;
+                on_button(&idum, error_source[j], bttn_box[J]);
+                ERROR_FLAG[j] = true;
+              }
             }
             break;
           } else if (i == ERROR_MENU_NUM+1) {
@@ -1778,6 +1787,12 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             _toggle_button(&array_type[0].flag, "", bttn_box[ANTLST_SECTION  ]);
             _toggle_button(&array_type[1].flag, "", bttn_box[ANTLST_SECTION+1]);
             array->TYPE = _VLBI_ARRAY_;
+          }
+          if (array->TYPE == _VLBI_ARRAY_ && ERROR_FLAG[DRYTRB] == true) {
+            ERROR_FLAG[DRYTRB] = false;
+            sprintf(string,
+              "In the case of VLBI simulations, Dry Air Turbulence cannot be selected.");
+            comment_disp(cmnt, comment, string, true);
           }
           obs_param_file_io(ERROR_FLAG, antenna_list_file,
                     array, ANT_NUM, GRT_NUM, SRT_NUM,
