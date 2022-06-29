@@ -1,6 +1,6 @@
 #include "mathtools.h"
 
-void cross_product(double *a1, double *a2, double *A)
+void cross_product3(double *a1, double *a2, double *A)
 {
   double  t;
 
