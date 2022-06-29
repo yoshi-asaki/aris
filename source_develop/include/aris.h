@@ -159,13 +159,16 @@ TYPICAL        : Typical tropospheric condition (Beasely anc Conway)
 POOR           : Poor tropospheric condition (Beasely anc Conway)
 */
 
-#define TRP_NUM          6
+/******
+#define TRP_NUM          7
 #define FANTASTIC_ALMA   0
 #define VERY_GOOD_ALMA   1
 #define GOOD_ALMA        2
-#define GOOD             3
-#define TYPICAL          4
-#define POOR             5
+#define VERY_GOOD        3
+#define GOOD             4
+#define TYPICAL          5
+#define POOR             6
+********/
 
 /*
 ---- IONOSPHERIC CONDITION ----

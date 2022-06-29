@@ -24,7 +24,7 @@ int   tracking_button_disp(
 
   cpgsfs(2);
   cpgsci(1);
-  cpgrect(0.020, 0.980, y_pos-0.065, y_pos+0.040);
+  cpgrect(0.010, 1.400, y_pos-0.065, y_pos+0.040);
   cpgsfs(1);
 
   cpgsci(1);

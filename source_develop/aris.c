@@ -268,7 +268,7 @@ int  main(int argc, char **argv)
     }
     cmnt.ncol  = 12;
     cmnt.xmin  = 0.020;
-    cmnt.xmax  = 0.980;
+    cmnt.xmax  = 1.380;
     cmnt.ymin  = 0.005;
     cmnt.ymax  = 0.180;
     cmnt.pitch = 0.030;
@@ -1524,8 +1524,8 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
     data_num.nobs = nobs;
     if (TV_SWT == true) {
       cmnt.ncol  = 11;
-      cmnt.xmin  = 0.02;
-      cmnt.xmax  = 0.98;
+      cmnt.xmin  = 0.01;
+      cmnt.xmax  = 1.40;
       cmnt.ymin  = 0.01;
       cmnt.ymax  = 0.16;
       cmnt.pitch = 0.03;

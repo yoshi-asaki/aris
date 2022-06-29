@@ -38,6 +38,8 @@ int     channel_num_set(int  );
 #define __DEBUG__
 ****/
 
+#define TRP_NUM   8
+
 int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
                 int *BGN_ANT_I, int *END_ANT_I,
                 int *BGN_ANT_J, int *END_ANT_J,
@@ -70,7 +72,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   int    BL_SELECT;
   char   *c=0, string[100];
   _Bool  Bdum;
-  float  bttn_box[BOTTUN_NUM][4], y_pos, srtatt_y_pos;
+  float  bttn_box[BOTTUN_NUM][4], y_pos, srtatt_y_pos, x_pos;
   float  ctrl_bttn_box[3][4], blsel_bttn_box[4][4];
   double swt_cyc_time;
   double orbit_error_ap, orbit_error_pe;
@@ -159,12 +161,14 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ---------------------------------------------------------
 */
 
-  sprintf(trp_name[0], "ALMA:0.5rad");
-  sprintf(trp_name[1], "ALMA:0.75rad");
-  sprintf(trp_name[2], "ALMA:1rad");
-  sprintf(trp_name[3], "Good");
-  sprintf(trp_name[4], "Typical");
-  sprintf(trp_name[5], "Poor");
+  sprintf(trp_name[0], "ALMA: 0.5 rad");
+  sprintf(trp_name[1], "ALMA: 0.75 rad");
+  sprintf(trp_name[2], "ALMA: 1 rad");
+  sprintf(trp_name[3], "Very Good");
+  sprintf(trp_name[4], "Good");
+  sprintf(trp_name[5], "Typical");
+  sprintf(trp_name[6], "Poor");
+  sprintf(trp_name[7], "Tuning");
   for (i=0; i<TRP_NUM; i++) {
     trp_code[i] = false;
   }
@@ -353,7 +357,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   swt_cyc_time       = 60.0;
   *apparent_tgt_on   = 50.0;
   BL_SELECT          = ALLBL;
-  *TRP_CONDITION     = TYPICAL;
+  *TRP_CONDITION     = 5;
   *ION_CONDITION     = NOMINAL;
   *reference_phase_process_mode = 0;
 
@@ -601,9 +605,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
       printf("1. ALMA:0.5rad   ");
       printf("2. ALMA:0.75rad  ");
       printf("3. ALMA:1rad     ");
-      printf("4. Good          ");
-      printf("5. Typical       ");
-      printf("6. Poor (CR->%d) : ", *TRP_CONDITION+1);
+      printf("4. Very good     ");
+      printf("5. Good          ");
+      printf("6. Typical       ");
+      printf("7. Poor (CR->%d) : ", *TRP_CONDITION+1);
       while (1) {
         if (fgets(string, sizeof(string), stdin) == NULL) {
           printf("ERROR: ERR_PARAMETER SET: Invalid input.\n");
@@ -1213,10 +1218,19 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
     cpgbbuf();
     cpgslct(PGMENU_ID);
+
+    cpgpap(2.00*pgpap_prm, 1.0/1.4);
+    cpgsch(1.5*pgpap_prm/13.0);
+    cpgsvp(0.0,  1.0, 0.0, 1.0);
+    cpgswin(0.0, 1.4, 0.0, 1.0);
+
+
+/****
     cpgpap(1.5*pgpap_prm, 1.10);
     cpgsch(1.5*pgpap_prm/13.0);
     cpgsvp(0.0, 1.0, 0.0, 1.0);
     cpgswin(0.0, 1.0, 0.0, 1.1);
+****/
 
 /*
 ----------------------
@@ -1302,20 +1316,27 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 -------------
 */
 
-    y_pos = 1.025;
+    y_pos = 0.940;
 
     if (ERROR_FLAG[TWVTRB] == true || ERROR_FLAG[DRYTRB] == true) {
       cpgsfs(2);
       cpgsci(1);
-      cpgrect(0.020, 0.980, y_pos-0.037, y_pos+0.035);
+      cpgrect(0.010, 1.400, y_pos-0.037, y_pos+0.035);
       cpgsfs(1);
 
       cpgtext(0.035, y_pos + 0.35 * pitch, "Tropospheric Condition\0");
 
       I = TROPOS_SECTION;
       for (i=0; i<TRP_NUM; i++) {
-        bttn_box[I][0] = 0.225 + 0.126 * (float)i;
-        bttn_box[I][1] = bttn_box[I][0] + 0.123;
+        if (i < 3) {
+          x_pos = 0.225;
+        } else if (i == 7) {
+          x_pos = 0.290;
+        } else {
+          x_pos = 0.255;
+        }
+        bttn_box[I][0] = x_pos + 0.128 * (float)i;
+        bttn_box[I][1] = bttn_box[I][0] + 0.125;
         bttn_box[I][2] = y_pos;
         bttn_box[I][3] = bttn_box[I][2] + pitch;
         I++;
@@ -1329,13 +1350,16 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
           _off_button(&trp_code[i], trp_name[i], bttn_box[I]);
         }
       }
+      if (i == TRP_NUM - 1 && array->TYPE == _VLBI_ARRAY_) {
+        _off_button(&trp_code[i], trp_name[i], bttn_box[I]);
+      }
     }
 
 /*
 -------------
 */
 
-    y_pos = 0.990;
+    y_pos = 0.905;
 
     if (ERROR_FLAG[IONTRB] == true) {
       cpgsci(1);
@@ -1364,7 +1388,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 --------------------
 */
 
-    y_pos = 0.950;
+    y_pos = 0.825;
 
     if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
      && array->TYPE ==  _VLBI_ARRAY_) {
@@ -1421,7 +1445,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     if (ERROR_FLAG[APOSER] == true && SRT_NUM > 0) {
       I = ORBIT_SECTION;
 
-      y_pos = 0.950;
+      y_pos = 0.825;
 
       cpgsfs(2);
       cpgsci(1);
@@ -1465,7 +1489,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
     if (SRT_NUM >= 1) {
-      y_pos = 0.867;
+      y_pos = 0.740;
       tracking_button_disp(TRK_SECTION, y_pos, pitch,
                            bttn_box, *TRK_NUM, trk_priority,
                            trk_name, trk_pos);
@@ -1479,11 +1503,11 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 --------------------
 */
 
-    y_pos = 0.760;
+    y_pos = 0.630;
 
     cpgsfs(2);
     cpgsci(1);
-    cpgrect(0.020, 0.980, y_pos-0.005, y_pos+0.034);
+    cpgrect(0.010, 1.400, y_pos-0.005, y_pos+0.034);
     cpgsfs(1);
 
     mjd = MJD(TimUTC[0], TimUTC[1], TimUTC[2],
@@ -1520,19 +1544,19 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 --------------------
 */
 
-    ncol = 10;
-    y_pos = 0.688;
+    ncol = 16;
+    y_pos = 0.558;
 
     cpgsfs(2);
     cpgsci(1);
-    cpgrect(0.020, 0.980, y_pos-0.140, y_pos+0.060);
+    cpgrect(0.010, 1.400, y_pos-0.070, y_pos+0.060);
     cpgsfs(1);
 
     I = T_WAVE_SECTION;
     for (i=0; i<=wave_num/ncol; i++) {
       for (j=0; j<ncol; j++) {
-        bttn_box[I][0] = 0.035 + (float)j * 0.092;
-        bttn_box[I][1] = bttn_box[I][0] + 0.087;
+        bttn_box[I][0] = 0.029 + (float)j * 0.085;
+        bttn_box[I][1] = bttn_box[I][0] + 0.083;
         bttn_box[I][2] = y_pos - 0.035 * (float)i;
         bttn_box[I][3] = bttn_box[I][2] + pitch;
         I++;
@@ -1562,12 +1586,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 -----------------
 */
 
-    y_pos -= 0.101;
+    y_pos -= 0.061;
     I = R_WAVE_SECTION;
     for (i=0; i<=wave_num/ncol; i++) {
       for (j=0; j<ncol; j++) {
-        bttn_box[I][0] = 0.035 + (float)j * 0.092;
-        bttn_box[I][1] = bttn_box[I][0] + 0.087;
+        bttn_box[I][0] = 0.029 + (float)j * 0.085;
+        bttn_box[I][1] = bttn_box[I][0] + 0.083;
         bttn_box[I][2] = y_pos - 0.035 * (float)i;
         bttn_box[I][3] = bttn_box[I][2] + pitch;
         I++;
@@ -1597,16 +1621,16 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 -----------------
 */
 
-    y_pos -= 0.101;
+    y_pos -= 0.074;
 
     cpgsfs(2);
     cpgsci(1);
-    cpgrect(0.020, 0.980, y_pos-0.097, y_pos+0.060);
+    cpgrect(0.010, 1.400, y_pos-0.055, y_pos+0.060);
     cpgsfs(1);
 
     I = BW_SECTION;
     for (i=0; i<bw_num; i++) {
-      bttn_box[I][0] = 0.035 + (float)i * 0.083;
+      bttn_box[I][0] = 0.029 + (float)i * 0.083;
       bttn_box[I][1] = bttn_box[I][0] + 0.080;
       bttn_box[I][2] = y_pos;
       bttn_box[I][3] = bttn_box[I][2] + pitch;
@@ -1628,18 +1652,16 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 -----------------
 */
 
-    y_pos -= 0.044;
-
     I = FRCHAN_SECTION;
-    cpgsci(1);
-    cpgtext(0.035, y_pos + 0.3 * pitch, "Frequency Channel\0");
     for (i=0; i<frchan_num; i++) {
-      bttn_box[I][0] = 0.195 + (float)i * 0.080;
+      bttn_box[I][0] = 0.950 + (float)i * 0.080;
       bttn_box[I][1] = bttn_box[I][0] + 0.075;
       bttn_box[I][2] = y_pos;
       bttn_box[I][3] = bttn_box[I][2] + pitch;
       I++;
     }
+    cpgsci(1);
+    cpgtext(0.950, bttn_box[FRCHAN_SECTION][3]+0.01, "Frequency Channel\0");
 
     for (i=0; i<frchan_num; i++) {
       I = FRCHAN_SECTION + i;
@@ -1712,12 +1734,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 --------------------------------------
 */
 
-    y_pos = 0.355;
+    y_pos = 0.330;
 
     cpgsci(1);
     cpgsfs(2);
     cpgsci(1);
-    cpgrect(0.020, 0.485, y_pos-0.155, y_pos+0.031);
+    cpgrect(0.010, 0.685, y_pos-0.125, y_pos+0.031);
     cpgsfs(1);
 
     I = T_FLUX_SECTION;
@@ -1762,10 +1784,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
     for (i=0; i<tgt_morpho_num; i++) {
       I = T_FLUX_SECTION + MRP_SECT + i;
-      bttn_box[I][0] = 0.040 + 0.2 * (float)(i%2);
-      bttn_box[I][1] = 0.050 + 0.2 * (float)(i%2);
+      bttn_box[I][0] = 0.040 + 0.2 * (float)(i%3);
+      bttn_box[I][1] = 0.050 + 0.2 * (float)(i%3);
       bttn_box[I][2] = bttn_box[T_FLUX_SECTION][2] - 2.0 * pitch
-                       - pitch * (float)(i/2);
+                       - pitch * (float)(i/3);
       bttn_box[I][3] = bttn_box[I][2] + 0.01;
       if (i == src[0].morphology) {
         _on_button( &tgt_proc_flag[i], "", bttn_box[I]);
@@ -1833,12 +1855,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     cpgsci(1);
     cpgsfs(2);
     cpgsci(1);
-    cpgrect(0.515, 0.980, y_pos-0.155, y_pos+0.031);
+    cpgrect(0.715, 1.400, y_pos-0.125, y_pos+0.031);
     cpgsfs(1);
 
     I = R_FLUX_SECTION;
-    bttn_box[I][0] = 0.730;
-    bttn_box[I][1] = 0.740;
+    bttn_box[I][0] = 0.930;
+    bttn_box[I][1] = 0.940;
     bttn_box[I][2] = y_pos + 0.3 * pitch;
     bttn_box[I][3] = bttn_box[I][2] + 0.01;
     if (src[1].positionID == 0) {
@@ -1849,8 +1871,8 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     cpgsci(1);
     cpgtext(bttn_box[I][0]+0.02, bttn_box[I][2], "Source-1\0");
     I++;
-    bttn_box[I][0] = 0.850;
-    bttn_box[I][1] = 0.860;
+    bttn_box[I][0] = 1.050;
+    bttn_box[I][1] = 1.060;
     bttn_box[I][2] = y_pos + 0.3 * pitch;
     bttn_box[I][3] = bttn_box[I][2] + 0.01;
     if (src[1].positionID == 0) {
@@ -1860,15 +1882,15 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     }
     cpgsci(1);
     cpgtext(bttn_box[I][0]+0.02, bttn_box[I][2], "Source-2\0");
-    cpgtext(0.535, bttn_box[I][2], "Reference Position\0");
+    cpgtext(0.735, bttn_box[I][2], "Reference Position\0");
 
     I = R_FLUX_SECTION + FLX_SECT;
-    bttn_box[I][0] = 0.760;
-    bttn_box[I][1] = 0.830;
+    bttn_box[I][0] = 0.960;
+    bttn_box[I][1] = 1.030;
     bttn_box[I][2] = bttn_box[R_FLUX_SECTION][2] - 1.3 * pitch;
     bttn_box[I][3] = bttn_box[I][2] + pitch;
 
-    cpgtext(0.535, bttn_box[I][2] + 0.3 * pitch, "Reference Total Flux [Jy]\0");
+    cpgtext(0.735, bttn_box[I][2] + 0.3 * pitch, "Reference Total Flux [Jy]\0");
     cpgsci(1);
     cpgrect(bttn_box[I][0], bttn_box[I][1], bttn_box[I][2], bttn_box[I][3]);
     cpgsci(0);
@@ -1878,10 +1900,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
     for (i=0; i<ref_morpho_num; i++) {
       I = R_FLUX_SECTION + MRP_SECT + i;
-      bttn_box[I][0] = 0.540 + 0.2 * (float)(i%2);
-      bttn_box[I][1] = 0.550 + 0.2 * (float)(i%2);
+      bttn_box[I][0] = 0.740 + 0.2 * (float)(i%3);
+      bttn_box[I][1] = 0.750 + 0.2 * (float)(i%3);
       bttn_box[I][2] = bttn_box[R_FLUX_SECTION][2] - 2.0 * pitch
-                       - pitch * (float)(i/2);
+                       - pitch * (float)(i/3);
       bttn_box[I][3] = bttn_box[I][2] + 0.01;
       if (i == src[1].morphology) {
         _on_button( &ref_proc_flag[i], "", bttn_box[I]);
@@ -1904,7 +1926,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
       cpgptxt(bttn_box[I][1]-0.015, text_bottom(bttn_box[I][2], bttn_box[I][3]),
               0.0, 1.0, ch_file[1].mcm);
       cpgsci(1);
-      TV_menu_hatch(0.525, 0.90,
+      TV_menu_hatch(0.725, 0.90,
                     bttn_box[R_FLUX_SECTION+FLX_SECT][2],
                     bttn_box[R_FLUX_SECTION+FLX_SECT][3], 7, 4);
     }
@@ -1920,7 +1942,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
       cpgsci(0);
       cpgptxt(bttn_box[I][1]-0.015, text_bottom(bttn_box[I][2], bttn_box[I][3]),
               0.0, 1.0, ch_file[1].cct);
-      TV_menu_hatch(0.525, 0.90,
+      TV_menu_hatch(0.725, 0.90,
                     bttn_box[R_FLUX_SECTION+FLX_SECT][2],
                     bttn_box[R_FLUX_SECTION+FLX_SECT][3], 7, 4);
     }
@@ -1936,7 +1958,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
       cpgsci(0);
       cpgptxt(bttn_box[I][1]-0.015, text_bottom(bttn_box[I][2], bttn_box[I][3]),
               0.0, 1.0, ch_file[0].bhs);
-      TV_menu_hatch(0.525, 0.90,
+      TV_menu_hatch(0.725, 0.90,
                     bttn_box[R_FLUX_SECTION+FLX_SECT][2],
                     bttn_box[R_FLUX_SECTION+FLX_SECT][3], 7, 4);
     }
@@ -1991,14 +2013,24 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
         for (I=TROPOS_SECTION; I<TROPOS_SECTION+TRP_NUM; I++) {
           if (_button_chk(cursor_pos, bttn_box[I]) == true) {
             *TRP_CONDITION = I - TROPOS_SECTION;
+/*xxxxxxxxxxxxxxxxxxxxxxxxxx*/
             for (i=0; i<TRP_NUM; i++) {
-              if (i == *TRP_CONDITION) {
+              if (i == TRP_NUM - 1) {
                 _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
               } else {
-                J = TROPOS_SECTION + i;
-                _off_button(&trp_code[i], trp_name[i], bttn_box[J]);
+                if (trp_code[7] == true) {
+                  J = TROPOS_SECTION + 7;
+                  _off_button(&trp_code[7], trp_name[7], bttn_box[J]);
+                }
+                if (i == *TRP_CONDITION) {
+                 _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
+                } else {
+                  J = TROPOS_SECTION + i;
+                  _off_button(&trp_code[i], trp_name[i], bttn_box[J]);
+                }
               }
             }
+/*xxxxxxxxxxxxxxxxxxxxxxxxxx*/
           }
         }
       }
@@ -2459,7 +2491,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
                     text_bottom(bttn_box[J][2], bttn_box[J][3]),
                     0.0, 1.0, ch_file[1].mcm);
             cpgsci(1);
-            TV_menu_hatch(0.525, 0.90,
+            TV_menu_hatch(0.725, 1.10,
                           bttn_box[R_FLUX_SECTION+FLX_SECT][2],
                           bttn_box[R_FLUX_SECTION+FLX_SECT][3], 7, 4);
           } else if (src[1].morphology == SRC_CC_COMP) {
@@ -2471,7 +2503,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
             cpgptxt(bttn_box[J][1]-0.015,
                     text_bottom(bttn_box[J][2], bttn_box[J][3]),
                     0.0, 1.0, ch_file[1].cct);
-            TV_menu_hatch(0.525, 0.90,
+            TV_menu_hatch(0.725, 1.10,
                           bttn_box[R_FLUX_SECTION+FLX_SECT][2],
                           bttn_box[R_FLUX_SECTION+FLX_SECT][3], 7, 4);
           } else if (src[1].morphology == SRC_BHS_MOD) {
@@ -2483,7 +2515,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
             cpgptxt(bttn_box[J][1]-0.015,
                     text_bottom(bttn_box[J][2], bttn_box[J][3]),
                     0.0, 1.0, ch_file[1].bhs);
-            TV_menu_hatch(0.525, 0.90,
+            TV_menu_hatch(0.725, 1.10,
                           bttn_box[R_FLUX_SECTION+FLX_SECT][2],
                           bttn_box[R_FLUX_SECTION+FLX_SECT][3], 7, 4);
           }
@@ -2498,9 +2530,9 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
                     bttn_box[J][2], bttn_box[J][3]);
 
             J = R_FLUX_SECTION + FLX_SECT;
-            TV_menu_hatch(0.525, 0.90,
+            TV_menu_hatch(0.725, 1.10,
                           bttn_box[J][2], bttn_box[J][3], 0, 1);
-            cpgtext(0.535, bttn_box[J][2] + 0.3 * pitch,
+            cpgtext(0.735, bttn_box[J][2] + 0.3 * pitch,
                     "Reference Total Flux [Jy]\0");
             cpgrect(bttn_box[J][0], bttn_box[J][1],
                     bttn_box[J][2], bttn_box[J][3]);
@@ -2648,10 +2680,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 **/
     *CW *= 4.0;
   } else if (*TRP_CONDITION == 3) {
-    *CW = 1.0e-7 * sqrt(1.4 * 1.0e3);
+    *CW = 0.5e-7 * sqrt(1.4 * 1.0e3);
   } else if (*TRP_CONDITION == 4) {
-    *CW = 2.0e-7 * sqrt(1.4 * 1.0e3);
+    *CW = 1.0e-7 * sqrt(1.4 * 1.0e3);
   } else if (*TRP_CONDITION == 5) {
+    *CW = 2.0e-7 * sqrt(1.4 * 1.0e3);
+  } else if (*TRP_CONDITION == 6) {
     *CW = 4.0e-7 * sqrt(1.4 * 1.0e3);
   }
 /**
