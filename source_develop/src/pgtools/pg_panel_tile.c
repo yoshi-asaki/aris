@@ -36,6 +36,10 @@ void  pg_panel_tile(int NPLANE, int IPLANE, float *fs,
     } else if (NPLANE > 91) {
       *NX = 10;
     }
+    *NY = NPLANE / *NX;
+    if (NPLANE % *NX != 0) {
+      *NY++;
+    }
   } else {
     if (*NX == 0) {
       *NX = NPLANE / *NY;
