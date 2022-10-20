@@ -10,10 +10,14 @@
 #define ___DEPENDENT___   1
 
 /**
-#define __DEBUG0__
-#define __DEBUG1__
-#define __DEBUG2__
-#define __DEBUG3__
+#define __TPS_DEBUG0__
+#define __TPS_DEBUG1__
+#define __TPS_DEBUG2__
+#define __TPS_DEBUG3__
+#define __TPS_DEBUG4__
+#define __TPS_DEBUG5__
+#define __TPS_DEBUG6__
+#define __TPS_DEBUG7__
 **/
 
 /****
@@ -127,38 +131,38 @@ int    turbulent_phase_screen
     I = NLOG -1 - ilog;
     if (I >= n_outer_log) {
       amp[ilog] = amp0;
-#ifdef __DEBUG3__
-      printf("__DEBUG3[0]__ %3d   %lf\n", ilog, amp[ilog]);
-#endif /*__DEBUG3__*/
+#ifdef __TPS_DEBUG0__
+      printf("__TPS_DEBUG0[0]__ %3d   %lf\n", ilog, amp[ilog]);
+#endif /*__TPS_DEBUG0__*/
     } else if (I < n_outer_log  && I > nh_outer_log) {
       D = atm->pixel * pow(2.0, (double)I);
       amp[ilog] = 3.0 * pow(atm->i_scale[1], d_expon)
               * (4.0*pow(D, atm->o_expon)
                       - pow(atm->o_scale[1], atm->o_expon));
-#ifdef __DEBUG3__
-      printf("__DEBUG3[1]__ %3d   %lf\n", ilog, amp[ilog]);
-#endif /*__DEBUG3__*/
+#ifdef __TPS_DEBUG0__
+      printf("__TPS_DEBUG0[1]__ %3d   %lf\n", ilog, amp[ilog]);
+#endif /*__TPS_DEBUG0__*/
     } else if (I <= nh_outer_log && I > n_inner_log) {
       D = atm->pixel * pow(2.0, (double)I);
       amp[ilog] = 3.0 * pow(atm->i_scale[1], d_expon)
                    * pow(D, atm->o_expon) * (4.0 - pow(2.0, atm->o_expon));
-#ifdef __DEBUG3__
-      printf("__DEBUG3[2]__ %3d   %lf\n", ilog, amp[ilog]);
-#endif /*__DEBUG3__*/
+#ifdef __TPS_DEBUG0__
+      printf("__TPS_DEBUG0[2]__ %3d   %lf\n", ilog, amp[ilog]);
+#endif /*__TPS_DEBUG0__*/
     } else if (I <= n_inner_log  && I > nh_inner_log) {
       D = atm->pixel * pow(2.0, (double)I);
       amp[ilog] = 3.0
         * (4.0 * pow(D, atm->i_expon)
                - pow(atm->i_scale[1], d_expon) * pow(2.0*D, atm->o_expon));
-#ifdef __DEBUG3__
-      printf("__DEBUG3[3]__ %3d   %lf\n", ilog, amp[ilog]);
-#endif /*__DEBUG3__*/
+#ifdef __TPS_DEBUG0__
+      printf("__TPS_DEBUG0[3]__ %3d   %lf\n", ilog, amp[ilog]);
+#endif /*__TPS_DEBUG0__*/
     } else if (I <= nh_inner_log) {
       D = atm->pixel * pow(2.0, (double)I);
       amp[ilog] = 3.0 * pow(D, atm->i_expon) * (4.0 - pow(2.0, atm->i_expon));
-#ifdef __DEBUG3__
-      printf("__DEBUG3[4]__ %3d   %lf\n", ilog, amp[ilog]);
-#endif /*__DEBUG3__*/
+#ifdef __TPS_DEBUG0__
+      printf("__TPS_DEBUG0[4]__ %3d   %lf\n", ilog, amp[ilog]);
+#endif /*__TPS_DEBUG0__*/
     }
   }
 
@@ -173,9 +177,9 @@ int    turbulent_phase_screen
 
   for (ilog=0; ilog<NLOG; ilog++) {
     amp[ilog] = amp_factor / 2.0 * sqrt(amp[ilog]);
-#ifdef __DEBUG3__
-    printf("__DEBUG3[-]__ %3d   %lf\n", ilog, amp[ilog]);
-#endif /*__DEBUG3__*/
+#ifdef __TPS_DEBUG0__
+    printf("__TPS_DEBUG0[-]__ %3d   %lf\n", ilog, amp[ilog]);
+#endif /*__TPS_DEBUG0__*/
   }
 /****
   getchar();
@@ -196,10 +200,10 @@ int    turbulent_phase_screen
   wd[1][0] = excess_value(amp[0]);
   wd[1][1] = excess_value(amp[0]);
 
-#ifdef __DEBUG0__
-  printf("__DEBUG0__  %lf   %lf  %lf  %lf\n",
+#ifdef __TPS_DEBUG1__
+  printf("__TPS_DEBUG1__  %lf   %lf  %lf  %lf\n",
          wd[0][0], wd[0][1], wd[1][0], wd[1][1]);
-#endif /* __DEBUG0__ */
+#endif /* __TPS_DEBUG1__ */
 
 /*
 -----------------------------------------
@@ -313,10 +317,10 @@ int    turbulent_phase_screen
       a1 = log10(pow(2, 30) / (double)(NDAT_AREA + 1)) / log10(2);
       a2 = log10(pow(2, 30) / pow((double)(NDAT_SEGM + 1), 2))
                             / log10(2);
-#ifdef __DEBUG0__
-      printf("__DEBUG0__  %d  %d   %lf  %lf\n",
+#ifdef __TPS_DEBUG2__
+      printf("__TPS_DEBUG2__  %d  %d   %lf  %lf\n",
              NDAT_AREA, NDAT_SEGM, a1, a2);
-#endif /* __DEBUG0__ */
+#endif /* __TPS_DEBUG2__ */
       if (a1 < 0.0 && a2 > 0.0) {
         while (a1 < 0.0 || a2 < 0.0) {
           NDAT_AREA /= 2;
@@ -375,12 +379,14 @@ int    turbulent_phase_screen
       }
 
       Num_of_Area = (nxmax - nxmin) * (nymax - nymin);
-#ifdef __DEBUG1__
-      printf("__DEBUG1__  %d  %d  %d  %d  %d  %d    [%d  %d]\n",
-             Num_of_Area, nxmin, nxmax, nymin, nymax,
-             Y_SHIFT, NDAT_AREA, NDAT_SEGM);
+#ifdef __TPS_DEBUG3__
+      printf("__TPS_DEBUG3__  %d  [%7d  %7d]    [%7d  %7d]    (%d)    [%7d  %7d]\n",
+             Num_of_Area,
+             nxmin,     nxmax,
+             nymin,     nymax,      Y_SHIFT,
+             NDAT_AREA, NDAT_SEGM);
       fflush(stdout);
-#endif /* __DEBUG1__ */
+#endif /* __TPS_DEBUG3__ */
 
       if ((nx = (int *)calloc(Num_of_Area, sizeof(int))) == NULL) {
         printf("ERROR: Turbulent_Phase_Screen: calloc failed for nx.\n");
@@ -403,9 +409,9 @@ int    turbulent_phase_screen
     narea_P1 = NDAT_AREA + 1;
     nsegm_P1 = NDAT_SEGM + 1;
 
-#ifdef __DEBUG0__
-    printf("__DEBUG0__   %d  %d  %d\n", narea_P1, M, narea_P1 * M);
-#endif /* __DEBUG0__ */
+#ifdef __TPS_DEBUG4__
+    printf("__TPS_DEBUG4__   %d  %d  %d\n", narea_P1, M, narea_P1 * M);
+#endif /* __TPS_DEBUG4__ */
     if ((x_lods = (double *)calloc(M * narea_P1, sizeof(double)))
                 == NULL) {
       printf("fail to allocate memories for x_lods.\n");
@@ -452,13 +458,13 @@ int    turbulent_phase_screen
       *(init_dist + narea_P1*NDAT_AREA        ) = wd[1][0];
       *(init_dist + narea_P1*narea_P1      - 1) = wd[1][1];
     }
-#ifdef __DEBUG0__
-    printf("__DEBUG0__   %lf   %lf   %lf   %lf\n",
+#ifdef __TPS_DEBUG5__
+    printf("__TPS_DEBUG5__   %lf   %lf   %lf   %lf\n",
       *(init_dist                             ),
       *(init_dist   + narea_P1             - 1),
       *(init_dist   + narea_P1*NDAT_AREA      ),
       *(init_dist   + narea_P1*narea_P1    - 1));
-#endif /*__DEBUG0__*/
+#endif /*__TPS_DEBUG5__*/
 
     nlog = 0;
     i = NDAT_AREA;
@@ -475,12 +481,12 @@ int    turbulent_phase_screen
       } else {
         RAND_MODE = ___DEPENDENT___;
       }
-#ifdef __DEBUG2__
+#ifdef __TPS_DEBUG6__
       printf(
-        "__AREA__  %3d %3d   [%7d  %3d]   %7d    %1d    [%3d   %lf]\n",
+        "__TPS_DEBUG6__:__AREA__  %3d %3d   [%7d  %3d]   %7d    %1d    [%3d   %lf]\n",
              NLOG, nlog, n_outer, n_outer_log,
              NDAT/ndiv, RAND_MODE, ilog, amp[ilog]);
-#endif /* __DEBUG2__ */
+#endif /* __TPS_DEBUG6__ */
       segment_calc(init_dist, amp[ilog], ndiv, NC,
                    narea_P1, NS, 0, RAND_MODE);
       ndiv *= 2;
@@ -570,10 +576,14 @@ int    turbulent_phase_screen
         } else {
           RAND_MODE = ___DEPENDENT___;
         }
-#ifdef __DEBUG2__
-        printf("__SEGM__  %3d %3d   [%7d  %3d]   %7d    %1d    [%3d   %lf]\n",
-               NLOG, nlog, n_outer, n_outer_log, NC, RAND_MODE, ilog, amp[ilog]);
-#endif /* __DEBUG2__ */
+#ifdef __TPS_DEBUG7__
+        printf("__TPS_DEBUG7__:__SEGM__  %7d  %7d    %3d %3d   [%7d  %3d]   %7d    %1d    [%3d   %lf]\n",
+               Num_of_Area, iarea,
+               NLOG,        nlog,
+               n_outer,     n_outer_log,
+               NC,          RAND_MODE,
+               ilog,        amp[ilog]);
+#endif /* __TPS_DEBUG7__ */
         segment_calc(seg_dist, amp[ilog], ndiv, NC, nsegm_P1, nsx, nsy, RAND_MODE);
         ndiv *= 2;
       }

@@ -459,11 +459,18 @@ int  main(int argc, char **argv)
 
   if (ERROR_FLAG[TWVTRB] == true) {
     for (isite=0; isite<SITE_NUM; isite++) {
+      wvc[isite].v[0]       = wind_v;
+      wvc[isite].v[1]       = 0.0;
       wvc[isite].pixel      = 1.0;
       if (array.TYPE == __CONNECTED_) {
-        if (bl_max > 800.0) {
-          wvc[isite].pixel      = (bl_max / 800.0) * 2.0;
-          wvc[isite].pixel      = bl_max / 8000.0;
+        if (bl_max >= 1000.0 && bl_max < 4000.0) {
+          wvc[isite].pixel      = bl_max / 800.0;
+        } else if (bl_max >= 4000.0 && bl_max < 8000.0) {
+          wvc[isite].pixel      = bl_max / 1600.0;
+        } else if (bl_max >= 8000.0 && bl_max < 20000.0) {
+          wvc[isite].pixel      = bl_max / 2000.0;
+        } else {
+          wvc[isite].pixel      = bl_max / 4000.0;
         }
         if (wvc[isite].pixel < 1.0) {
           wvc[isite].pixel = 1.0;
@@ -479,8 +486,6 @@ int  main(int argc, char **argv)
                          &(wvc[isite].o_scale[0]), &itmp);
       wvc[isite].i_expon    = alpha1;
       wvc[isite].o_expon    = alpha2;
-      wvc[isite].v[0]       = wind_v;
-      wvc[isite].v[1]       = 0.0;
       wvc[isite].i_coeffi   = 1.0;
       wvc[isite].o_coeffi   = 0.0;
       wvc[isite].c_coeffi   = 0.0;

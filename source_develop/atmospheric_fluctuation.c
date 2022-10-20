@@ -13,6 +13,8 @@
 #define __DEBUG1__
 #define __DEBUG2__
 #define __DEBUG3__
+#define __DEBUG4__
+#define __DEBUG5__
 **/
 
 
@@ -277,8 +279,8 @@ int    atmospheric_fluctuation(
       }
     }
 
-#ifdef __DEBUG3__
-    printf("__DEBUG3__  %d  %d  %d\n", NY_MIN, NY_MAX, NMTRX);
+#ifdef __DEBUG1__
+    printf("__DEBUG1__  %d  %d  %d\n", NY_MIN, NY_MAX, NMTRX); fflush(stdout);
 #endif
 
     if (NY_MAX - NY_MIN <= NMTRX) {
@@ -315,19 +317,21 @@ int    atmospheric_fluctuation(
       }
     }
 
-#ifdef __DEBUG1__
+#ifdef __DEBUG2__
     for (iobs=0; iobs<nobs; iobs++) {
       for (ns=0; ns<nseries; ns++) {
-        printf("__DEBUG1__ :  %4d  %4d  %4d:  %4d  %4d  %4d  %4d  %4d\n",
+        printf("__DEBUG2__ :  %4d  %4d  %4d:  %4d  %4d  %4d  %4d  %4d\n",
               iant, iobs, ns, screen[ns][iobs],
               NX[ns][iobs], NY[ns][iobs], sobs[ns], eobs[ns]);
         fflush (stdout);
       }
+/**
       if (iobs%10 == 9) {
         getchar();
       }
+**/
     }
-#endif /*__DEBUG1__*/
+#endif /*__DEBUG2__*/
 
 /*
 ---------------------------------------------
@@ -439,6 +443,7 @@ int    atmospheric_fluctuation(
         printf("__DEBUG3__  %d %d %d %d\n",
                  corner_position[0][0], corner_position[0][1],
                  corner_position[1][0], corner_position[1][1]);
+        fflush(stdout);
 #endif /* __DEBUG3__ */
 
         y_len = corner_position[1][1] - corner_position[0][1] + 1;
@@ -481,11 +486,12 @@ int    atmospheric_fluctuation(
           Y_SHIFT = 0;
         }
 
-#ifdef __DEBUG2__
-        printf("__DEBUG2__   %d  %d  %d  %d  %d\n",
+#ifdef __DEBUG4__
+        printf("__DEBUG4__   %d  %d  %d  %d  %d\n",
                 NSCREEN, corner_position[0][1], corner_position[1][1],
                 y_len, Y_SHIFT);
-#endif /* __DEBUG2__ */
+        fflush(stdout);
+#endif /* __DEBUG4__ */
 
         if ((COUNT_NOD = turbulent_phase_screen
                 (NMTRX, 0, seed_dist, &atm[iant],
@@ -513,6 +519,13 @@ int    atmospheric_fluctuation(
           }
         }
         free (DS);
+
+#ifdef __DEBUG5__
+        printf("__DEBUG5__   %d  %d  %d  %d  %d\n",
+                NSCREEN, corner_position[0][1], corner_position[1][1],
+                y_len, Y_SHIFT); fflush(stdout);
+        fflush(stdout);
+#endif /* __DEBUG5__ */
 
         if (Y_SHIFT != 0) {
           for (iobs=0; iobs<nobs; iobs++) {
