@@ -79,6 +79,7 @@ int  array_config(
       for (i=0; i<10; i++) {
         ant_tmp.IDC[i] = 0;
       }
+
       ant_tmp.ARRAY    = 0;
       ant_tmp.UFL      = false;
       ant_tmp.FRQSTD   = NONE;
@@ -87,6 +88,8 @@ int  array_config(
         ant_tmp.XYZ[i] = 0.0;
         ant_tmp.ERR[i] = 0.0;
       }
+      ant_tmp.lo_phs_jmp_val = 0.0;
+      ant_tmp.lo_phs_jmp_tim = 0.0;
       for (ns=0; ns<SRC_NUM; ns++) {
         if (wave_id[ns] == ALLBAND) {
           ant_tmp.WID[ns]  =  0;

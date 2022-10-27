@@ -1883,10 +1883,10 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
           if (ant_prm[iant].lo_phs_jmp_val != 0.0) {
             I = 0;
             J = 0;
-            if (ant_prm[iant].lo_phs_jmp_tim >= 0.0) {
+            if (       ant_prm[iant].lo_phs_jmp_tim >= 0.0) {
               I = (int)rint(ant_prm[iant].lo_phs_jmp_tim * (float)data_num.nobs);
               J = data_num.nobs;
-            } else if (ant_prm[iant].lo_phs_jmp_val < 0.0) {
+            } else if (ant_prm[iant].lo_phs_jmp_tim <  0.0) {
               I = 0;
               J = (int)rint((1.0 + ant_prm[iant].lo_phs_jmp_tim) * (float)data_num.nobs);
             }
@@ -2209,9 +2209,14 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
                 for (ifrq=0; ifrq<nfrq; ifrq++) {
                   L = (ibase * data_num.nobs + iobs) * nfrq + ifrq;
                   F = nu[ns] + (double)ifrq  * d_band_width;
+
+                  fai_err = 2.0 * dpi * (F * tau_err
+                                       + ion_err / F) + d_lo_phs + phs_err;
+/****
                   fai_err = 2.0 * dpi * (F * tau_err
                                        + F * phs_err
                                        + ion_err / F) + d_lo_phs;
+****/
 
                   L = (ibase * data_num.nobs + iobs) * nfrq + ifrq;
                   ar = cos(fai_err);
