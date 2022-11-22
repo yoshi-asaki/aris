@@ -64,7 +64,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
                 struct antenna_parameter  *trk_pos,
                 struct comment_param *cmnt,
                 char   comment[][NCOMLEN],
-                _Bool  TV_SWT, float *cursor_pos, int PGMENU_ID)
+                _Bool  TV_SWT, float *cursor_pos, int cpgid1, int  cpgid2)
 {
   int    i, j, k, iant, ns;
   int    ncol;
@@ -74,6 +74,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   _Bool  Bdum;
   float  bttn_box[BOTTUN_NUM][4], y_pos, srtatt_y_pos, x_pos;
   float  ctrl_bttn_box[3][4], blsel_bttn_box[4][4];
+  float  ant_bttn_box[ANTMAX][4];
   double swt_cyc_time;
   double orbit_error_ap, orbit_error_pe;
   double tdscz, idscz;
@@ -1217,20 +1218,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
     cpgbbuf();
-    cpgslct(PGMENU_ID);
+    cpgslct(cpgid1);
 
     cpgpap(2.00*pgpap_prm, 1.0/1.4);
     cpgsch(1.5*pgpap_prm/13.0);
     cpgsvp(0.0,  1.0, 0.0, 1.0);
     cpgswin(0.0, 1.4, 0.0, 1.0);
-
-
-/****
-    cpgpap(1.5*pgpap_prm, 1.10);
-    cpgsch(1.5*pgpap_prm/13.0);
-    cpgsvp(0.0, 1.0, 0.0, 1.0);
-    cpgswin(0.0, 1.0, 0.0, 1.1);
-****/
 
 /*
 ----------------------
@@ -1394,7 +1387,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
      && array->TYPE ==  _VLBI_ARRAY_) {
       cpgsfs(2);
       cpgsci(1);
-      cpgrect(0.020, 0.485, y_pos-0.039, y_pos+0.035);
+      cpgrect(0.010, 0.485, y_pos-0.039, y_pos+0.035);
       cpgsfs(1);
     }
 
@@ -2016,12 +2009,53 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 /*xxxxxxxxxxxxxxxxxxxxxxxxxx*/
             for (i=0; i<TRP_NUM; i++) {
               if (i == TRP_NUM - 1) {
+/********
                 _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
               } else {
                 if (trp_code[7] == true) {
                   J = TROPOS_SECTION + 7;
                   _off_button(&trp_code[7], trp_name[7], bttn_box[J]);
+                } else if (trp_code[7] == false) {
+                  J = TROPOS_SECTION + 7;
+                  _on_button(&trp_code[7], trp_name[7], bttn_box[J]);
+
+
+
+
+                  if (TV_SWT == true) {
+                    cpgid2 = (int)cpgopen("/xs");
+                    if (cpgid2 < 0) {
+                      cpgask(-1);
+                    }
+                    cpgslct(cpgid2);
+
+                    cpgpap(pgpap_prm, 1.0);
+                    for (iant=0; iant<ANT_NUM; iant++) {
+                      ant_bttn_box[iant][0] = 0.020 + 0.097 * (float)(i % 14);
+                      ant_bttn_box[iant][1] = 0.120 + 0.097 * (float)(i % 14);
+                      ant_bttn_box[iant][2] = 0.95 - pitch * (float)(i / 14);
+                      ant_bttn_box[iant][3] = ant_bttn_box[i][2] + pitch;
+                      _off_button(&Bdum, (ant_prm+iant)->IDC, &ant_bttn_box[iant][0]);
+                    }
+
+                    cpgslct(cpgid1);
+                  } else {
+
+
+
+                  }
+
+
+
+
+
+
+
+
+
+
                 }
+********/
                 if (i == *TRP_CONDITION) {
                  _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
                 } else {

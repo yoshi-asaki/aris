@@ -1546,7 +1546,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
               ERROR_FLAG, srt, &data_num,
               timUTC, &ut1_utc,
               &nswt,  &apparent_tgt_on, ant_prm, &TRK_NUM, trk_pos,
-              &cmnt, comment, TV_SWT, cursor_pos, pgid[0]) == -1) {
+              &cmnt, comment, TV_SWT, cursor_pos, pgid[0], pgid[1]) == -1) {
       return 1;
     }
 

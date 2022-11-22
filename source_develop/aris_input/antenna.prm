@@ -8,6 +8,7 @@
 ## STATION        : "(antenna code name within 8 characters)"
 ## TYPE           : "(type: VLBI/CONNECTED)"
 ## ARRAY          : "(array code name)"
+## TYPE           : "(VLBI/ALMA/ACA)"
 ## MOUNT          : "(ALAZ/EQUA/ORBT)"
 ## FREQ_STANDARD  : "(H_M/CSO_10/CSO_100)"
 ## POSITION       : (station position (x, y, z) [m])

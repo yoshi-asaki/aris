@@ -600,7 +600,7 @@ int     err_parameter_set
           int       *,    struct antenna_parameter                  *,
           struct comment_param      *,
           char   [][NCOMLEN],
-          _Bool      ,    float     *,    int
+          _Bool      ,    float     *,    int        ,    int        
         );
 int     trk_priority_check
         (

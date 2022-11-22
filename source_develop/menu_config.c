@@ -190,7 +190,10 @@ int  menu_config(int ANT_NUM, int GRT_NUM,  int SRT_NUM,  int TRK_NUM,
   sprintf((proc_menu+ID)->name,
                  "Orbit of Spacecrafts");
   proc_menu[ID].ID = ID;
+/****** xxxxxxxxxxxxxxxx
   if (SRT_NUM >= 1) {
+********/
+  if (SRT_NUM >= 0) {
     proc_menu[ID].flag = true;
   } else {
     proc_menu[ID].flag = false;
@@ -601,7 +604,10 @@ int  menu_config(int ANT_NUM, int GRT_NUM,  int SRT_NUM,  int TRK_NUM,
               MENU_ID = i;
               break;
             } else if (i >= 8 && i <= 15) {
+/**** xxxxxxxxxxxxxxxxxxxxxxxxxxx
               if (SRT_NUM >= 1) {
+****/
+              if (SRT_NUM >= 0) {
                 on_button(&idum, (proc_menu+i)->name, bttn_box[I]);
                 MENU_ID = i;
                 break;

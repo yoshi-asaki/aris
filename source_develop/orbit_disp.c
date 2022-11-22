@@ -5,6 +5,7 @@
 #include <mathtools.h>
 #include <cpgplot.h>
 #include <astrotools.h>
+#include <unistd.h>
 #include <aris.h>
 
 void  oe_plot_label(float , float , float , float ,
@@ -653,20 +654,19 @@ xxxx*/
         }
 #endif /* __TRACKING_STATUS__ */
       }
-
-#ifdef __TRT_STATUS__
-      for (iiant=0; iiant<GRT_NUM; iiant++) {
-        I = iiant * nobs + iobs;
-        if (int_obs[0][I].w > 0.0) {
-          pgxx[0] = int_obs[0][I].u * 1.0e-3;
-          pgyy[0] = int_obs[0][I].v * 1.0e-3;
-          cpgpt(1, pgxx, pgyy, 15);
-        }
-      }
-#endif /* __TRT_STATUS__ */
-
       srt_pos[3*iant] = P[0];
     }
+
+#ifdef __TRT_STATUS__
+    for (iiant=0; iiant<GRT_NUM; iiant++) {
+      I = iiant * nobs + iobs;
+      if (int_obs[0][I].w > 0.0) {
+        pgxx[0] = int_obs[0][I].u * 1.0e-3;
+        pgyy[0] = int_obs[0][I].v * 1.0e-3;
+        cpgpt(1, pgxx, pgyy, 15);
+      }
+    }
+#endif /* __TRT_STATUS__ */
 
 #ifdef __ORBD_ANIMATION__
   #ifdef __ANIMA_CLOCK__
