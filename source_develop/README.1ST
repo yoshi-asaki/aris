@@ -5,7 +5,7 @@
 
 Astronomical Radio Interferometer Simulator
 
-      Last Update : 2022-06-17 21:00 UT  (Ver 1.5.0)
+      Last Update : 2022-11-22 19:00 UT  (Ver 1.5.0)
 
 ------------------------------------------------------
 ------------------------------------------------------
@@ -792,9 +792,11 @@ CHANGE HISTORY
   * "ON"/"OFF" selection is changed to Boolean algebra (_Bool) with stdbool.h 
   * ALMA antenna position definition has been changed.
 
-2022-06-16 20:00 UT (Ver 1.5.0)
+2022-11-22 19:00 UT (Ver 1.5.0)
   * VLBI and connected arrays (ALMA and ACA) have been separated.
   * ALMA Band-to-Band phase jump error simulation has been implemented.
   * WARNING messge is shown when the switching cycle time is too short 
     to assign on-source scans.
   * Modification for the independent atmospheric condition for VLBI observations
+  * Animation of the antenna trajectory is displayed not only for space-VLBI 
+    but also for ground array observations.
