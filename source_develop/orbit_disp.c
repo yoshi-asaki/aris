@@ -229,10 +229,10 @@ void orbit_disp(int SRT_NUM, int  nobs,
   } else {
     pg_width = pgxmax - pgxmin;
   }
-  clkx[0][0] = pgxmax - 0.15 * pg_width;
-  clky[0][0] = pgymax - 0.15 * pg_width;
-  clkx[1][0] = pgxmax - 0.15 * pg_width;
-  clky[1][0] = pgymax - 0.15 * pg_width;
+  clkx[0][0] = pgxmax - 0.125 * pg_width;
+  clky[0][0] = pgymax - 0.125 * pg_width;
+  clkx[1][0] = pgxmax - 0.125 * pg_width;
+  clky[1][0] = pgymax - 0.125 * pg_width;
   hand[0]    = 0.04 * pg_width;
   hand[1]    = 0.06 * pg_width;
   dial       = 0.08 * pg_width;
@@ -355,8 +355,9 @@ void orbit_disp(int SRT_NUM, int  nobs,
 ********/
   cpglab("\\fiu \\fn[km]", "\\fiv \\fn[km]", "");
 /*xxxx
-xxxx*/
   GST_theta = GST(TimUTC, 0.0, UT1_UTC);
+xxxx*/
+  GST_theta = GST(TimUTC, (double)nobs, UT1_UTC);
   draw_earth(earth_radius, EPSIRON(ET(timUTC, UT1_UTC)), GST_theta,
              src, sun, &earth_shape,
              clrplt, shadow_swt, color_swt, axis_swt);
@@ -663,7 +664,14 @@ xxxx*/
       if (int_obs[0][I].w > 0.0) {
         pgxx[0] = int_obs[0][I].u * 1.0e-3;
         pgyy[0] = int_obs[0][I].v * 1.0e-3;
-        cpgpt(1, pgxx, pgyy, 15);
+        if (i == NOBS -1) {
+          cpgsci(0);
+          cpgpt(1, pgxx, pgyy, 17);
+          cpgsci(4);
+          cpgpt(1, pgxx, pgyy, 4);
+        } else {
+          cpgpt(1, pgxx, pgyy, 15);
+        }
       }
     }
 #endif /* __TRT_STATUS__ */
