@@ -45,7 +45,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
                 int *BGN_ANT_J, int *END_ANT_J,
                 struct array_parameter *array,
                 int *TRP_CONDITION,  int *ION_CONDITION,
-                double *CW,     double *CI,
+                double *Cw,     double *CI,
                 struct phase_screen_parameter   *wvc,
                 struct atmospheric_zenith_error *dz,
                 struct source_parameter  *src,
@@ -71,26 +71,36 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   int    idum, jdum, I, J;
   int    BL_SELECT;
   char   *c=0, string[100];
-  _Bool  Bdum;
+  _Bool  Bdum, QUIT_SWT;
   float  bttn_box[BOTTUN_NUM][4], y_pos, srtatt_y_pos, x_pos;
   float  ctrl_bttn_box[3][4], blsel_bttn_box[4][4];
   float  ant_bttn_box[ANTMAX][4];
+  float  ftmp1, ftmp2;
   double swt_cyc_time;
   double orbit_error_ap, orbit_error_pe;
   double tdscz, idscz;
   double wl, fr;
   FILE   *fp;
+  int    IANT, ITRP;
 
   int    blsel_num=0;
-  _Bool  blsel_code[4];
-  char   blsel_name[4][20];
+  struct blsel_status {
+    _Bool  code;
+    char   name[20];
+  } blsel_status[4];
 
-  _Bool  trp_code[TRP_NUM];
-  char   trp_name[TRP_NUM][20];
+  int    trp_num, trp_status_num;
+  int    trp_tune;
+  struct trp_status {
+    _Bool  code;
+    char   name[20];
+  } trp_status[8];
 
   int    ion_num;
-  _Bool  ion_code[3];
-  char   ion_name[3][10];
+  struct ion_status {
+    _Bool  code;
+    char   name[10];
+  } ion_status[3];
 
   int    itrk, trk_num;
   int    TRK_GEN_CMD=2;
@@ -133,6 +143,14 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   int    id, ih, im, is;
   double ut1_utc, mjd;
 
+  struct ant_trp_tune {
+    char   IDC[10];
+    int    code;
+  } *ant_trp, *ant_trp_io;
+  char   ant_tmp[10];
+
+  float  trp_bttn_box[ANTMAX][7][4];
+
 /*
 ---------------------------------------------------------
 */
@@ -143,10 +161,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ---------------------------------------------------------
 */
 
-  sprintf(blsel_name[0], "Full");
-  sprintf(blsel_name[1], "Ground-Ground");
-  sprintf(blsel_name[2], "Ground-Space");
-  sprintf(blsel_name[3], "Space-Space");
+  sprintf((blsel_status  )->name, "Full");
+  sprintf((blsel_status+1)->name, "Ground-Ground");
+  sprintf((blsel_status+2)->name, "Ground-Space");
+  sprintf((blsel_status+3)->name, "Space-Space");
   if (SRT_NUM == 0) {
     blsel_num = 0;
   } else if (SRT_NUM == 1) {
@@ -155,23 +173,35 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     blsel_num = 4;
   }
   for (i=0; i<blsel_num; i++) {
-    blsel_code[i] = false;
+    blsel_status[i].code = false;
   }
 
 /*
 ---------------------------------------------------------
 */
 
-  sprintf(trp_name[0], "ALMA: 0.5 rad");
-  sprintf(trp_name[1], "ALMA: 0.75 rad");
-  sprintf(trp_name[2], "ALMA: 1 rad");
-  sprintf(trp_name[3], "Very Good");
-  sprintf(trp_name[4], "Good");
-  sprintf(trp_name[5], "Typical");
-  sprintf(trp_name[6], "Poor");
-  sprintf(trp_name[7], "Tuning");
-  for (i=0; i<TRP_NUM; i++) {
-    trp_code[i] = false;
+  trp_num  = 7;
+  trp_tune = -1;
+
+  trp_status_num = 7;
+  if (       array->TYPE == __CONNECTED_) {
+    trp_num  = 7;
+    trp_tune = -1;
+  } else if (array->TYPE == _VLBI_ARRAY_) {
+    trp_num  = 8;
+    trp_tune = 7;
+  }
+
+  sprintf((trp_status  )->name, "ALMA: 0.5 rad");
+  sprintf((trp_status+1)->name, "ALMA: 0.75 rad");
+  sprintf((trp_status+2)->name, "ALMA: 1 rad");
+  sprintf((trp_status+3)->name, "Very Good");
+  sprintf((trp_status+4)->name, "Good");
+  sprintf((trp_status+5)->name, "Typical");
+  sprintf((trp_status+6)->name, "Poor");
+  sprintf((trp_status+7)->name, "Tuning");
+  for (i=0; i<trp_num; i++) {
+    trp_status[i].code = false;
   }
 
 /*
@@ -179,11 +209,11 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
   ion_num = 3;
-  sprintf(ion_name[0], "Half");
-  sprintf(ion_name[1], "Nominal");
-  sprintf(ion_name[2], "Double");
+  sprintf((ion_status  )->name, "Half");
+  sprintf((ion_status+1)->name, "Nominal");
+  sprintf((ion_status+2)->name, "Double");
   for (i=0; i<ion_num; i++) {
-    ion_code[i] = false;
+    ion_status[i].code = false;
   }
 
 /*
@@ -339,7 +369,6 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ---------------------------------------------------------
 */
 
-  *CW                = 0.0;
   *CI                = 0.0;
   orbit_error_ap     = 0.0;
   orbit_error_pe     = 0.0;
@@ -361,6 +390,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   *TRP_CONDITION     = 5;
   *ION_CONDITION     = NOMINAL;
   *reference_phase_process_mode = 0;
+
+  for (iant=0; iant<GRT_NUM; iant++) {
+    Cw[iant]         = 0.0;
+  }
 
   for (itrk=0; itrk<TRKMAX; itrk++) {
     trk_priority[itrk] = 0;
@@ -497,9 +530,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
     fclose (fp);
   }
 
-  blsel_code[BL_SELECT]    = true;
-  trp_code[*TRP_CONDITION] = true;
-  ion_code[*ION_CONDITION] = true;
+  blsel_status[BL_SELECT].code    = true;
+  ion_status[*ION_CONDITION].code = true;
+  trp_status[*TRP_CONDITION].code = true;
+
 
 /****
   sscanf(ch_timer[0], "%d/%d:%d:%d", &sday, &shh, &smm, &sss);
@@ -602,25 +636,119 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
     if (ERROR_FLAG[TWVTRB] == true || ERROR_FLAG[DRYTRB] == true) {
-      printf("Tropospheric Condition:\n");
-      printf("1. ALMA:0.5rad   ");
-      printf("2. ALMA:0.75rad  ");
-      printf("3. ALMA:1rad     ");
-      printf("4. Very good     ");
-      printf("5. Good          ");
-      printf("6. Typical       ");
-      printf("7. Poor (CR->%d) : ", *TRP_CONDITION+1);
       while (1) {
+        printf("Tropospheric condition:\n");
+        for (i=0; i<trp_num; i++) {
+          printf("%d. %s\n", i+1, (trp_status+i)->name);
+        }
+        printf("(CR->%d) : ", *TRP_CONDITION+1);
         if (fgets(string, sizeof(string), stdin) == NULL) {
-          printf("ERROR: ERR_PARAMETER SET: Invalid input.\n");
+          printf("ERROR: ERR_PARAMETER SET: Invalid input: %s", string);
           return (-1);
         }
+
         if (string[0] == '\n') {
+          for (iant=0; iant<GRT_NUM; iant++) {
+            ant_prm[iant].WVturb = *TRP_CONDITION;
+          }
           break;
         } else {
           sscanf(string, "%d", &idum);
-          if (idum >= 1 && idum <= TRP_NUM) {
+          if (idum >= 1 && idum < trp_num) {
             *TRP_CONDITION = idum - 1;
+            for (iant=0; iant<GRT_NUM; iant++) {
+              ant_prm[iant].WVturb = *TRP_CONDITION;
+            }
+            break;
+          } else if (idum == trp_num) {
+            if ((ant_trp = (struct ant_trp_tune *)
+              calloc(GRT_NUM, sizeof(struct ant_trp_tune))) == NULL) {
+              printf("ERROR: err_parameter: ");
+              printf("tropospheric tuning parameter memry allocation.\n");
+              exit (-1);
+            } else {
+              for (iant=0; iant<GRT_NUM; iant++) {
+                strcpy((ant_trp+iant)->IDC, (ant_prm+iant)->IDC);
+              }
+            }
+
+            if ((fp = fopen( "aris_input/ant_trp_tuning.prm", "r")) != NULL) {
+              while (1) {
+                if (fgets(string, sizeof(string), fp) == NULL) {
+                  break;
+                } else {
+                  sscanf(string, "%s %d", &ant_tmp, &idum);
+                  for (iant=0; iant<GRT_NUM; iant++) {
+                    if (strncmp((ant_trp+iant)->IDC, ant_tmp,
+                                strlen(ant_tmp)) == 0) {
+                      ant_trp[iant].code = idum;
+                      break;
+                    }
+                  }
+                }
+              }
+              fclose (fp);
+            } else {
+              for (iant=0; iant<GRT_NUM; iant++) {
+                ant_trp[iant].code = 0;
+              }
+            }
+
+            printf("Antenna List:\n");
+            for (iant=0; iant<GRT_NUM; iant++) {
+              printf("%3d. %s", iant+1, (ant_trp+iant)->IDC);
+              k = strlen(ant_trp[i].IDC);
+              if (k > 10) {
+                k = 10;
+              }
+              for (j=0; j<11-k; j++) {
+                printf(" ");
+              }
+              printf("[%d]   ", ant_trp[iant].code+1);
+              if (iant % 5 == 4) {
+                printf("\n");
+              }
+            }
+            if ((iant-1) % 5 != 4) {
+              printf("\n");
+            }
+
+            while (1) {
+              printf("Please select antenna (CR->quit): ");
+              if (fgets(string, sizeof(string), stdin) == NULL) {
+                printf("ERROR: ERR_PARAMETER SET: Invalid input.\n");
+                return (-1);
+              }
+              if (string[0] == '\n') {
+                break;
+              }
+              sscanf(string, "%d", &IANT);
+              IANT--;
+              printf("Please select the tropospheric option for %s (1->%d, CR->%d): ",
+                     (ant_trp+IANT)->IDC, trp_status_num, ant_trp[IANT].code+1);
+              if (fgets(string, sizeof(string), stdin) == NULL) {
+                printf("ERROR: ERR_PARAMETER SET: Invalid input.\n");
+                return (-1);
+              }
+              if (string[0] != '\n') {
+                sscanf(string, "%d", &ITRP);
+                ant_trp[IANT].code = ITRP-1;
+              }
+            }
+
+            if ((fp = fopen(
+                  "aris_input/ant_trp_tuning.prm", "w")) != NULL) {
+              for (iant=0; iant<GRT_NUM; iant++) {
+                fprintf(fp, "%s %d\n",
+                     (ant_trp+iant)->IDC, ant_trp[iant].code);
+              }
+              fclose (fp);
+            }
+
+            for (iant=0; iant<GRT_NUM; iant++) {
+              ant_prm[iant].WVturb = ant_trp[iant].code;
+            }
+            free (ant_trp);
             break;
           }
         }
@@ -1295,10 +1423,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
       }
 
       for (i=0; i<blsel_num; i++) {
-        if (blsel_code[i] == true) {
-          _on_button (&blsel_code[i], blsel_name[i], blsel_bttn_box[i]);
-        } else if (blsel_code[i] == false) {
-          _off_button(&blsel_code[i], blsel_name[i], blsel_bttn_box[i]);
+        if (blsel_status[i].code == true) {
+          _on_button (&blsel_status[i].code, (blsel_status+i)->name,
+                      blsel_bttn_box[i]);
+        } else if (blsel_status[i].code == false) {
+          _off_button(&blsel_status[i].code, (blsel_status+i)->name,
+                      blsel_bttn_box[i]);
         }
       }
     } else {
@@ -1320,7 +1450,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
       cpgtext(0.035, y_pos + 0.35 * pitch, "Tropospheric Condition\0");
 
       I = TROPOS_SECTION;
-      for (i=0; i<TRP_NUM; i++) {
+      for (i=0; i<trp_num; i++) {
         if (i < 3) {
           x_pos = 0.225;
         } else if (i == 7) {
@@ -1335,16 +1465,16 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
         I++;
       }
 
-      for (i=0; i<TRP_NUM; i++) {
+      for (i=0; i<trp_num; i++) {
         I = TROPOS_SECTION + i;
-        if (trp_code[i] == true) {
-          _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
+        if (trp_status[i].code == true) {
+          _on_button(&trp_status[i].code, (trp_status+i)->name, bttn_box[I]);
         } else {
-          _off_button(&trp_code[i], trp_name[i], bttn_box[I]);
+          _off_button(&trp_status[i].code, (trp_status+i)->name, bttn_box[I]);
         }
       }
-      if (i == TRP_NUM - 1 && array->TYPE == _VLBI_ARRAY_) {
-        _off_button(&trp_code[i], trp_name[i], bttn_box[I]);
+      if (i == trp_num - 1 && array->TYPE == _VLBI_ARRAY_) {
+        _off_button(&trp_status[i].code, (trp_status+i)->name, bttn_box[I]);
       }
     }
 
@@ -1369,10 +1499,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
       for (i=0; i<ion_num; i++) {
         I = IONOS_SECTION + i;
-        if (ion_code[i] == true) {
-          _on_button(&ion_code[i], ion_name[i], bttn_box[I]);
+        if (ion_status[i].code == true) {
+          _on_button(&ion_status[i].code,  (ion_status+i)->name, bttn_box[I]);
         } else {
-          _off_button(&ion_code[i], ion_name[i], bttn_box[I]);
+          _off_button(&ion_status[i].code, (ion_status+i)->name, bttn_box[I]);
         }
       }
     }
@@ -1393,7 +1523,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
     if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
      && array->TYPE ==  _VLBI_ARRAY_) {
-      I = TROPOS_SECTION + TRP_NUM;
+      I = TROPOS_SECTION + trp_num;
       cpgsci(1);
       cpgtext(0.035, y_pos + 0.3 * pitch,
               "Tropospheric Zenith Delay Error [mm]\0");
@@ -1989,10 +2119,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
           BL_SELECT = I;
           for (i=0; i<blsel_num; i++) {
             if (i == BL_SELECT) {
-              _on_button (&blsel_code[i], blsel_name[i], blsel_bttn_box[I]);
+              _on_button (&blsel_status[i].code, (blsel_status+i)->name,
+                          blsel_bttn_box[I]);
             } else {
               J = i;
-              _off_button(&blsel_code[i], blsel_name[i], blsel_bttn_box[J]);
+              _off_button(&blsel_status[i].code, (blsel_status+i)->name,
+                          blsel_bttn_box[J]);
             }
           }
         }
@@ -2003,68 +2135,146 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 */
 
       if (ERROR_FLAG[TWVTRB] == true || ERROR_FLAG[DRYTRB] == true) {
-        for (I=TROPOS_SECTION; I<TROPOS_SECTION+TRP_NUM; I++) {
+        for (I=TROPOS_SECTION; I<TROPOS_SECTION+trp_num; I++) {
           if (_button_chk(cursor_pos, bttn_box[I]) == true) {
             *TRP_CONDITION = I - TROPOS_SECTION;
-/*xxxxxxxxxxxxxxxxxxxxxxxxxx*/
-            for (i=0; i<TRP_NUM; i++) {
-              if (i == TRP_NUM - 1) {
-/********
-                _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
+            for (i=0; i<trp_num; i++) {
+              if (i == *TRP_CONDITION) {
+               _on_button(&trp_status[i].code, (trp_status+i)->name,
+                          bttn_box[I]);
               } else {
-                if (trp_code[7] == true) {
-                  J = TROPOS_SECTION + 7;
-                  _off_button(&trp_code[7], trp_name[7], bttn_box[J]);
-                } else if (trp_code[7] == false) {
-                  J = TROPOS_SECTION + 7;
-                  _on_button(&trp_code[7], trp_name[7], bttn_box[J]);
-
-
-
-
-                  if (TV_SWT == true) {
-                    cpgid2 = (int)cpgopen("/xs");
-                    if (cpgid2 < 0) {
-                      cpgask(-1);
-                    }
-                    cpgslct(cpgid2);
-
-                    cpgpap(pgpap_prm, 1.0);
-                    for (iant=0; iant<ANT_NUM; iant++) {
-                      ant_bttn_box[iant][0] = 0.020 + 0.097 * (float)(i % 14);
-                      ant_bttn_box[iant][1] = 0.120 + 0.097 * (float)(i % 14);
-                      ant_bttn_box[iant][2] = 0.95 - pitch * (float)(i / 14);
-                      ant_bttn_box[iant][3] = ant_bttn_box[i][2] + pitch;
-                      _off_button(&Bdum, (ant_prm+iant)->IDC, &ant_bttn_box[iant][0]);
-                    }
-
-                    cpgslct(cpgid1);
-                  } else {
-
-
-
-                  }
-
-
-
-
-
-
-
-
-
-
-                }
-********/
-                if (i == *TRP_CONDITION) {
-                 _on_button(&trp_code[i], trp_name[i], bttn_box[I]);
-                } else {
-                  J = TROPOS_SECTION + i;
-                  _off_button(&trp_code[i], trp_name[i], bttn_box[J]);
-                }
+                J = TROPOS_SECTION + i;
+                _off_button(&trp_status[i].code, (trp_status+i)->name,
+                            bttn_box[J]);
               }
             }
-/*xxxxxxxxxxxxxxxxxxxxxxxxxx*/
+
+            if (*TRP_CONDITION < trp_status_num) {
+              break;
+            } else if (*TRP_CONDITION == trp_tune) {
+
+/** INDIVIDUAL TUNING ON **/
+
+              if ((ant_trp = (struct ant_trp_tune *)
+                calloc(GRT_NUM, sizeof(struct ant_trp_tune))) == NULL) {
+                printf("ERROR: err_parameter: ");
+                printf("tropospheric tuning parameter memry allocation.\n");
+                exit (-1);
+              } else {
+                for (iant=0; iant<GRT_NUM; iant++) {
+                  strcpy((ant_trp+iant)->IDC, (ant_prm+iant)->IDC);
+                }
+              }
+
+              if ((fp = fopen( "aris_input/ant_trp_tuning.prm", "r")) != NULL) {
+                while (1) {
+                  if (fgets(string, sizeof(string), fp) == NULL) {
+                    break;
+                  } else {
+                    sscanf(string, "%s %d", &ant_tmp, &idum);
+                    for (iant=0; iant<GRT_NUM; iant++) {
+                      if (strncmp((ant_trp+iant)->IDC, ant_tmp,
+                                  strlen(ant_tmp)) == 0) {
+                        ant_trp[iant].code = idum;
+                        break;
+                      }
+                    }
+                  }
+                }
+                fclose (fp);
+              } else {
+                for (iant=0; iant<GRT_NUM; iant++) {
+                  ant_trp[iant].code = 0;
+                }
+              }
+
+              cpgid2 = (int)cpgopen("/xs");
+              if (cpgid2 < 0) {
+                cpgask(-1);
+              }
+              cpgslct(cpgid2);
+
+              cpgpap(2.00*pgpap_prm, 1.0/1.4);
+              cpgsch(1.5*pgpap_prm/13.0);
+              cpgsvp(0.0,  1.0, 0.0, 1.0);
+              cpgswin(0.0, 1.4, 0.0, 1.0);
+
+              for (i=0; i<trp_status_num; i++) {
+                cpgptxt(0.335+(float)i*0.150, 0.950, 0.0, 0.5,
+                        (trp_status+i)->name);
+              }
+
+              for (iant=0; iant<GRT_NUM; iant++) {
+                ant_bttn_box[iant][0] = 0.010 + 0.097;
+                ant_bttn_box[iant][1] = 0.110 + 0.097;
+                ant_bttn_box[iant][2] = 0.90 - pitch * (float)iant;
+                ant_bttn_box[iant][3] = ant_bttn_box[iant][2] + pitch;
+                _off_button(&Bdum, (ant_trp+iant)->IDC,
+                                    &ant_bttn_box[iant][0]);
+                for (i=0; i<trp_status_num; i++) {
+                  ftmp1 = 0.325 + (float)i*0.150;
+                  ftmp2 = ant_bttn_box[iant][2] + 0.2 * pitch;
+                  trp_bttn_box[iant][i][0] = ftmp1;
+                  trp_bttn_box[iant][i][1] = ftmp1 + 0.02;
+                  trp_bttn_box[iant][i][2] = ftmp2;
+                  trp_bttn_box[iant][i][3] = ftmp2 + 0.02;
+
+                  if (ant_trp[iant].code == i) {
+                    _on_button(&Bdum, "", trp_bttn_box[iant][i]);
+                  } else {
+                    _off_button(&Bdum, "", trp_bttn_box[iant][i]);
+                  }
+                }
+              }
+
+              ant_bttn_box[GRT_NUM][0] = 0.600;
+              ant_bttn_box[GRT_NUM][1] = 0.660;
+              ant_bttn_box[GRT_NUM][2] = 0.050;
+              ant_bttn_box[GRT_NUM][3] = ant_bttn_box[GRT_NUM][2] + pitch;
+              _off_button(&Bdum, "QUIT", &ant_bttn_box[GRT_NUM][0]);
+
+              QUIT_SWT = false;
+              while (1) {
+                cpgcurs(cursor_pos, cursor_pos+1, string);
+                if (_button_chk(cursor_pos, ant_bttn_box[GRT_NUM]) == true) {
+                  QUIT_SWT = true;
+                  break;
+                } else {
+                  for (iant=0; iant<GRT_NUM; iant++) {
+                    for (i=0; i<trp_status_num; i++) {
+                      if (_button_chk(cursor_pos,
+                            trp_bttn_box[iant][i]) == true) {
+                        for (j=0; j<trp_status_num; j++) {
+                          if (j == i) {
+                            _on_button(&Bdum, "", trp_bttn_box[iant][j]);
+                          } else {
+                            _off_button(&Bdum, "", trp_bttn_box[iant][j]);
+                          }
+                        }
+                        ant_trp[iant].code = i;
+                        break;
+                      }
+                    }
+                  }
+                }
+              }
+
+              if ((fp = fopen(
+                    "aris_input/ant_trp_tuning.prm", "w")) != NULL) {
+                for (iant=0; iant<GRT_NUM; iant++) {
+                  fprintf(fp, "%s %d\n",
+                       (ant_trp+iant)->IDC, ant_trp[iant].code);
+                }
+                fclose (fp);
+              }
+              cpgclos();
+              cpgslct(cpgid1);
+
+              for (iant=0; iant<GRT_NUM; iant++) {
+                ant_prm[iant].WVturb = ant_trp[iant].code;
+              }
+              free (ant_trp);
+            }
           }
         }
       }
@@ -2079,10 +2289,12 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
             *ION_CONDITION = I - IONOS_SECTION;
             for (i=0; i<ion_num; i++) {
               if (i == *ION_CONDITION) {
-                _on_button(&ion_code[i], ion_name[i], bttn_box[I]);
+                _on_button(&ion_status[i].code,  (ion_status+i)->name,
+                           bttn_box[I]);
               } else {
                 J = IONOS_SECTION + i;
-                _off_button(&ion_code[i], ion_name[i], bttn_box[J]);
+                _off_button(&ion_status[i].code, (ion_status+i)->name,
+                            bttn_box[J]);
               }
             }
           }
@@ -2271,7 +2483,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 
       if (ERROR_FLAG[TDSECZ] == true && GRT_NUM > 0
        && array->TYPE == _VLBI_ARRAY_) {
-        I = TROPOS_SECTION + TRP_NUM;
+        I = TROPOS_SECTION + trp_num;
         if (_button_chk(cursor_pos, bttn_box[I]) == true) {
           tv_get_param("double", cursor_pos, bttn_box[I],
                        pitch, ch_tdscz, 0.0, 0.0);
@@ -2689,44 +2901,38 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ------
 */
 
-  if (       *TRP_CONDITION == 0) {
-    *CW = pow(sqrt(pow(wvc[0].v[0], 2.0) + pow(wvc[0].v[1], 2.0)) * 120.0,
-                                                 -0.5*wvc[0].o_expon)
-            / sqrt(wvc[0].i_scale[0])   / 12.0;
-/**
-    *CW *= 2.0;
-**/
-    *CW *= 4.0;
-  } else if (*TRP_CONDITION == 1) {
-    *CW = pow(sqrt(pow(wvc[0].v[0], 2.0) + pow(wvc[0].v[1], 2.0)) * 120.0,
-                                                 -0.5*wvc[0].o_expon)
-            / sqrt(wvc[0].i_scale[0])   /  9.0;
-/**
-    *CW *= 2.0;
-**/
-    *CW *= 4.0;
-  } else if (*TRP_CONDITION == 2) {
-    *CW = pow(sqrt(pow(wvc[0].v[0], 2.0) + pow(wvc[0].v[1], 2.0)) * 120.0,
-                                                 -0.5*wvc[0].o_expon)
-            / sqrt(wvc[0].i_scale[0])   /  6.0;
-/**
-    *CW *= 2.0;
-**/
-    *CW *= 4.0;
-  } else if (*TRP_CONDITION == 3) {
-    *CW = 0.5e-7 * sqrt(1.4 * 1.0e3);
-  } else if (*TRP_CONDITION == 4) {
-    *CW = 1.0e-7 * sqrt(1.4 * 1.0e3);
-  } else if (*TRP_CONDITION == 5) {
-    *CW = 2.0e-7 * sqrt(1.4 * 1.0e3);
-  } else if (*TRP_CONDITION == 6) {
-    *CW = 4.0e-7 * sqrt(1.4 * 1.0e3);
+  for (iant=0; iant<GRT_NUM; iant++) {
+    if (ant_prm[iant].WVturb == 0) {
+      Cw[iant] = pow(sqrt(pow(wvc[0].v[0], 2.0)
+                    + pow(wvc[0].v[1], 2.0)) * 120.0,
+                                                   -0.5*wvc[0].o_expon)
+              / sqrt(wvc[0].i_scale[0])   / 12.0;
+      Cw[iant] *= 4.0;
+    } else if (ant_prm[iant].WVturb == 1) {
+      Cw[iant] = pow(sqrt(pow(wvc[0].v[0], 2.0) + pow(wvc[0].v[1], 2.0)) * 120.0,
+                                                   -0.5*wvc[0].o_expon)
+              / sqrt(wvc[0].i_scale[0])   /  9.0;
+      Cw[iant] *= 4.0;
+    } else if (ant_prm[iant].WVturb == 2) {
+      Cw[iant] = pow(sqrt(pow(wvc[0].v[0], 2.0) + pow(wvc[0].v[1], 2.0)) * 120.0,
+                                                   -0.5*wvc[0].o_expon)
+              / sqrt(wvc[0].i_scale[0])   /  6.0;
+      Cw[iant] *= 4.0;
+    } else if (ant_prm[iant].WVturb == 3) {
+      Cw[iant] = 0.5e-7 * sqrt(1.4 * 1.0e3);
+      Cw[iant] = 0.189e-3 / pow(1.0e3, 0.5) / pow(10.0e3, 1.0/3.0) * 10.0;
+    } else if (ant_prm[iant].WVturb == 4) {
+      Cw[iant] = 1.0e-7 * sqrt(1.4 * 1.0e3);
+      Cw[iant] = 2.835e-3 / pow(1.0e3, 0.5) / pow(10.0e3, 1.0/3.0) * 10.0;
+    } else if (ant_prm[iant].WVturb == 5) {
+      Cw[iant] = 2.0e-7 * sqrt(1.4 * 1.0e3);
+    } else if (ant_prm[iant].WVturb == 6) {
+      Cw[iant] = 4.0e-7 * sqrt(1.4 * 1.0e3);
+    }
+    Cw[iant] /= speed_of_light;
   }
-/**
-  printf("AAAAAAAAAAAAAAAA   %lf\n", *CW * 1.0e6 * 46.41);
-**/
-  *CW /= speed_of_light;
 
+  /*                                                        */
   /*                                                        */
   /*  1.67 X 10^{-16/3} [m^{1-5/6}] :  Asaki et al., 1996   */
   /*         ----> Cn = 2.1e-7 [m^{-1/3}]                   */
@@ -2742,6 +2948,7 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
   /*  VERY GOOD SITUATION:                                  */
   /*  The value is described in Asaki et al.                */
   /*  (ALMA Memo, No. 535, 2005). [50-% condition]          */
+  /*                                                        */
   /*                                                        */
 
 /*
@@ -2869,8 +3076,10 @@ int   err_parameter_set(int ANT_NUM,  int GRT_NUM,  int SRT_NUM,
 ------
 */
 
-  if (*TRP_CONDITION == 0 || *TRP_CONDITION == 1 || *TRP_CONDITION == 2) {
-    *CW *= wave_length[0];
+  for (iant=0; iant<GRT_NUM; iant++) {
+    if (*TRP_CONDITION == 0 || *TRP_CONDITION == 1 || *TRP_CONDITION == 2) {
+      Cw[iant] *= wave_length[0];
+    }
   }
 
 /*

@@ -245,7 +245,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
 -------------------------------------------
 */
 
-  ARRAY_NUM = 12;
+  ARRAY_NUM = 13;
 
   array_id[ 0].id = ANT_RESET;
   array_id[ 1].id = VLBA;
@@ -259,6 +259,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   array_id[ 9].id = EALMA;
   array_id[10].id = ALMA;
   array_id[11].id = ACA;
+  array_id[12].id = NG_VLA;
 
   array_id[ 0].type = NO_DEF_ARRAY;
   array_id[ 1].type = _VLBI_ARRAY_;
@@ -272,6 +273,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   array_id[ 9].type = _VLBI_ARRAY_;
   array_id[10].type = __CONNECTED_;
   array_id[11].type = __CONNECTED_;
+  array_id[12].type = __CONNECTED_;
 
   sprintf(array_id[ 0].name, "RESET");
   sprintf(array_id[ 1].name, "VLBA");
@@ -285,6 +287,7 @@ int  obs_param_input(_Bool *ERROR_FLAG,
   sprintf(array_id[ 9].name, "EALMA");
   sprintf(array_id[10].name, "ALMA");
   sprintf(array_id[11].name, "ACA");
+  sprintf(array_id[12].name, "ngVLA");
 
   for (iarray=0; iarray<ARRAY_NUM; iarray++) {
     array_id[iarray].flag = false;
@@ -754,9 +757,6 @@ int  obs_param_input(_Bool *ERROR_FLAG,
         if (ant_list_file_chk(antenna_list_file_tmp, bttn_box[I=ANTLST_SECTION+2],
                               cmnt, comment, false) == 1) {
 
-
-
-
 /*xxxxxxxxxxxxxxxxxxxxxxxxx*/
           if (strcmp(antenna_list_file, antenna_list_file_tmp) != 0) {
             char_copy(antenna_list_file, antenna_list_file_tmp);
@@ -779,11 +779,6 @@ int  obs_param_input(_Bool *ERROR_FLAG,
             }
           }
 /*xxxxxxxxxxxxxxxxxxxxxxxxx*/
-
-
-
-
-
 
         }
       }

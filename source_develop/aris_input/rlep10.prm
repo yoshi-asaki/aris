@@ -1,0 +1,1326 @@
+################
+##
+##     DA41 A058
+##
+BEGIN_ANT
+STATION        : "DA41"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225039.860327, -5440023.555275, -2481800.313850
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 12.739700, -827.033700, 21.969400
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA42 W203
+##
+BEGIN_ANT
+STATION        : "DA42"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2219340.327383, -5442595.143807, -2480452.618695
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -6236.200300, 502.425400, -294.096300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA43 A035
+##
+BEGIN_ANT
+STATION        : "DA43"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225075.354753, -5440059.364258, -2481689.474756
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 32.036900, -706.804900, 21.766400
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA48 S306
+##
+BEGIN_ANT
+STATION        : "DA48"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2228434.986832, -5437820.967686, -2483420.294517
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 3989.723400, -2611.965100, -40.392800
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA49 A125
+##
+BEGIN_ANT
+STATION        : "DA49"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2223802.546891, -5440248.768504, -2482327.914553
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -1217.860000, -1414.154700, -12.133800
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA50 A108
+##
+BEGIN_ANT
+STATION        : "DA50"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225718.601120, -5439808.039139, -2481613.935648
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 722.580900, -632.960300, 2.459900
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA53 S307
+##
+BEGIN_ANT
+STATION        : "DA53"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2229218.151715, -5437538.065327, -2483351.919437
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 4821.818200, -2535.257700, -34.529900
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA55 A122
+##
+BEGIN_ANT
+STATION        : "DA55"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224149.167515, -5440732.003526, -2481005.167019
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -1079.855700, 29.432300, 6.250800
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA58 A118
+##
+BEGIN_ANT
+STATION        : "DA58"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225669.216373, -5439445.957813, -2482517.722189
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 813.997300, -1603.193700, 28.126900
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA59 P409
+##
+BEGIN_ANT
+STATION        : "DA59"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2229234.316039, -5440047.967872, -2477588.913701
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 3884.906600, 3679.738200, -129.844000
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA60 S303
+##
+BEGIN_ANT
+STATION        : "DA60"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2227320.323969, -5436658.143161, -2486450.588931
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 3398.991400, -5986.736100, -240.367800
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA61 A091
+##
+BEGIN_ANT
+STATION        : "DA61"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224774.742824, -5440235.549316, -2481577.815738
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -312.911900, -584.771800, 23.731500
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA62 W210
+##
+BEGIN_ANT
+STATION        : "DA62"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224521.171612, -5441794.372241, -2478423.947949
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -1137.500800, 2844.617900, 38.759300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA63 A123
+##
+BEGIN_ANT
+STATION        : "DA63"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225279.583487, -5439469.357366, -2482833.131841
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 444.477200, -1942.727400, 34.901700
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DA65 A131
+##
+BEGIN_ANT
+STATION        : "DA65"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2226201.284529, -5439135.840298, -2482771.546411
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 1423.948900, -1870.279600, 48.140300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV01 A127
+##
+BEGIN_ANT
+STATION        : "DV01"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224469.426250, -5440842.097440, -2480524.460225
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -825.080400, 559.058300, 24.876600
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV02 A129
+##
+BEGIN_ANT
+STATION        : "DV02"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2226329.603342, -5440032.444293, -2480531.147740
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 1203.085400, 535.353300, -14.095700
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV03 W209
+##
+BEGIN_ANT
+STATION        : "DV03"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224115.973054, -5442159.048896, -2477930.249036
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -1650.445700, 3371.120900, 16.784000
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV05 P413
+##
+BEGIN_ANT
+STATION        : "DV05"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2232260.492768, -5440514.444781, -2473666.363642
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 6506.928400, 7908.019700, -196.048700
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV06 A130
+##
+BEGIN_ANT
+STATION        : "DV06"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2223501.902102, -5440635.376258, -2481765.563222
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -1642.458800, -801.130800, -6.020100
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV07 A126
+##
+BEGIN_ANT
+STATION        : "DV07"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2226186.009469, -5439426.101837, -2482003.421108
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 1299.854100, -1060.414300, -8.596000
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV08 A101
+##
+BEGIN_ANT
+STATION        : "DV08"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224962.812027, -5440337.301328, -2481190.013194
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -177.350600, -163.186100, 25.252200
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV09 A074
+##
+BEGIN_ANT
+STATION        : "DV09"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225176.481631, -5439963.821951, -2481800.529929
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 161.813600, -828.619400, 18.769500
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV10 A135
+##
+BEGIN_ANT
+STATION        : "DV10"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225505.182980, -5440025.000250, -2481355.370618
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 442.891400, -348.084400, 12.434700
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV11 S309
+##
+BEGIN_ANT
+STATION        : "DV11"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2229979.537987, -5435357.937332, -2486831.078991
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 6354.000000, -6412.879400, -270.985300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV12 A120
+##
+BEGIN_ANT
+STATION        : "DV12"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224236.001840, -5439969.306500, -2482606.062063
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -710.833200, -1707.212500, 8.900900
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV13 W201
+##
+BEGIN_ANT
+STATION        : "DV13"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2217992.136495, -5442740.794321, -2480999.714888
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -7539.685700, -147.099900, -425.964200
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV14 A094
+##
+BEGIN_ANT
+STATION        : "DV14"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224759.171111, -5440069.473563, -2481944.572555
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -264.459000, -984.729900, 19.355600
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV16 W205
+##
+BEGIN_ANT
+STATION        : "DV16"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2221246.309313, -5442298.719425, -2479820.812739
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -4359.502300, 1257.746000, -129.261900
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV17 P408
+##
+BEGIN_ANT
+STATION        : "DV17"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2229431.842958, -5439738.450683, -2478057.090565
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 4184.989600, 3166.161200, -142.905100
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV18 S305
+##
+BEGIN_ANT
+STATION        : "DV18"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2227358.778480, -5436308.799371, -2487170.699139
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 3567.095000, -6770.240800, -243.937400
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV19 A111
+##
+BEGIN_ANT
+STATION        : "DV19"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225523.140129, -5440197.242016, -2480975.072345
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 394.294500, 66.917600, 17.669100
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV20 P404
+##
+BEGIN_ANT
+STATION        : "DV20"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2228204.450396, -5439789.055996, -2479182.920057
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 3030.221900, 1966.149400, -91.156200
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV21 P410
+##
+BEGIN_ANT
+STATION        : "DV21"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2229254.341156, -5440457.335830, -2476683.353256
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 3748.251400, 4664.297700, -125.375300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV22 P412
+##
+BEGIN_ANT
+STATION        : "DV22"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2231065.975203, -5440910.164108, -2473976.550150
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 5252.202200, 7588.282200, -156.144400
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV23 W202
+##
+BEGIN_ANT
+STATION        : "DV23"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2219253.459652, -5442893.770408, -2479851.412212
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -6429.389500, 1151.120800, -303.269300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV24 A128
+##
+BEGIN_ANT
+STATION        : "DV24"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2224749.448345, -5439522.277636, -2483129.028067
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -66.300200, -2274.343900, 10.294300
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     DV25 A133
+##
+BEGIN_ANT
+STATION        : "DV25"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2223831.904340, -5440054.465360, -2482719.709134
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : -1117.152900, -1840.734900, -15.129700
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################
+################
+##
+##     PM04 A116
+##
+BEGIN_ANT
+STATION        : "PM04"
+ARRAY          : "ALMA"
+TYPE           : "CONNECTED"
+MOUNT          : "ALAZ"
+FREQ_STANDARD  : "H_M"
+POSITION       : 2225871.456706, -5439985.600524, -2481088.794370
+POS_ERROR      : 0.0, 0.0, 0.0
+POS_OFFSET     : 796.813700, -62.736300, 2.942700
+STAXOF         : 0.0
+LONGITUDE      :  -67 44 49.8
+LATITUDE       :  -22 53 07.3
+ALTITUDE       : 5000.0
+AZ_RATE_ACCEL  :            2.5, 2.0
+EL_RATE_ACCEL  :            1.5, 2.0
+EL_LIM         :           25.0
+FREQ_SWT_LAG   :            0.0
+SLEW_TIME      :            1.0
+BAND01         : 12.0, 0.75,  17.0,   1.0
+BAND02         : 12.0, 0.74,  30.0,   3.0
+BAND03         : 12.0, 0.80,  41.0,  30.0
+BAND04         : 12.0, 0.73,  51.0,  30.0
+BAND05         : 12.0, 0.72,  65.0,  30.0
+BAND06         : 12.0, 0.72,  83.0,  12.0
+BAND07         : 12.0, 0.69, 147.0,  13.0
+BAND08         : 12.0, 0.67, 196.0, 104.0
+BAND09         : 12.0, 0.54, 175.0, 625.0
+BAND10         : 12.0, 0.45, 230.0,1170.0
+END_ANT
+################

@@ -208,6 +208,8 @@ int  array_config(
                 array_id = ACA;
               } else if (strncmp(string+i, "EALMA",            j) == 0) {
                 array_id = EALMA;
+              } else if (strncmp(string+i, "NG_VLA",           j) == 0) {
+                array_id = NG_VLA;
               } else if (strncmp(string+i, "STAND_ALONE",      j) == 0) {
                 array_id = STAND_ALONE;
               } else if (strncmp(string+i, "ORBITING",         j) == 0) {
@@ -909,9 +911,12 @@ int  array_config(
             &ant_tmp.LLH[0], &ant_tmp.LLH[1], &ant_tmp.LLH[2], ant_tmp.XYZ);
         }
 
-        if (ant_tmp.OFS[0] != 0.0 ||
-            ant_tmp.OFS[1] != 0.0 ||
-            ant_tmp.OFS[2] != 0.0) {
+        if ((ant_tmp.OFS[0] != 0.0 ||
+             ant_tmp.OFS[1] != 0.0 ||
+             ant_tmp.OFS[2] != 0.0) &&
+              (ant_tmp.XYZ[0] == 0.0 &&
+               ant_tmp.XYZ[1] == 0.0 &&
+               ant_tmp.XYZ[2] == 0.0)) {
           XYZ[0] = ant_tmp.OFS[0];
           XYZ[1] = ant_tmp.OFS[1];
           XYZ[2] = ant_tmp.OFS[2];

@@ -387,7 +387,10 @@ xxxx*/
        eccentric_anomaly[iant] - srt[iant].e * sin(eccentric_anomaly[iant]);
   }
 
+  for (i=NOBS-1; i<NOBS; i++) {
+/****
   for (i=0; i<NOBS; i++) {
+****/
     cpgbbuf();
     iobs = i * TIME_STEP;
 
@@ -417,8 +420,10 @@ xxxx*/
     }
     cpgsls(1);
   #ifdef __ANIMA_CLOCK__
-    cpgline(2, clkx[0], clky[0]);
-    cpgline(2, clkx[1], clky[1]);
+    if (i != 0) {
+      cpgline(2, clkx[0], clky[0]);
+      cpgline(2, clkx[1], clky[1]);
+    }
   #endif /*__ANIMA_CLOCK__*/
 
     cpgsci(8);

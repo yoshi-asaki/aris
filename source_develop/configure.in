@@ -1,0 +1,58 @@
+#                                               -*- Autoconf -*-
+# Process this file with autoconf to produce a configure script.
+
+AC_PREREQ([2.71])
+AC_INIT([FULL-PACKAGE-NAME], [VERSION], [BUG-REPORT-ADDRESS])
+AC_CONFIG_SRCDIR([trk_priority_check.c])
+AC_CONFIG_HEADERS([config.h])
+
+# Checks for programs.
+AC_PROG_CC
+AC_PROG_F77
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+
+# Checks for libraries.
+# FIXME: Replace 'main' with a function in '-lX11':
+AC_CHECK_LIB([X11], [main])
+# FIXME: Replace 'main' with a function in '-lastrotools':
+AC_CHECK_LIB([astrotools], [main])
+# FIXME: Replace 'main' with a function in '-lcfitsio':
+AC_CHECK_LIB([cfitsio], [main])
+# FIXME: Replace 'main' with a function in '-lcpgplot':
+AC_CHECK_LIB([cpgplot], [main])
+# FIXME: Replace 'main' with a function in '-lgcc':
+AC_CHECK_LIB([gcc], [main])
+# FIXME: Replace 'main' with a function in '-lgsl':
+AC_CHECK_LIB([gsl], [main])
+# FIXME: Replace 'main' with a function in '-lgslcblas':
+AC_CHECK_LIB([gslcblas], [main])
+# FIXME: Replace 'main' with a function in '-lm':
+AC_CHECK_LIB([m], [main])
+# FIXME: Replace 'main' with a function in '-lmathtools':
+AC_CHECK_LIB([mathtools], [main])
+# FIXME: Replace 'main' with a function in '-lpgplot':
+AC_CHECK_LIB([pgplot], [main])
+# FIXME: Replace 'main' with a function in '-lpgtools':
+AC_CHECK_LIB([pgtools], [main])
+# FIXME: Replace 'main' with a function in '-lpng':
+AC_CHECK_LIB([png], [main])
+# FIXME: Replace 'main' with a function in '-lz':
+AC_CHECK_LIB([z], [main])
+
+# Checks for header files.
+AC_CHECK_HEADERS([fcntl.h sys/time.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_CHECK_FUNCS([floor gettimeofday pow rint sqrt])
+
+AC_CONFIG_FILES([Makefile])
+AC_CONFIG_SUBDIRS([src/astrotools
+                   src/mathtools
+                   src/pgtools])
+AC_OUTPUT

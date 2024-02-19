@@ -335,9 +335,9 @@ int    turbulent_phase_screen
           NDAT_SEGM /= 2;
           a2 += 1.0;
         }
-      } 
+      }
 /**
-      printf("bbbbbbb  %d  %d      %lf  %lf\n", NDAT_AREA, NDAT_SEGM, a1, a2);
+      printf("__DEBUG__    %d  %d      %lf  %lf\n", NDAT_AREA, NDAT_SEGM, a1, a2);
 **/
 
 

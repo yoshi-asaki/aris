@@ -87,7 +87,7 @@ int  main(int argc, char **argv)
   double DS[SRC_NUM];
   double sefd[SRC_NUM];
   double soffx, soffy;
-  int    nseries, NELEM, SITE_NUM=1; 
+  int    nseries=1, NELEM=1, SITE_NUM=1; 
   double *D_S;
 
   char   comment[40][NCOMLEN];
@@ -97,7 +97,7 @@ int  main(int argc, char **argv)
   int    TRP_CONDITION, ION_CONDITION;
   struct phase_screen_parameter wvc[ANTMAX], ion[ANTMAX], dry[ANTMAX];
   struct phase_screen_parameter ALMA_ant;
-  double Cw[ANTMAX], Cd[ANTMAX], CW, CD, CI;
+  double Cw[ANTMAX], Cd[ANTMAX], CD, CI;
   double Ci[2][86400];
   double alpha1, alpha2, wind_v;
   int    corner_position[2][2];
@@ -1538,7 +1538,7 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
     if (err_parameter_set(ANT_NUM, GRT_NUM, SRT_NUM,
               &BGN_ANT_I, &END_ANT_I, &BGN_ANT_J, &END_ANT_J,
               &array, &TRP_CONDITION, &ION_CONDITION,
-              &CW, &CI, wvc,
+              Cw, &CI, wvc,
               dz[1], src_proc, ch_file,
               wave_id, wave_length, nu,
               &band_width, &nfrq, &cfact,
@@ -1596,11 +1596,13 @@ be stable with this usleep in order to disturb SEGMENTATION FAULT.
 ----------------------------------------------------
 */
 
+/****
     if (ERROR_FLAG[TWVTRB] == true || ERROR_FLAG[DRYTRB] == true) {
       for (iant=0; iant<GRT_NUM; iant++) {
         Cw[iant] = CW;
       }
     }
+****/
 
 /*
 ----------------------------------------------------

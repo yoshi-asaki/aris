@@ -141,6 +141,42 @@ int  fitsidi_save(char *fits_fname,             int nobs,
 ------------------------------------------------------------
 */
 
+  FILE   *fp;
+  int    SOBS, EOBS;
+  double phs;
+
+  SOBS = 74;
+  SOBS = 80;
+  EOBS = SOBS + 60;
+
+  printf("save data..............\n");
+  fp = fopen("phase_check.dat", "w");
+  for (iobs=SOBS; iobs<EOBS; iobs++) {
+    for (ifrq=0; ifrq<nfrq; ifrq++) {
+      fprintf(fp, " 0,  0, %d, 0.0\n", iobs-SOBS);
+    }
+  }
+
+  iant = 0;
+  for (jant=iant+1; jant<ANT_NUM; jant++) {
+    if (jant >= BGN_ANT_J && jant < END_ANT_J) {
+      for (iobs=SOBS; iobs<EOBS; iobs++) {
+        I = baseline_number(ANT_NUM, iant, jant) * nobs + iobs;
+        for (ifrq=0; ifrq<nfrq; ifrq++) {
+          J = I * nfrq + ifrq;
+          phs = atan2((float)frng[J].im, (float)frng[J].rl) / 2.0 / dpi / nu * 1.0e12;
+          fprintf(fp, "%2d, %2d, %d, %lf\n", jant, iant, iobs-SOBS, phs);
+        }
+      }
+    }
+  }
+  fclose(fp);
+  printf("Done!\n");
+
+/*
+------------------------------------------------------------
+*/
+
 #ifdef __FITS_SAVE_DEBUG__
   printf("#### __DEBUG__ : fitsidi_save : (05)\n"); fflush(stdout);
 #endif

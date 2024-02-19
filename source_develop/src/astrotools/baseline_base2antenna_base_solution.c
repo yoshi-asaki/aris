@@ -2,7 +2,7 @@
 
 
 double   baseline_base2antenna_base_solution(
-            int    ant_num,
+            size_t ant_num,
             int    refant,
             double *bl_base_fringe,
             double *bl_weight,

@@ -184,9 +184,9 @@ int   SSF_disp(int    ANT_NUM,
 **/
               pgy[IF][nbase[IF]] = sqrt(c);
               pgx[IF][nbase[IF]] = sqrt(
-                     pow(diff(ant_prm[iant].XYZ[0], ant_prm[jant].XYZ[0]), 2.0) 
-                   + pow(diff(ant_prm[iant].XYZ[1], ant_prm[jant].XYZ[1]), 2.0) 
-                   + pow(diff(ant_prm[iant].XYZ[2], ant_prm[jant].XYZ[2]), 2.0));
+                   pow(diff(ant_prm[iant].XYZ[0], ant_prm[jant].XYZ[0]), 2.0) 
+                 + pow(diff(ant_prm[iant].XYZ[1], ant_prm[jant].XYZ[1]), 2.0) 
+                 + pow(diff(ant_prm[iant].XYZ[2], ant_prm[jant].XYZ[2]), 2.0));
 
               if (ascii_out[0] == '!') {
                 fprintf(log_fp, "%s  %s: %f, %f\n",
@@ -211,9 +211,11 @@ int   SSF_disp(int    ANT_NUM,
                 tim[i] = (float)(3600*TimUT[3] + 60*TimUT[4] + TimUT[5] + iobs);
                 phs[i] = diff(int_obs[0][ix].grp_delay, int_obs[0][iy].grp_delay)
                + F2[0] * diff(int_obs[0][ix].ion_delay, int_obs[0][iy].ion_delay);
+                phs[i] = diff(int_obs[0][ix].grp_delay, int_obs[0][iy].grp_delay);
                 if (IF == 1) {
                   phs[i] -= diff(int_obs[1][ix].grp_delay, int_obs[1][iy].grp_delay)
                   - F2[1] * diff(int_obs[1][ix].ion_delay, int_obs[1][iy].ion_delay);
+                  phs[i] -= diff(int_obs[1][ix].grp_delay, int_obs[1][iy].grp_delay);
                 }
                 phs[i] *= 2.0 * dpi * nu[0];
                 i++;
@@ -229,9 +231,9 @@ int   SSF_disp(int    ANT_NUM,
 #endif
               pgy[IF][nbase[IF]] = sqrt(c);
               pgx[IF][nbase[IF]] = sqrt(
-                     pow(diff(ant_prm[iant].XYZ[0], ant_prm[jant].XYZ[0]), 2.0) 
-                   + pow(diff(ant_prm[iant].XYZ[1], ant_prm[jant].XYZ[1]), 2.0) 
-                   + pow(diff(ant_prm[iant].XYZ[2], ant_prm[jant].XYZ[2]), 2.0));
+                   pow(diff(ant_prm[iant].XYZ[0], ant_prm[jant].XYZ[0]), 2.0) 
+                 + pow(diff(ant_prm[iant].XYZ[1], ant_prm[jant].XYZ[1]), 2.0) 
+                 + pow(diff(ant_prm[iant].XYZ[2], ant_prm[jant].XYZ[2]), 2.0));
 
               if (ascii_out[0] == '!') {
                 fprintf(log_fp, "%s  %s: %f, %f\n",
@@ -329,8 +331,10 @@ int   SSF_disp(int    ANT_NUM,
   cpgsch(3.0);
   cpgsci(2);
   cpgpt(nbase[0], pgx[0], pgy[0], 22);
+/**
   cpgsci(4);
   cpgpt(nbase[1], pgx[1], pgy[1],  2);
+**/
 
   cpgebuf();
 

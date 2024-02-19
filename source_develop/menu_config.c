@@ -365,7 +365,7 @@ int  menu_config(int ANT_NUM, int GRT_NUM,  int SRT_NUM,  int TRK_NUM,
 ------------------------------------------
 */
 
-  output_dev_num = 7;
+  output_dev_num = 8;
   sprintf(pgdev[0], "/XS");
   sprintf(pgdev[1], "/PS");
   sprintf(pgdev[2], "/VPS");
@@ -676,7 +676,7 @@ int  menu_config(int ANT_NUM, int GRT_NUM,  int SRT_NUM,  int TRK_NUM,
 */
 
     if (PGDEV_ID == 6 &&
-       (! (MENU_ID == 2 || MENU_ID == 3 || MENU_ID == 8))) {
+       (! (MENU_ID == 2 || MENU_ID == 3 || MENU_ID == 8 || MENU_ID == 20 || MENU_ID == 21))) {
       PGDEV_ID = 7;
       sprintf(string, "Sorry, the text output mode has not been");
       if (TV_SWT == true) {
@@ -706,7 +706,8 @@ int  menu_config(int ANT_NUM, int GRT_NUM,  int SRT_NUM,  int TRK_NUM,
       if (MENU_ID !=  5
         && (! (PGDEV_ID ==  6 &&
                (MENU_ID ==  1 || MENU_ID ==  2 || MENU_ID ==  3 ||
-                MENU_ID ==  8 || MENU_ID == 14 || MENU_ID == 15) /*Not Implemented*/
+                MENU_ID ==  8 || MENU_ID == 14 || MENU_ID == 15 ||
+                MENU_ID == 20 || MENU_ID == 21) /*Not Implemented*/
                                                                ))) {
         cpgid2 = (int)cpgopen(pgdev[PGDEV_ID]);
         if (cpgid2 < 0) {
@@ -1765,6 +1766,7 @@ AAAA****/
 */
 
     } else if (MENU_ID == 20) {
+      printf("AAAAAAAAAAAAAAAAA   %d   %s\n", PGDEV_ID, pgdev[PGDEV_ID]);
       if (PGDEV_ID != 6) {
         if (TV_SWT == true) {
           cpgslct(cpgid2);

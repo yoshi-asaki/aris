@@ -244,8 +244,8 @@ FCHOWN_DEFINES = -DHAS_FCHOWN
      XBUILDBINDIR = $(XBUILDINCROOT)/bin
            INCDIR = $(INCROOT)
            ADMDIR = /usr/adm
-           LIBDIR = /usr/local/lib/X11
-         SHAREDIR = /usr/local/share/X11
+           LIBDIR = /usr/X11//lib
+         SHAREDIR = /usr/X11/share
        LIBEXECDIR = /usr/local/libexec
         MODULEDIR = $(USRLIBDIR)/modules
           XBINDIR = $(PROJECTROOT)/bin
@@ -381,27 +381,26 @@ EXTRAXAWCLIENTLIBS =
 # ----------------------------------------------------------------------
 # start of Imakefile
 
-PGPLOT_LIBDIR = /usr/local/pgplot
-#PGPLOT_LIBDIR = /usr/lib/
+PGPLOT_LIBDIR = /opt/pgplot
 
-PGPLOT_INCDIR = /usr/local/pgplot
-#PGPLOT_INCDIR = /usr/include/
+PGPLOT_INCDIR = /opt/pgplot
 
-CFITSIO_LIBDIR = /usr/local/lib
+CFITSIO_LIBDIR = /opt/local/lib
 
-CFITSIO_INCDIR = /usr/local/include
+CFITSIO_INCDIR = /opt/local/include
 
-GSL_LIBDIR = /usr/local/lib
+GSL_LIBDIR = /opt/local/lib
 
-GSL_INCDIR = /usr/local/include
+GSL_INCDIR = /opt/local/include
 
 LOCAL_LIBDIR = ./lib
 
 LOCAL_INCDIR = ./include
 
-LOCAL_LIBRARIES = $(XLIB) -L/usr/X11/lib 	-L$(PGPLOT_LIBDIR) -lcpgplot -lpgplot 	-L$(CFITSIO_LIBDIR) -lcfitsio 	-L$(GSL_LIBDIR) -lgsl -lgslcblas 	-L$(LOCAL_LIBDIR) -lastrotools -lpgtools -lmathtools -lm -lpng -lz
+LOCAL_LIBRARIES = $(XLIB) -L$(LIBDIR) 	-L$(PGPLOT_LIBDIR) -lcpgplot -lpgplot 	-L$(CFITSIO_LIBDIR) -lcfitsio 	-L$(GSL_LIBDIR) -lgsl -lgslcblas 	-L$(LOCAL_LIBDIR) -lastrotools -lpgtools -lmathtools -lm -lpng -lz
 
-CCOPTIONS = -O3 -ansi -Wuninitialized -g
+CCOPTIONS = -O3 -Wuninitialized -g
+#CCOPTIONS = -O3 -ansi -Wuninitialized -g
 
 CDEBUGFLAGS =
 

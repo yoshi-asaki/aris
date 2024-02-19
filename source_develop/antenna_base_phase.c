@@ -93,7 +93,7 @@ int   antenna_base_phase(int  ANT_NUM,   int  nfrq,
         }
       }
       improve_factor = baseline_base2antenna_base_solution
-                             (ANT_NUM, refant, bl_base_fringe,
+                             ((size_t)ANT_NUM, refant, bl_base_fringe,
                               bl_weight, ant_base_phase, ant_base_amp, 0, 0);
       for (iant=0; iant<ANT_NUM; iant++) {
         for (jant=iant+1; jant<ANT_NUM; jant++) {

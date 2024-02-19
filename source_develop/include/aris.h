@@ -73,6 +73,7 @@
 #define EALMA                 9
 #define ALMA                 10
 #define ACA                  11
+#define NG_VLA               12
 #define STAND_ALONE          20
 #define TRACKING_NETWORK     30
 #define ORBITING             40
@@ -260,9 +261,11 @@ struct antenna_parameter
           double LOPHS[N_WAVE]; /** Local Oscilator Phase      */
           double d_gain;   /** Delta GAIN Error                */
 
-          int    WVtrub;   /** Water Vapor turnulence          */
+          int    WVturb;   /** Water Vapor turnulence          */
           int    DAturb;   /** Dry Air turbulence              */
           int    IOturb;   /** Ionosphere turbulence           */
+
+          double Cw;       /** Water vapor structure coefficient */
 
           double lo_phs_jmp_val; /** LO phase jump value (deg)      */
           double lo_phs_jmp_tim; /** LO phase jump timing (0-1)     */

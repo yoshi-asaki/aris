@@ -208,7 +208,7 @@ int    baseline2antenna_number
        );
 double baseline_base2antenna_base_solution
        (
-         int     , int     , double *, double *, double *, double *, int , int 
+         size_t  , int     , double *, double *, double *, double *, int , int 
        );
 void   B1950toJ2000(
          double  , double , double *, double *
